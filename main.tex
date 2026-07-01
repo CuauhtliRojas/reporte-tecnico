@@ -1,0 +1,89 @@
+﻿\documentclass[12pt,a4paper]{article}
+
+% --- PREAMBULO ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+
+
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{csquotes}
+\usepackage[
+    backend=biber,
+    style=apa,
+    sorting=nyt
+]{biblatex}
+
+\addbibresource{referencias.bib}
+
+\usepackage{float}
+\usepackage{setspace}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+
+% Config general ESIME
+\usepackage[left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+% Carpeta central de imagenes
+\graphicspath{{imagenes/}}
+
+% Hyperref casi al final
+\usepackage{hyperref}
+\hypersetup{pdfborder=0 0 0}
+
+\begin{document}
+
+% Preliminares con numeros romanos
+\pagenumbering{roman}
+
+% Portada
+\input{capitulos/00-caratula.tex}
+\clearpage
+
+% Indice general
+\tableofcontents
+\clearpage
+
+% Resumen
+\input{capitulos/01-resumen.tex}
+\clearpage
+
+% Contenido principal con numeros arabigos
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% Interlineado 1.5 para el cuerpo del informe
+\onehalfspacing
+
+% Capi­tulos principales
+\input{capitulos/02-introduccion.tex}
+\clearpage
+
+\input{capitulos/03-estado-arte-marco-teorico.tex}
+\clearpage
+
+\input{capitulos/04-diseno-desarrollo.tex}
+\clearpage
+
+\input{capitulos/05-pruebas.tex}
+\clearpage
+
+\input{capitulos/06-resultados-analisis.tex}
+\clearpage
+
+\input{capitulos/07-conclusiones.tex}
+\clearpage
+
+% Referencias
+\printbibliography[
+    heading=bibintoc,
+    title={Referencias}
+]
+\clearpage
+
+% Anexos
+\input{capitulos/08-anexos.tex}
+
+\end{document}

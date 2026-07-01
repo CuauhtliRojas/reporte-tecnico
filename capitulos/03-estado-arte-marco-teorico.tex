@@ -299,3 +299,38 @@ Como se observa en la Figura \ref{fig:segmentacion_semantica}, la segmentación 
 \medskip\textbf{Formulación del problema como segmentación binaria.}
 
 El objetivo del modelo es aprender una función que a partir de una imagen del rostro pueda generar un mascara binaria que indique regiones manipuladas, De esta forma los pixeles pertenecientes a una clase se pueden representar asignándole el calor 0, caso contrario los pixeles con de regiones de otras clases se podrá asignar el valor 1. Dicho formulación permitirá localizar con precisión las áreas de la alteración.
+
+Arquitectura U-Net
+
+Qué es U-Net
+
+La red neuronal U-Net es una red convolucional diseñada para tareas de segmentación, propuesta por Ronneberger2015 en 2015 fue diseñada para usarse en contextos de medicina donde se requirió precisión en imágenes de tipo biomédicas ya que se requería localizar estructuras específicas píxel a píxel. Este modelo se diferencia al resto de clasificadores globales por tener una predicción mas especifica, permitiendo localizar regiones donde la tarea exige una ubicación del objeto a detectar, llámese alteración u objeto. Su nombre se deriva de la característica de su arquitectura ya que en la etapa de contracción o codificación seguida de por la etapa de expansión o decodificación genera un peculiar y reconocible “U”, su arquitectura permite la amplia detección desde características generales hasta los detalles más finos.
+
+Componentes principales de la arquitectura
+
+La U-Net se compone de 3 elementos particulares, el de codificador, decodificador y los saltos de conexión. 
+El primero se encarga de extraer las características de la imagen de entrada, esta diseñada con una serie de capas convolucionales acompañadas con operaciones de max pooling que reducen de manera progresiva la resolución mientras aumentan la profundidad de los mapas de características extraídos. Su objetivo principal es juntar todo el contexto e información semántica, logrando que el modelo identifique patrones complejos. Cada bloque que constituye el codificador está compuesto generalmente por:
+
+Dos convoluciones de 3x3
+Una función de activación
+Una operación de max pooling
+
+La reducción permite el aprendizaje por abstracción.
+El Decodificador tiene la función de volver a construir la resolución original de la imagen para generar el mapa de segmentación, es dicha etapa se utilizan operaciones de up-smapling o convolución transpuesta, aumentando progresivamente la resolución. El bloque de un decodificador se constituye por:
+
+Up-sampling
+Concatenación de mapas de características
+Dos convoluciones de 3x3
+
+El decodificador recuera los detalles del espacio que se pueden llegar a perder del proceso anterior.
+
+Los saltos de conexión son de los elementos mas importantes de la arquitectura U-Net, las conexiones se enlazan entres las capas del codificador y el decodificador, cada una unida a su capa correspondiente, concatenando los mapas de características con el propósito de preservar la mayor cantidad de información espacial de alta resolución que de no hacer estas conexiones se perderían durante el proceso de reducción del codificador, gracias a estas conexiones el modelo puede combinar información global hasta los detalles finas.
+
+Imagen de U-Net
+
+Figura 5
+
+Diferencia entre clasificación y segmentación
+El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen, para llevar a cabo la tarea, las redes sueles reducir la resolución de manera progresiva, sin embargo cuando el objetivo cambia hacia la segmentación el objetivo del modelo es construir un mapa de predicción denso en el cual el pixel tiene la etiqueta, implicando que las características globales se deban de mantener o reconstruirse para producir la información espacial y predicción en cada pixel.
+
+

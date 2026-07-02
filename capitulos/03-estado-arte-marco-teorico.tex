@@ -2,9 +2,9 @@
 \subsection{Estado del arte}
 Existen enfoques de detección de “deepfakes” lo cuales tienen como objetivo principal la clasificación global binaria, creando una etiqueta según sus clases. El trabajo de \textcite{Yagual2024} evaluó 3 tipos diferentes de arquitecturas de redes convolucionales dedicadas a la visión de computadora, las cuales fueron MobileNetV2, EfficientNetB0 y ResNet50, el desempeño de estas redes fue evaluado bajo un umbral de probabilidad dedicado a la clasificación binaria (Area Under Curve). Siguiendo con los trabajos de clasificación se encuentra \textcite{Tiwari2025}, utilizando una metodología hibrida combinando la arquitectura de ResNet-50 para la extracción de características robustas y posteriormente la clasificación ajustada de VGG-16 para la detección de deepfakes. Si bien ambos trabajos cumplen con sus objetivos comparten la deficiencia de no localizar espacialmente la alteración de la imagen, lo cual imposibilitan su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
 
-Para poder resolver la generalidad que conlleva los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido \textcite{Deng2025} menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
+Para atender las limitaciones de los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido \textcite{Deng2025} menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
 
-A diferencia de los trabajos anteriores, que resuelven la situación en donde la proporción de píxeles falsos contra píxeles reales es desbalanceada, con estrategias matemáticas como la función de perdida asimétrica polinomial (APL). En contraste en este proyecto el sistema busca centrarse en una segmentación semántica por medio de una red neuronal con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Ademas, reduce el desbalanceo de clases usando una función de perdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación semánticas (IoU y Dice) que se suman a la función de pérdida total.
+A diferencia de enfoques centrados principalmente en clasificación o localización indirecta. Este proyecto formula el problema como segmentación semántica supervisada, por medio de una red neuronal, con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Además, atiende el desbalance entre píxeles auténticos y manipulados mediante una función de pérdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación (IoU y Dice) que se suman a la función de pérdida total.
 
 \subsection{Marco teórico}
 
@@ -26,6 +26,8 @@ Técnicas como el reemplazo y la recreación tienden a introducir discontinuidad
 
 
 La manipulación de rostros suele incluir una localización y emparejamiento facial, obtención de características, generación mediante modelos como redes generativas antagónicas (GAN) o modelos de difusión, y finalmente una fase de entremezclado y posprocesamiento para integrar el rostro manipulado con el contexto de la imagen real (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
+
+Para este proyecto, las manipulaciones cubiertas para cumplir el objetivo de generación de conjunto de datos propios se centran en dos tipologías: reemplazo facial tipo FaceSwap e inpainting facial localizado\parencite{Rossler_2019_ICCV, Rombach2022}.
 
 \subsubsection{Detección de deepfakes: enfoques y taxonomía}
 
@@ -176,7 +178,7 @@ Como se observa en la Figura \ref{fig:segmentacion_semantica}, la segmentación 
 
 \medskip\textbf{Formulación del problema como segmentación binaria.}
 
-El objetivo del modelo es aprender una función que a partir de una imagen del rostro pueda generar una máscara binaria que indique regiones manipuladas. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración.
+El objetivo del modelo es aprender una función que, a partir de una imagen facial manipulada, genere una predicción espacial de la región alterada. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración. Aunque la formulación se mantiene como una distinción binaria entre región auténtica y región manipulada, el conjunto de datos conserva máscaras separadas para ambas regiones, lo que permite entrenar salidas diferenciadas.
 
 
 \subsubsection{Arquitectura U-Net}
@@ -221,8 +223,7 @@ La Figura \ref{fig:unet_architecture} muestra la arquitectura original de U-Net.
 El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen completa. En cambio, en una tarea de segmentación no basta con etiquetar sino que también se requiere ubicar la manipulación. Por ello el modelo debe generar un mapa de predicción denso en el cual cada píxel recibe una etiqueta. En U-Net, la resolución espacial se reduce durante la etapa de codificación y posteriormente se recupera en el decodificador para construir dicho mapa de segmentación.
 
 \medskip\textbf{Elección de U-Net para el escenario del proyecto}
-El objetivo es detectar y localizar manipulaciones faciales en imágenes mediante una segmentación binaria.La arquitectura U-Net resulta la que mejor se adecua por esta tarea por gran capcidad para capturar aracterísticas semánticas complejas, preservar información espacial y generar mapas
-de segmentación de alta resolución.
+En el proyecto, la arquitectura se adapta como una variante tipo U-Net con doble decodificador, de modo que una salida aprende regiones auténticas y otra salida aprende regiones manipuladas\parencite{Ronneberger2015}.
 
 \subsection{Artefactos típicos en deepfakes faciales}
 
@@ -238,9 +239,38 @@ Las inconsistencias en bordes aparecen cuando existe incompatibilidad entre la r
 En el caso de la iluminación la evidencia se relaciona con la falta de coherencia con respecto a la imagen completa, direcciones de luz que no coinciden, sombras ajenas, reflejos atípicos, así como diferencias entre el sombreado producido y el real. Aunque los generadores pueden producir una coherencia global alta, aún existen casos donde la generación introduce errores locales. Para un segmentador esto resulta un patrón que sobresale por romper la continuidad, principalmente en zonas de alta variación visual como lo son los ojos, labios, zonas de cambio entre piel y elementos del rostro\parencite{Amerini2025, MurguiaSerranoJY2025}.
 
 \medskip\textbf{Alta frecuencia y residuos de textura}
+
 Una parte de estos artefactos puede concentrarse en altas frecuencias y en residuos de textura, detectables al analizar los detalles finos. Partiendo del supuesto de que aquellos rastros de utilidad suelen estar en texturas y detalles, los enfoques que realzan la textura pueden mejorar la sensibilidad ante regiones manipuladas\parencite{Jiang2025, Jin2025, Qiao2025}.
 
 \medskip\textbf{Compresión y reescalado}
 
 La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación\parencite{Gao2024, LiM2025}. 
 
+\subsection{Datos, etiquetado y sesgos}
+
+\medskip\textbf{Conjunto de datos sintético y fuente base}
+
+La validez de un modelo de detección y localización depende de cómo se representan los datos usados durante el entrenamiento y la evaluación. La bibliografía indica que no basta con obtener métricas altas dentro del mismo conjunto de datos para que el modelo pueda superar escenarios diferentes al entrenamiento. En el entorno de banco de pruebas existen variedades en cuyo momento fueron buena opción, sin embargo, la evolución de los generadores puede volver insuficientes algunas distribuciones usadas como banco de prueba. Por lo cual, en este proyecto se propone construir uno propio con un control alto, para hacer coherente la supervisión con la tarea de segmentación planteada, se utilizaron como base imágenes faciales de alta resolución provenientes del conjunto FFHQ\parencite{Rossler_2019_ICCV, Karras2019}.
+
+La línea de trabajo del proyecto se enfoca en generar un aproximado de 50,000 imágenes manipuladas, divididas en dos tipologías, cerca de 25,000 imágenes aproximadamente intervenidas con la técnica de FaceSwap avanzado y otras 25,000 imágenes aproximadamente generadas por inpainting facial localizado \parencite{Rombach2022}.
+
+El reemplazo facial requiere etapas de detección, alineación y análisis de identidad facial, por lo que se apoya en modelos de reconocimiento facial.\parencite{Deng2019ArcFace}
+
+Para garantizar el control y trazabilidad para el posterior entrenamiento y validación, por cada muestra intervenida, se guarda un conjunto de datos, que incluye: la imagen de entrada manipulada, una máscara auténtica, una máscara fake y los metadatos correspondientes a la generación. Se utilizo  modelos de face parsing para delimitar regiones faciales usadas en la generación de máscaras. \parencite{Yu2019bisenet}.
+
+\medskip\textbf{Máscaras binarias y protocolo de etiquetado}
+
+El proceso de etiquetado no se limita a una única máscara binaria general. En su lugar, el sistema define y almacena dos máscaras complementarias para cada muestra: una máscara fake, que delimita la región que ha sido manipulada, y la máscara auténtica, que representa la zona facial original. La definición de las máscaras depende del tipo de manipulación generada. Por ejemplo, en el caso de FaceSwap, la máscara fake cubre en su totalidad el rostro, por ende, la máscara auténtica, resulta en una máscara completamente negra. En cambio, el local inpainting al estar delimitado por zonas específicas, las máscaras se alternan de manera que se restan mutuamente.
+
+Para estandarizar estas manipulaciones, el proyecto define el rostro como la región que abarca exclusivamente la piel, cejas, ojos, lentes, nariz, boca y labios; excluyendo de manera explícita elementos como el cabello, el cuello, las orejas y el fondo de la imagen, utilizando face parsing para su correcta identificación \parencite{Yu2019bisenet}.
+
+
+\medskip\textbf{Sesgos, partición y generalización acotada}
+
+Es fundamental reconocer los sesgos inherentes al linea de trabajo de generación propuesto, ya que estos determinan los límites de generalización del modelo ante datos no vistos \parencite{Yang2025, Chandra2025}. 
+
+Al utilizar FFHQ como única base para las imágenes, el modelo hereda la composición visual, las condiciones de captura y la distribución facial propias de dicho conjunto.
+
+El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e inpainting localizado). Por consiguiente, no garantiza la detección de deepfakes generados por técnicas distintas no representadas en el entrenamiento \parencite{Alrashoud2025}. Los artefactos visuales que el modelo aprende a localizar están ligados a las particularidades de los generadores utilizados para su síntesis. Además, el análisis se restringe a la región facial definida por el linea de trabajo, por lo que no cubre cabello, cuello, orejas ni fondo.
+
+La separación debe realizarse con base en el identificador original de la imagen FFHQ, evitando que variaciones manipuladas de una misma imagen base aparezcan a la vez en el entrenamiento y pruebas. 

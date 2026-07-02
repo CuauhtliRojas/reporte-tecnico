@@ -26,7 +26,7 @@ Desde la perspectiva técnica, el problema se centra en que, mientras mayor real
 
 % Explicar por qué tiene sentido usar segmentación semántica y redes convolucionales.
 % Justificar U-Net por su uso en localización píxel a píxel.
-Ante esa situación, se plantea cambiar de un enfoque de clasificación global a uno de segmentación de regiones, exigiendo que el sistema delimite e identifique las áreas del rostro que han sido intervenidas. Para lograr esto, las redes neuronales convolucionales enfocadas en segmentación, como U-Net, resultan adecuadas, ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que los modelos globales pueden omitir por la proporción de la región manipulada respecto a la imagen completa. Además, la segmentación binaria permite generar evidencia visual de valor interpretativo, ya que no se limita a decidir si una imagen es falsa, sino que resalta la región intervenida para guiar su inspección.
+Por este motivo, el proyecto propone transitar de una clasificación global hacia la segmentación de regiones, exigiendo que el sistema delimite e identifique las áreas del rostro que han sido intervenidas. Para lograr esto, las redes neuronales convolucionales enfocadas en segmentación, como U-Net, resultan adecuadas, ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que los modelos globales pueden omitir por la proporción de la región manipulada respecto a la imagen completa. Además, la segmentación binaria permite generar evidencia visual de valor interpretativo, ya que no se limita a decidir si una imagen es falsa, sino que resalta la región intervenida para guiar su inspección.
 
 \subsection{Objetivo general}
 

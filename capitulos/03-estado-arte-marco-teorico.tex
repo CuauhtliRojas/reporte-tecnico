@@ -1,10 +1,10 @@
 \section{Estado del arte / Marco teórico}
 \subsection{Estado del arte}
-Existen enfoques de detección de \textit{deepfakes} los cuales tienen como objetivo principal la clasificación global binaria, asignando una etiqueta según sus clases. El trabajo de \textcite{Yagual2024} evaluó tres arquitecturas de redes convolucionales aplicadas a visión por computadora: MobileNetV2, EfficientNetB0 y ResNet50. El desempeño de estas redes fue evaluado mediante el área bajo la curva (AUC), en un esquema de clasificación binaria. En esta misma línea, \textcite{Tiwari2025} propuso una metodología híbrida que combina ResNet-50 para la extracción de características robustas y VGG-16 ajustada para la detección de \textit{deepfakes}. Si bien ambos trabajos cumplen con sus objetivos, comparten la limitación de no localizar espacialmente la alteración en la imagen, lo cual imposibilita su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
+Existen enfoques de detección de \textit{deepfakes} los cuales tienen como objetivo principal la clasificación global binaria, asignando una etiqueta según sus clases. El trabajo de \textcite{Yagual2024} comparó tres arquitecturas de redes convolucionales enfocadas en visión artificial: MobileNetV2, EfficientNetB0 y ResNet50. El desempeño de estas redes fue evaluado mediante el área bajo la curva (AUC), en un esquema de clasificación binaria. En esta misma línea, \textcite{Tiwari2025} propuso una metodología híbrida que combina ResNet-50 para la extracción de características robustas y VGG-16 ajustada para la detección de \textit{deepfakes}. Si bien ambos trabajos cumplen con sus objetivos, comparten la limitación de no localizar espacialmente la alteración en la imagen, lo cual imposibilita su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
 
 Para atender las limitaciones de los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización de las alteraciones. En este sentido, \textcite{Deng2025} menciona que los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, por lo que aborda un esquema de clasificación de etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que, debido a su nivel de integración, requieren ubicarse para tener una validación forense.
 
-A diferencia de enfoques centrados principalmente en clasificación o localización indirecta, este proyecto formula el problema como segmentación semántica supervisada por medio de una red neuronal con arquitectura basada en U-Net. Mediante su doble decodificador, el modelo genera máscaras que delimitan la región manipulada y la región auténtica. Además, atiende el desbalance entre píxeles auténticos y manipulados mediante una función de pérdida compuesta por entropía cruzada binaria (BCE) y términos de solapamiento como IoU y Dice.
+A diferencia de enfoques centrados principalmente en clasificación o localización indirecta, este proyecto formula el problema como segmentación semántica supervisada por medio de una red neuronal con arquitectura basada en U-Net. Mediante su doble decodificador, el modelo genera máscaras que delimitan la región manipulada y la región auténtica. Para resolver la gran diferencia de proporción entre los píxeles reales y los alterados, el modelo aplica una función de pérdida que integra la entropía cruzada binaria (BCE) y términos de solapamiento como IoU y Dice.
 
 \subsection{Marco teórico}
 
@@ -17,7 +17,7 @@ A diferencia de enfoques centrados principalmente en clasificación o localizaci
 En particular, la manipulación facial puede organizarse como un conjunto de transformaciones sobre el rostro que abarcan:
 \begin{itemize}
     \item Reemplazo de identidad.
-    \item Recreación o transferencia de expresiones.
+    \item Clonación de gestos y transferencia de movimientos faciales.
     \item Ediciones localizadas del rostro sin sustituir por completo la identidad.
     \item Síntesis de un rostro completo sin una referencia. 
 \end{itemize}
@@ -25,7 +25,7 @@ En particular, la manipulación facial puede organizarse como un conjunto de tra
 Técnicas como el reemplazo y la recreación tienden a introducir discontinuidades en contornos y coherencias internas del rostro, mientras que la síntesis puede producir coherencias globales altas, pero inconsistencias de textura en regiones específicas. \parencite{MurguiaSerrano2025}
 
 
-La manipulación de rostros suele incluir una localización y emparejamiento facial, obtención de características, generación mediante modelos como redes generativas antagónicas (GAN) o modelos de difusión, y finalmente una fase de entremezclado y posprocesamiento para integrar el rostro manipulado con el contexto de la imagen real (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
+Alterar un rostro requiere primero ubicar y alinear sus rasgos. Después, herramientas como las redes GAN o los modelos de difusión sintetizan las nuevas características, y finalmente se aplica un posprocesamiento para integrar el rostro manipulado con el contexto de la imagen original (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
 
 Para este proyecto, las manipulaciones cubiertas para cumplir el objetivo de generación de conjunto de datos propios se centran en dos tipologías: reemplazo facial tipo FaceSwap e inpainting facial localizado\parencite{Rossler_2019_ICCV, Rombach2022}.
 
@@ -43,7 +43,7 @@ Debido al acelerado desarrollo de generadores, la detección se puede estructura
     \item Enfoque basado en aprendizaje profundo (end-to-end).
     \item Enfoques híbridos. 
 \end{itemize}
-Esta organización no pretende ser excluyente, ya que diversos modelos contemporáneos combinan señales y representaciones; sin embargo, permite sintetizar la intuición forense detrás de cada familia y, en consecuencia, discutir sus fallas típicas ante el cambio de dominio (conjunto de datos, generador y postprocesado) \parencite{MurguiaSerrano2025, Banerjee2025}.
+Esta clasificación no es estricta, ya que diversos modelos actuales combinan señales y representaciones. Su propósito real es resumir la teoría detrás de cada categoría y facilitar el análisis de sus debilidades cuando cambian de dominio (conjunto de datos, generador y postprocesado) \parencite{MurguiaSerrano2025, Banerjee2025}.
 
 En el enfoque de frecuencia, la hipótesis es que los procesos de generación introducen artefactos espectrales que no son necesariamente evidentes en el espacio de píxel, pero sí se manifiestan como anomalías en bandas de alta frecuencia o como distribuciones espectrales atípicas. Parte de la evidencia reportada en la bibliografía vincula estas huellas con operaciones internas de los generadores, por ejemplo, etapas de sobremuestreo en arquitecturas GAN, que dejan patrones característicos en el espectro. En consecuencia, se utilizan transformadas (Fourier, DCT o wavelets) y descriptores espectrales para separar contenido real de contenido sintético. Sin embargo, una limitación importante es que las huellas pueden variar entre generadores y, por lo tanto, inducir sensibilidad a patrones específicos del modelo de síntesis o del dominio de entrenamiento, reduciendo la capacidad de generalización ante escenarios más realistas y variados. \parencite{Tan2024}
 

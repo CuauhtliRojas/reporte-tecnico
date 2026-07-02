@@ -173,3 +173,23 @@ El objetivo de un modelo de clasificación es asignar una etiqueta general a la 
 Elección de U-Net para el escenario del proyecto
 El objetivo es detectar y localizar manipulaciones faciales en imágenes mediante una segmentación binaria.La arquitectura U-Net resulta la que mejor se adecua por esta tarea por gran capcidad para capturar aracterísticas semánticas complejas, preservar información espacial y generar mapas
 de segmentación de alta resolución.
+
+Artefactos típicos en deepfakes faciales
+
+Inconsistencias espaciales: textura, bordes e iluminación
+
+El concepto de "artefacto" se define como un rastro o huella observable que surge a partir de la síntesis, recreación o mezcla con el contexto total de la imagenAmerini2025, MurguiaSerranoJY2025. En este proyecto estas huellas pueden interpretarse como señales locales que un segmentador puede capturar a partir del aprendizaje por supervisión con máscaras binarias, considerando que la inferencia se realiza sin imagen de referencia y con una salida visual interpretable. 
+
+De forma operativa se pueden ubicar tres conjuntos de inconsistencias visuales: textura, bordes/contornos e iluminación/sombras. Estas agrupaciones pueden existir de manera conjunta, y se pueden presentar en cualquier zona dentro de la región facial, lo cual es un factor importante para tratar el problema como una tarea de localización.
+Las inconsistencias de textura se asocian a características normales de la piel, las cuales pueden ser suavizadas, reconstruidas o simuladas por el generador. Sin embargo, la alteración puede quedar con un aspecto liso, repetitivo o con un ruido residual que no corresponde con el resto de la imagen. Por lo tanto, los trabajos recientes hacen énfasis en explotar las texturas finas como un recurso de valor cuando una señal semántica induce un sobreajuste al modeloJiang2025, Jin2025.
+
+Las inconsistencias en bordes aparecen cuando existe incompatibilidad entre la región manipulada y la real. Aparecen líneas de mezcla o transiciones abruptas entre regiones, también pueden existir errores de alineación y deformación facial, en imágenes, estas señales pueden observarse en los contornos faciales. En la segmentación esto resulta relevante ya que estas señales se ubican en fronteras de la manipulación lo que favorece la obtención de máscarasAmerini2025, Jiang2025.
+
+En el caso de la iluminación la evidencia se relaciona con la falta de coherencia con respecto a la imagen completa, direcciones de luz que no coinciden, sombras ajenas, reflejos atípicos, así como diferencias entre el sombreado producido y el real. Aunque los generadores pueden producir una coherencia global alta, aún existen casos donde la generación introduce errores locales. Para un segmentador esto resulta un patrón que sobresale por romper la continuidad, principalmente en zonas de alta variación visual como lo son los ojos, labios, zonas de cambio entre piel y elementos del rostroAmerini2025, MurguiaSerranoJY2025.
+
+Alta frecuencia y residuos de textura
+Una parte de estos artefactos puede concentrarse en altas frecuencias y en residuos de textura, detectables al analizar los detalles finos. Partiendo del supuesto de que aquellos rastros de utilidad suelen estar en texturas y detalles, los enfoques que realzan la textura pueden mejorar la sensibilidad ante regiones manipuladasJiang2025, Jin2025, Qiao2025.
+
+Compresión y reescalado
+
+La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación Gao2024, LiM2025.

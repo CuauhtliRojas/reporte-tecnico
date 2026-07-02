@@ -125,23 +125,16 @@ Donde e representa la base del logaritmo natural.
 
 Segmentación semántica y formulación del problema.
 
-Artefactos e inconsistencias en deepfake.
-
-El uso desmedido de redes generativas (GAN) para producir deepfakes ha conducido a una proliferación de imágenes y con ello, al aumento del realismo. Sin embargo, aún con todos estos avances se pueden detectar por las técnicas correctas artefactos visuales que delatan su intervención. “FaceForensics++: Learning to Detect Manipulated Facial Images de Andreas Rossler” demostró que aún existe irregularidades en textura de piel asi como iluminación y sombras.
-
-Dentro del dominio contextual de un rostro, la mayor inconsistencia presente de texturas se presenta cuando se realiza un suavizado en la piel o bien cuando estén perdida de imperfecciones que la piel debería de conservar y más con los avances de calidad digital al momento de capturar contenido. Este tipo de efectos surgen cuando en la generación de la manipulación se le da prioridad a una coherencia global sobre las particulares detalladas (Ejemplo: Un tono de piel informe por sobre la generación de líneas de expresión) lo que provoca transiciones notorias entre el rostro alterado y la imagen real, las zonas que más se delatan son el cabello y el contorno facial. Otro tipo de incoherencia visual que se presenta con regularidad son la dualidad de sombra y luz que resaltan por no coincidir con la imagen real.
-
-Altas frecuencias y residuos de textura.
-
-Un aspecto para tomar en cuenta es el análisis de alta frecuencia, el cual suele abarcar información acerca de bordes, detalles fino o micro texturas. Los cuales se alteran durante la generación de un “deepfake”. Detección como el propuesto como “MesoNet: a Compact Facial Video Forgery Detection Network de Darius Afchar” mencionan que se puede tomar ventaja de los residuos de textura para extraer características o rastros de manipulación. En varios casos la region manipulada presenta un conjunto de frecuencias distintas a las imágenes reales, permitiendo detección que serían difícil para la percepción del ojo del ser humano 
-
 Segmentación semántica.
 
-Las técnicas de segmentación semántica permiten asignar una etiqueta a cada píxel de una imagen según su contexto. A diferencia de un método tradicional de clasificación que genera una etiqueta global, la segmentación permite determinar ubicación dentro las imágenes, dicho enfoque resulta útil en un análisis forense permitiendo la localización espacial.
+Las técnicas de segmentación semántica permiten asignar una etiqueta a cada píxel de una imagen según su contexto. A diferencia de un método tradicional de clasificación que genera una etiqueta global, la segmentación permite determinar ubicación dentro de la imagen. Dicho enfoque resulta útil en un análisis forense permitiendo la localización espacial.Ronneberger2015, Bappy_2017_ICCV
+
+
+Como se observa en la Figura fig:segmentacion_semantica, la segmentación semántica permite identificar diferentes regiones dentro de una imagen mediante etiquetas asignadas a cada píxel. En este proyecto, en lugar de múltiples categorías semánticas, el objetivo consiste en distinguir únicamente entre regiones manipuladas y regiones auténticas dentro del rostro.
 
 Formulación del problema como segmentación binaria.
 
-El objetivo del modelo es aprender una función que a partir de una imagen del rostro pueda generar un mascara binaria que indique regiones manipuladas, De esta forma los pixeles pertenecientes a una clase se pueden representar asignándole el calor 0, caso contrario los pixeles con de regiones de otras clases se podrá asignar el valor 1. Dicho formulación permitirá localizar con precisión las áreas de la alteración.
+El objetivo del modelo es aprender una función que a partir de una imagen del rostro pueda generar una máscara binaria que indique regiones manipuladas. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración.
 
 
 Arquitectura U-Net

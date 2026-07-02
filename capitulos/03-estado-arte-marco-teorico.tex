@@ -4,7 +4,7 @@ Existen enfoques de detección de “deepfakes” lo cuales tienen como objetivo
 
 Para poder resolver la generalidad que conlleva los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido \textcite{Deng2025} menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
 
-A diferencia de los trabajos anteriores, que resuelven la situación en donde la proporción de pixeles falsos contra píxeles reales es desbalanceada, con estrategias matemáticas como la función de perdida asimétrica polinomial (APL). En contraste en este proyecto el sistema busca centrarse en una segmentación semántica por medio de una red neuronal con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera mascaras donde agrupa y delimita una región manipulada contra la real. Ademas, reduce el desbalanceo de clases usando una función de perdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación semánticas (IoU y Dice) que se suman a la función de pérdida total.
+A diferencia de los trabajos anteriores, que resuelven la situación en donde la proporción de pixeles falsos contra píxeles reales es desbalanceada, con estrategias matemáticas como la función de perdida asimétrica polinomial (APL). En contraste en este proyecto el sistema busca centrarse en una segmentación semántica por medio de una red neuronal con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Ademas, reduce el desbalanceo de clases usando una función de perdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación semánticas (IoU y Dice) que se suman a la función de pérdida total.
 
 \subsection{Marco teórico}
 
@@ -79,47 +79,18 @@ La generación de una máscara proporciona evidencia visual interpretable, permi
 \medskip\textbf{Redes neuronales convolucionales}
 
 
-\textcite{goodfellow2016deep} describen las redes neuronales convolucionales como un tipo de red neuronal specializada en el procesamiento de datos que tiene una topología conocida similar a una cuadrícula. Mencionan particularmente a las imágenes, las cuales pueden considerarse como una cuadrícula bidimensional de píxeles. El nombre "red neuronal convolucional" indica que la red emplea una operación matemática llamada convolución. La convolución es un tipo specializado de operación lineal. Por su parte las redes neuronales convolucionales son simplemente redes neuronales que utilizan la convolución en lugar de la multiplicación matricial general en al menos una de sus capas. 
+\textcite{goodfellow2016deep} describen las redes neuronales convolucionales como un tipo de red neuronal especializada en el procesamiento de datos que tiene una topología conocida similar a una cuadrícula. Mencionan particularmente a las imágenes, las cuales pueden considerarse como una cuadrícula bidimensional de píxeles. El nombre "red neuronal convolucional" indica que la red emplea una operación matemática llamada convolución. Por su parte las redes neuronales convolucionales son simplemente redes neuronales que utilizan la convolución en lugar de la multiplicación matricial general en al menos una de sus capas. 
 
 
 \medskip\textbf{La operación de convolución}
 
 
-La operación de convolución se define como una operación matemática entre dos funciones que produce una tercera función que representa la cantidad de superposición entre ellas. En términos continuos puede expresarse como:
- 
-\[
-    s(t) = \int x(a)w(t - a)da
-\]
-Esta operación se denomina convolución y normalmente se indica con un asterisco 
-\[
-s(t)=(x*w)(t)
-\]
-Donde:
-\begin{itemize}
-    \item 	x representa la señal de entrada o los datos originales. En el contexto de las redes neuronales convolucionales, esta señal corresponde a los valores de los píxeles de una imagen
-    \item 	w representa el filtro o kernel de convolución en el contexto de CNN el cual es una matriz de valores que se utilizan para detectar características específicas en la imagen (Bordes, texturas, patrones, etc.)
-    \item 	* representa la operación de convolución entre la señal de entrada x y el filtro w
-    \item 	t representa la posición o desplazamiento en la señal o imagen donde se está aplicando el filtro
-    \item 	s(t) es el resultado de la convolución, es decir, una señal nueva resultante del proceso de convolución o un mapa de activación en el contexto de las CNN obtenido después de aplicar un filtro a una señal de entrada.
-\end{itemize}
-
+La operación de convolución se define como una operación matemática entre dos funciones que produce una tercera función que representa la cantidad de superposición entre ellas.
 
 En el contexto de redes neuronales convolucionales, esta operación se utiliza para aplicar filtros sobre imágenes con el objetivo de detectar patrones locales como bordes, texturas o formas. Cada filtro se desplaza sobre la imagen generando mapas de activación que resaltan dichas características.
 
-Sin embargo, en aplicaciones de aprendizaje automático y visión por computadora, los datos utilizados no son continuos sino discretos. Las imágenes digitales, por ejemplo, se representan como matrices de valores numéricos correspondientes a píxeles. Debido a esto, la operación de convolución se expresa mediante una forma discreta, en la cual la integral es reemplazada por una suma.
+Sin embargo, en aplicaciones de aprendizaje automático y visión por computadora, los datos utilizados no son continuos sino discretos. Las imágenes digitales, por ejemplo, se representan como matrices de valores numéricos correspondientes a píxeles. Debido a esto, la operación de convolución se expresa mediante una forma discreta. Como las imágenes digitales se pueden representar como matrices bidimensionales de píxeles:
 
-\[
-s(t)=\sum_a x(a)w(t-a)
-\]
-Donde: 
-\begin{itemize}
-    \item x(a) representa la señal de entrada en la posición a
-    \item w(t-a) valor del filtro desplazado 
-    \item a representa el índice discreto de la suma 
-    \item s(t) es el resultado de la convolución en la posición t 
-\end{itemize}
-
-Debido a que las imágenes digitales se pueden representar como matrices bidimensionales de píxeles, para llevar a cabo el proceso de convolución se aplica la misma fórmula, pero adaptada a dos dimensiones:
 \[
 s(i,j)=\sum_m\sum_n x(i-m,j-n)w(m,n)
 \]
@@ -127,70 +98,41 @@ Donde:
 \begin{itemize}
     \item x(i,j) es el valor del píxel en la imagen de entrada.
     \item w(m,n) es el valor del filtro o kernel.
-    \item s(i,j)  es el resultado de la convolución en la posición (i,j).
+    \item s(i,j) es el resultado de la convolución en la posición (i,j).
     \item m,n son los índices del kernel.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{Ejemplo_convolucion_2_dimensiones.png}
-    \caption{Ejemplo de un proceso de convolución en una matriz de 2 dimensiones y el proceso para generar cada uno de los elementos (tensores) que componen el mapa de activación resultante después de aplicar el filtro en la matriz de entrada}
+    \caption{Ejemplo de un proceso de convolución en una matriz de dos dimensiones y el proceso para generar cada uno de los elementos que componen el mapa de activación resultante después de aplicar el filtro en la matriz de entrada}
     \label{fig:convolucion_2d}
 \end{figure}
 
-Aunque el término convolución es ampliamente utilizado en redes neuronales convolucionales, en la práctica la operación implementada en la mayoría de los frameworks de aprendizaje profundo corresponde técnicamente a una correlación cruzada (cross-correlation). La principal diferencia entre ambas operaciones radica en que la convolución implica una inversión del filtro antes de realizar el desplazamiento sobre la señal de entrada, mientras que en la correlación el filtro se aplica directamente sin dicha inversión. A pesar de esta diferencia matemática, en el contexto del aprendizaje profundo ambos términos suelen utilizarse de manera intercambiable, ya que los filtros son aprendidos automáticamente durante el entrenamiento de la red.
-
+En la mayoría implementaciones de capas convolucionales, la operación denominada convolución corresponde técnicamente a una correlación cruzada (cross-correlation). La principal diferencia entre ambas operaciones radica en que la convolución implica una inversión del filtro antes de realizar el desplazamiento sobre la señal de entrada, mientras que en la correlación el filtro se aplica directamente sin dicha inversión. A pesar de eso ambos términos suelen utilizarse de manera intercambiable, ya que los filtros son aprendidos automáticamente durante el entrenamiento de la red\parencite{goodfellow2016deep}.
 
 \medskip\textbf{Filtros, mapas de activación y jerarquía de características.}
 
+Los filtros son matrices que se desplazan sobre la entrada. Durante el proceso de entrenamiento, los valores de los filtros se ajustan automáticamente mediante algoritmos de optimización, permitiendo que la red aprenda a identificar patrones relevantes en los datos.
 
-En las redes neuronales convolucionales, los filtros o kernels son pequeñas matrices de valores que se utilizan para detectar características específicas dentro de una imagen. Estos filtros se desplazan sobre la matriz de entrada aplicando la operación de convolución o correlación en cada posición. Durante el proceso de entrenamiento, los valores de los filtros se ajustan automáticamente mediante algoritmos de optimización, permitiendo que la red aprenda a identificar patrones relevantes en los datos.
-
-
- 
-
-
-El resultado de aplicar un filtro sobre una imagen de entrada se denomina mapa de activación (feature map). Este mapa representa la respuesta del filtro en cada posición de la imagen, resaltando aquellas regiones donde el patrón detectado por el filtro está presente. Cada filtro genera un mapa de activación diferente, lo que permite a la red neuronal capturar múltiples características visuales dentro de la imagen.
-
+El resultado de aplicar un filtro sobre una imagen de entrada se denomina mapa de activación o mapa de características. Este mapa representa la respuesta del filtro en cada posición de la imagen, resaltando aquellas regiones donde el patrón detectado por el filtro está presente. Al ser diferente cada filtro produce una respuesta distinta, permitiendo a la red neuronal capturar múltiples características visuales dentro de la imagen.
 
 Las redes neuronales convolucionales aprenden una jerarquía de características visuales a través de sus diferentes capas. En las primeras capas, los filtros suelen detectar características simples como bordes y orientaciones. En capas intermedias, la red comienza a identificar patrones más complejos como texturas o formas. Finalmente, en las capas más profundas se reconocen estructuras más complejas, como partes de objetos o configuraciones faciales completas. Esta capacidad de aprender representaciones jerárquicas permite a las CNN analizar imágenes de forma eficiente en tareas de reconocimiento y clasificación.
-Esta capacidad resulta especialmente útil en la detección de deepfakes, ya que permite identificar inconsistencias visuales sutiles en imágenes manipuladas, tales como anomalías en texturas faciales, iluminación o patrones de compresión.
-
-
-En las redes neuronales convolucionales, esta operación se aplica repetidamente a través de múltiples capas convolucionales. Cada capa utiliza varios filtros que son aprendidos automáticamente durante el proceso de entrenamiento, permitiendo a la red detectar diferentes tipos de características visuales. Como resultado, se generan múltiples mapas de activación que capturan patrones relevantes dentro de la imagen de entrada.
+Esta capacidad resulta especialmente útil en la detección de deepfakes, ya que permite identificar inconsistencias visuales sutiles en imágenes manipuladas, tales como anomalías en texturas faciales, iluminación o patrones de compresión.\parencite{Rossler_2019_ICCV}
 
 
 \medskip\textbf{Pooling y stride.}
 
-En las redes neuronales convolucionales, el pooling es una operación mediante la cual se busca reducir la dimensionalidad o tamaño de los mapas de activación generados por las capas convolucionales. Esta reducción permite disminuir el número de parámetros que utiliza el modelo y el costo computacional, al mismo tiempo que se conserva la información más relevante para las características que anteriormente se detectaron. Este proceso consiste en dividir el mapa de activación en pequeñas regiones y aplicar una función de agregación sobre cada una de ellas dando como resultado un mapa de activación más pequeño que conserva las características más importantes detectadas por los filtros de la red.
+En las redes neuronales convolucionales, el pooling es una operación mediante la cual se busca reducir la dimensionalidad o tamaño de los mapas de activación generados por las capas convolucionales. Esta reducción permite disminuir la dimensión espacial de los mapas de activación y el costo computacional, al mismo tiempo que se conserva la información más relevante para las características que anteriormente se detectaron. Este proceso consiste en dividir el mapa de activación en pequeñas regiones y aplicar una función de agregación sobre cada una de ellas, dando como resultado un mapa de activación más pequeño que conserva las características más importantes detectadas por los filtros de la red.
 
 
 El max pooling es uno de los métodos de pooling más utilizados en redes neuronales convolucionales. En este método, para cada región del mapa de activación se selecciona únicamente el valor máximo. De esta manera, se conserva la característica más significativa detectada por el filtro en esa región específica.
-Este mecanismo permite que la red neuronal mantenga las activaciones más relevantes y reduzca la información irrelevante, lo que ayuda a mejorar la eficiencia del modelo.
-
-
-Otro método utilizado es el average pooling, el cual calcula el valor promedio dentro de cada región del mapa de activación. Aunque este método también reduce la dimensionalidad de los datos, en la práctica el max pooling suele utilizarse con mayor frecuencia en arquitecturas modernas de redes neuronales convolucionales debido a su mejor desempeño en muchas tareas de visión por computadora.
-
 
 En la operación de convolución, el stride (comúnmente traducido como paso o zancada) es un hiperparámetro estructural que determina la cantidad de unidades espaciales o píxeles que el filtro (kernel) avanza sobre la matriz de entrada en cada iteración.
-En las operaciones de convolución estándar, se asume un desplazamiento unitario (stride = 1), lo que significa que el filtro se mueve un píxel a la vez de izquierda a derecha y de arriba hacia abajo, procesando la imagen de manera altamente superpuesta.
- Sin embargo, al incrementar este valor, el filtro "salta" posiciones, desplazándose de dos en dos píxeles.
-El impacto principal del stride se ve reflejado en las dimensiones espaciales del mapa de activación resultante una vez terminado el proceso de convolución, si el stride es grande, las dimensiones serán menores, actuando como un mecanismo de submuestreo y se denota de la siguiente manera:
-\[
-O = \left\lfloor \frac{W - K + 2P}{S} \right\rfloor + 1
-\]
+En las operaciones de convolución estándar, se asume un desplazamiento unitario (stride = 1), lo que significa que el filtro se mueve un píxel a la vez de izquierda a derecha y de arriba hacia abajo, procesando la imagen de manera altamente superpuesta. Sin embargo, al incrementar este valor, el filtro "salta" posiciones, desplazándose de dos en dos píxeles.
+El impacto principal del stride se ve reflejado en las dimensiones espaciales del mapa de activación resultante una vez terminado el proceso de convolución. Si el stride es grande, las dimensiones serán menores, actuando como un mecanismo de submuestreo\parencite{goodfellow2016deep}.
 
-
-Donde:
-\begin{itemize}
-    \item O representa la dimensión espacial del mapa de activación de salida
-    \item W es la dimensión de la imagen o matriz de entrada
-    \item K es el tamaño del filtro o kernel
-    \item P representa el padding (relleno) aplicado a los bordes de la entrada
-    \item S es el valor del stride o desplazamiento.
-\end{itemize}
-\medskip\textbf{Funciones de activación.}
-
+\medskip\textbf{Funciones de activación en extracción y salida binaria}
 
 En las redes neuronales convolucionales, después de realizar la operación de convolución, se aplica una función de activación. Estas funciones introducen no linealidad en el modelo, lo cual permite que la red neuronal pueda aprender representaciones más complejas de los datos. Sin la incorporación de funciones no lineales, una red compuesta únicamente por operaciones lineales sería equivalente a una sola transformación lineal, limitando significativamente su capacidad de aprendizaje.
 Las funciones de activación se aplican a los valores generados por las capas convolucionales, produciendo mapas de activación que posteriormente son procesados por las siguientes capas de la red. De acuerdo con \textcite{goodfellow2016deep}, las funciones de activación permiten que las redes neuronales profundas modelen relaciones complejas presentes en los datos y facilitan el aprendizaje de representaciones jerárquicas en tareas de visión por computadora.
@@ -209,7 +151,7 @@ Donde:
 \end{itemize}
 Según \textcite{goodfellow2016deep}, el uso de la función ReLU facilita el entrenamiento de redes neuronales profundas, ya que ayuda a reducir el problema del gradiente desvanecido y permite una convergencia más rápida durante el proceso de aprendizaje.
 
-Aun con la eficiencia de ReLU en las capas ocultas para la extracción de características, la salid de la red ocupa un enfoque diferente, pues las clasificación binaria como la generación de mascaras en problemas de segmentación semántica mediante arquitecturas como U-Net \textcite{Ronneberger2015}, por ellos la salid del modela se interpreta como una probabilidad, la función de activación sigmoide, comprime el valor real de la de entrada en un intervalo continuo entre el 0 y 1 lo cual según \textcite{goodfellow2016deep} resulta determinante para calcular la probabilidad de pertenecer a una clase.
+Aun con la eficiencia de ReLU en las capas ocultas para la extracción de características, la salida de la red requiere una acotación, por ello es necesario que la salida sea una probabilidad, la función de activación sigmoide comprime el valor real de la entrada en un intervalo continuo entre el 0 y 1 lo cual según \textcite{goodfellow2016deep} resulta determinante para calcular la probabilidad de pertenecer a una clase por cada píxel de la imagen.
 
 \begin{equation}
 f(x) = \frac{1}{1 + e^{-x}}
@@ -286,6 +228,6 @@ Los saltos de conexión son de los elementos mas importantes de la arquitectura 
 La Figura \ref{fig:unet_architecture} muestra la arquitectura original de U-Net. En la parte izquierda se encuentra la ruta de contracción (encoder), donde la resolución espacial de la imagen se reduce progresivamente mediante operaciones de max pooling mientras aumenta el número de mapas de características. En la parte derecha se encuentra la ruta de expansión (decoder), donde la resolución se recupera mediante operaciones de up-convolution. Las conexiones laterales entre ambas rutas permiten combinar información semántica profunda con detalles espaciales de alta resolución, lo que mejora la precisión en tareas de segmentación.
 
 \medskip\textbf{Diferencia entre clasificación y segmentación}
-El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen, para llevar a cabo la tarea, las redes sueles reducir la resolución de manera progresiva, sin embargo cuando el objetivo cambia hacia la segmentación el objetivo del modelo es construir un mapa de predicción denso en el cual el pixel tiene la etiqueta, implicando que las características globales se deban de mantener o reconstruirse para producir la información espacial y predicción en cada pixel.
+El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen, para llevar a cabo la tarea, las redes sueles reducir la resolución de manera progresiva, sin embargo cuando el objetivo cambia hacia la segmentación el objetivo del modelo es construir un mapa de predicción denso en el cual el píxel tiene la etiqueta, implicando que las características globales se deban de mantener o reconstruirse para producir la información espacial y predicción en cada píxel.
 
 

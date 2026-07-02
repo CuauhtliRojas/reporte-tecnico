@@ -183,20 +183,19 @@ El objetivo del modelo es aprender una función que a partir de una imagen del r
 
 \medskip\textbf{Qué es U-Net}
 
-La red neuronal U-Net es una red convolucional diseñada para tareas de segmentación, propuesta por Ronneberger2015 en 2015 fue diseñada para usarse en contextos de medicina donde se requirió precisión en imágenes de tipo biomédicas ya que se requería localizar estructuras específicas píxel a píxel. Este modelo se diferencia al resto de clasificadores globales por tener una predicción mas especifica, permitiendo localizar regiones donde la tarea exige una ubicación del objeto a detectar, llámese alteración u objeto. Su nombre se deriva de la característica de su arquitectura ya que en la etapa de contracción o codificación seguida de por la etapa de expansión o decodificación genera un peculiar y reconocible “U”, su arquitectura permite la amplia detección desde características generales hasta los detalles más finos.
+La red neuronal U-Net es una red convolucional diseñada para tareas de segmentación, propuesta por \textcite{Ronneberger2015}, pensada para usarse en contextos de medicina donde se requirió precisión en imágenes biomédicas, ya que se necesitaba localizar estructuras específicas píxel a píxel. Este modelo se diferencia de los modelos de clasificación global por tener una predicción más específica, permitiendo localizar regiones donde la tarea exige una ubicación del objeto a detectar, llámese alteración u objeto. Su nombre se deriva de la característica de su arquitectura ya que en la etapa de contracción o codificación seguida por la etapa de expansión o decodificación genera un peculiar y reconocible “U”, su arquitectura permite combinar características generales del contexto hasta los detalles espaciales más finos.
 
 \medskip\textbf{Componentes principales de la arquitectura}
 
-La U-Net se compone de 3 elementos particulares, el de codificador, decodificador y los saltos de conexión. 
-El primero se encarga de extraer las características de la imagen de entrada, esta diseñada con una serie de capas convolucionales acompañadas con operaciones de max pooling que reducen de manera progresiva la resolución mientras aumentan la profundidad de los mapas de características extraídos. Su objetivo principal es juntar todo el contexto e información semántica, logrando que el modelo identifique patrones complejos. Cada bloque que constituye el codificador está compuesto generalmente por:
+La U-Net se compone de tres elementos: codificador, decodificador y conexiones de salto. 
+El primero se encarga de extraer las características de la imagen de entrada, está diseñado con una serie de capas convolucionales acompañadas con operaciones de max pooling que reducen de manera progresiva la resolución mientras aumentan la profundidad de los mapas de características extraídos. Su objetivo principal es extraer el contexto e información semántica de manera progresiva, logrando que el modelo identifique patrones complejos. Cada bloque que constituye el codificador está compuesto generalmente por:
 \begin{itemize}
     \item Dos convoluciones de 3x3
-    \item Una función de activación
+    \item Una función de activación ReLU
     \item Una operación de max pooling
 \end{itemize}
 
-La reducción permite el aprendizaje por abstracción.
-El Decodificador tiene la función de volver a construir la resolución original de la imagen para generar el mapa de segmentación, es dicha etapa se utilizan operaciones de up-smapling o convolución transpuesta, aumentando progresivamente la resolución. El bloque de un decodificador se constituye por:
+El Decodificador tiene la función de volver a construir la resolución original de la imagen para generar el mapa de segmentación, en dicha etapa se utilizan operaciones de up-sampling o convolución transpuesta, aumentando progresivamente la resolución. El bloque de un decodificador se constituye por:
 
 \begin{itemize}    
     \item Up-sampling
@@ -204,20 +203,23 @@ El Decodificador tiene la función de volver a construir la resolución original
     \item Dos convoluciones de 3x3
 \end{itemize}
 
-El decodificador recuera los detalles del espacio que se pueden llegar a perder del proceso anterior.
+El decodificador recupera los detalles espaciales que se pueden llegar a perder del proceso anterior.
 
-Los saltos de conexión son de los elementos mas importantes de la arquitectura U-Net, las conexiones se enlazan entres las capas del codificador y el decodificador, cada una unida a su capa correspondiente, concatenando los mapas de características con el propósito de preservar la mayor cantidad de información espacial de alta resolución que de no hacer estas conexiones se perderían durante el proceso de reducción del codificador, gracias a estas conexiones el modelo puede combinar información global hasta los detalles finas.
+Las conexiones de salto son elementos importantes de la arquitectura U-Net, se conectan con las capas del codificador y el decodificador correspondientes, concatenando los mapas de características con el propósito de preservar información espacial de alta resolución. Gracias a esto el modelo puede combinar información global/semántica con detalles espaciales finos.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{U-Net.png}
-\caption{Arquitectura de U-Net propuesta por Ronneberger \cite{Ronneberger2015}. }
+\caption{Arquitectura de U-Net propuesta por \cite{Ronneberger2015}. }
 \label{fig:unet_architecture}
 \end{figure}
 
 La Figura \ref{fig:unet_architecture} muestra la arquitectura original de U-Net. En la parte izquierda se encuentra la ruta de contracción (encoder), donde la resolución espacial de la imagen se reduce progresivamente mediante operaciones de max pooling mientras aumenta el número de mapas de características. En la parte derecha se encuentra la ruta de expansión (decoder), donde la resolución se recupera mediante operaciones de up-convolution. Las conexiones laterales entre ambas rutas permiten combinar información semántica profunda con detalles espaciales de alta resolución, lo que mejora la precisión en tareas de segmentación.
 
 \medskip\textbf{Diferencia entre clasificación y segmentación}
-El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen, para llevar a cabo la tarea, las redes sueles reducir la resolución de manera progresiva, sin embargo cuando el objetivo cambia hacia la segmentación el objetivo del modelo es construir un mapa de predicción denso en el cual el píxel tiene la etiqueta, implicando que las características globales se deban de mantener o reconstruirse para producir la información espacial y predicción en cada píxel.
 
+El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen completa. En cambio, en una tarea de segmentación no basta con etiquetar sino que también se requiere ubicar la manipulación. Por ello el modelo debe generar un mapa de predicción denso en el cual cada píxel recibe una etiqueta. En U-Net, la resolución espacial se reduce durante la etapa de codificación y posteriormente se recupera en el decodificador para construir dicho mapa de segmentación.
 
+\medskip\textbf{Elección de U-Net para el escenario del proyecto}
+El objetivo es detectar y localizar manipulaciones faciales en imágenes mediante una segmentación binaria.La arquitectura U-Net resulta la que mejor se adecua por esta tarea por gran capcidad para capturar aracterísticas semánticas complejas, preservar información espacial y generar mapas
+de segmentación de alta resolución.

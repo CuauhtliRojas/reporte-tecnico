@@ -4,14 +4,14 @@
 % Debe incluir: contexto general, ámbito, planteamiento del problema,
 % objetivo general, objetivos específicos y justificación.
 
-La manipulación de imágenes con técnicas y herramientas de inteligencia artificial cada día es mayor, sofisticada y al alcance del público en general, si bien esto representa un avance en el campo de visión de computadora, genera una brecha técnica que dificulta distinguir lo alterado de lo original. Un caso particular: las manipulaciones faciales, o mejor conocidas como "deepfakes", pueden llegar a tener un nivel de gran realismo debido a que conservan coherencia al hacer modificaciones en regiones específicas del rostro. Esta situación genera una necesidad de abordar métodos que aporten una nueva perspectiva a las herramientas usadas en la detección, no solo para determinar una clasificación general sino también para localizar espacialmente lo alterado.
+La manipulación de imágenes mediante técnicas y herramientas de inteligencia artificial ha aumentado y se ha vuelto más sofisticada y accesible para el público general. Si bien esto representa un avance en el campo de la visión por computadora, también genera una brecha técnica que dificulta distinguir lo alterado de lo original. Un caso particular son las manipulaciones faciales, conocidas como \textit{deepfakes}, las cuales pueden alcanzar un alto nivel de realismo porque conservan coherencia visual al modificar regiones específicas del rostro. Esta situación exige métodos que no solo determinen una clasificación general, sino que también localicen espacialmente la región alterada.
 \subsection{Contexto del problema}
 % Explicar qué son los deepfakes, por qué son un problema técnico y social,
 % y por qué la detección binaria no siempre es suficiente.
 
-En el ámbito social debido al aumento de los “deepfakes”, la capacidad de poder sustituir, ya sea por video o imagen, representa desde una difamación personal, creación de evidencia visual falsa, suplantación de identidad o hasta desinformación en escala masiva.
+En el ámbito social, el aumento de los \textit{deepfakes} y la capacidad de sustituir rostros en imágenes o videos representan riesgos como difamación personal, creación de evidencia visual falsa, suplantación de identidad y desinformación a escala masiva.
 
-En areas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
+En áreas como la política y los medios de comunicación, esto genera riesgos para la confiabilidad e integridad de la información, dado que la veracidad del contenido es difícil de avalar únicamente con medios de detección global. El alcance de estas prácticas puede ir de lo individual a lo colectivo, pues compromete contextos donde la evidencia audiovisual resulta decisiva.
 
 \subsection{Planteamiento del problema}
 
@@ -19,14 +19,14 @@ En areas como la política y los medios de comunicación, esto genera riesgos en
 % muchos métodos detectan si una imagen es falsa, pero no indican con precisión
 % qué regiones fueron manipuladas.
 % Aquí se debe conectar con segmentación semántica.
-Desde la perspectiva técnica, el problema se centra en la disminución de características o patrones visuales que delaten la evidencia falsa al ser inversamente proporcional al realismo generado, los sistemas de detección presentan limitantes pues se concentran en una clasificación binaria global, en la que se le asigna una clase, real o falso a la imagen completa, este tipo de enfoque sirve siempre y cuando la manipulación afecte de forma general a la imagen, sin embargo, una alteración puede y mayormente esta delimitada a regiones especificas que representan un menor porcentaje generando insensibilidad produciendo falsos negativos.
+Desde la perspectiva técnica, el problema se centra en que, mientras mayor realismo alcanza una manipulación, menos evidentes pueden ser las características o patrones visuales que la delatan. Muchos sistemas de detección se concentran en una clasificación binaria global, donde asignan una clase real o falsa a la imagen completa. Este enfoque puede ser útil cuando la manipulación afecta gran parte de la imagen; sin embargo, una alteración facial suele estar delimitada a regiones específicas, lo que puede reducir la sensibilidad del detector y producir falsos negativos.
 
 
 \subsection{Justificación}
 
 % Explicar por qué tiene sentido usar segmentación semántica y redes convolucionales.
 % Justificar U-Net por su uso en localización píxel a píxel.
-Ante esa situación, se establece cambiar de enfoque  de clasificación general, a uno de detección, segmentando las zonas, exigiendo que un sistema delimite e identifica las regiones dentro del contexto de un rostro que ha sido intervenido. Para lograr esto las redes neuronales convolucionales enfocadas en segmentación como U-Net resultan de gran ayuda ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que el ojo humano no podría percibir y que los modelos globales omiten por la proporción manipulada con respecto a la imagen completa. Sumándole a eso la segmentación binaria permite generar evidencia visual de gran valor de interpretación, no se limita a decidir, si no que resalta la región intervenida, permitiendo una guía para su inspección.
+Ante esa situación, se plantea cambiar de un enfoque de clasificación global a uno de segmentación de regiones, exigiendo que el sistema delimite e identifique las áreas del rostro que han sido intervenidas. Para lograr esto, las redes neuronales convolucionales enfocadas en segmentación, como U-Net, resultan adecuadas, ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que los modelos globales pueden omitir por la proporción de la región manipulada respecto a la imagen completa. Además, la segmentación binaria permite generar evidencia visual de valor interpretativo, ya que no se limita a decidir si una imagen es falsa, sino que resalta la región intervenida para guiar su inspección.
 
 \subsection{Objetivo general}
 
@@ -35,14 +35,14 @@ Desarrollar una red neuronal para la detección y localización de manipulacione
 \subsection{Objetivos específicos}
 
 \begin{itemize}
-    \item Generar un conjunto de datos (dataset) conformado por 50,000 muestras, estandarizando las imágenes para incluir variaciones de contexto y etiquetado mediante máscaras binarias enfocadas en deepfakes, que delimiten exclusivamente la región facial manipulada.
+    \item Generar un conjunto de datos (dataset) conformado por 50,000 muestras, estandarizando las imágenes para incluir variaciones de contexto y etiquetado mediante máscaras binarias que delimiten la región facial manipulada.
     \item Implementar una arquitectura basada en U-Net para la detección de inconsistencias en texturas, iluminación y bordes, capaz de generar una salida de segmentación.
-    \item Entrenar el modelo utilizando el dataset generado, enfocándose en la generalización frente a técnicas de reemplazo y alteraciónes localizadas en el rostro.
-    \item Evaluar el desempeño del sistema con metricas de segmentacion semantica y generando visualizaciones (overlays) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
+    \item Entrenar el modelo utilizando el dataset generado, enfocándose en la generalización frente a técnicas de reemplazo y alteraciones localizadas en el rostro.
+    \item Evaluar el desempeño del sistema con métricas de segmentación semántica y generar visualizaciones (\textit{overlays}) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
 \end{itemize}
 
 \subsection{Alcance del proyecto}
-En el presente proyecto se diseñó para el análisis offline de una imagen exclusivamente dentro del contexto semántico de un rostro (Se omite cuello, orejas y cabello) sin requerir una referencia del sujeto en un estado no manipulado. Partiendo de las características de textura, discontinuidades y bordes que el modelo pueda extraer generando una representación próxima de la alteración facial. Todo esto a partir del entrenamiento de la red, usando un conjunto de datos especializado para la tarea.
+El presente proyecto se diseñó para el análisis offline de una imagen exclusivamente dentro del contexto semántico de un rostro; se omiten cuello, orejas y cabello, y no se requiere una referencia del sujeto en un estado no manipulado. El sistema parte de características de textura, discontinuidades y bordes que el modelo pueda extraer para generar una representación aproximada de la alteración facial. Todo esto se realiza a partir del entrenamiento de la red con un conjunto de datos especializado para la tarea.
 % Delimitar qué sí hace y qué no hace el proyecto.
 % Ejemplo:
 % El proyecto se enfoca en imágenes faciales y localización por máscara.

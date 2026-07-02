@@ -1,0 +1,1284 @@
+﻿REVISIÓN 00-03 REPORTE TÉCNICO
+Generado: 07/02/2026 08:14:14
+Root: C:\Users\cuauh\Desktop\reporte-tecnico
+
+============================================================
+1) ARCHIVOS INCLUIDOS
+============================================================
+OK  main.tex
+OK  referencias.bib
+OK  capitulos/00-caratula.tex
+OK  capitulos/01-resumen.tex
+OK  capitulos/02-introduccion.tex
+OK  capitulos/03-estado-arte-marco-teorico.tex
+
+============================================================
+2) CONTENIDO CON NÚMEROS DE LÍNEA
+============================================================
+
+-------------------- main.tex --------------------
+    1: \documentclass[12pt,a4paper]{article}
+    2: 
+    3: % --- PREAMBULO ---
+    4: \usepackage[T1]{fontenc}
+    5: \usepackage[utf8]{inputenc}
+    6: \usepackage[spanish]{babel}
+    7: \usepackage{lmodern}
+    8: 
+    9: 
+   10: \usepackage{amsmath, amsfonts, amssymb}
+   11: \usepackage{graphicx}
+   12: \usepackage{fancyhdr}
+   13: \usepackage{csquotes}
+   14: \usepackage[
+   15:     backend=biber,
+   16:     style=apa,
+   17:     sorting=nyt
+   18: ]{biblatex}
+   19: 
+   20: \addbibresource{referencias.bib}
+   21: 
+   22: \usepackage{float}
+   23: \usepackage{setspace}
+   24: \usepackage[font=footnotesize,labelfont=bf]{caption}
+   25: 
+   26: % Config general ESIME
+   27: \usepackage[left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+   28: 
+   29: % Carpeta central de imagenes
+   30: \graphicspath{{imagenes/}}
+   31: 
+   32: % Hyperref casi al final
+   33: \usepackage{hyperref}
+   34: \hypersetup{pdfborder=0 0 0}
+   35: 
+   36: \begin{document}
+   37: 
+   38: % Preliminares con numeros romanos
+   39: \pagenumbering{roman}
+   40: 
+   41: % Portada
+   42: \input{capitulos/00-caratula.tex}
+   43: \clearpage
+   44: 
+   45: % Indice general
+   46: \tableofcontents
+   47: \clearpage
+   48: 
+   49: % Resumen
+   50: \input{capitulos/01-resumen.tex}
+   51: \clearpage
+   52: 
+   53: % Contenido principal con numeros arabigos
+   54: \pagenumbering{arabic}
+   55: \setcounter{page}{1}
+   56: 
+   57: % Interlineado 1.5 para el cuerpo del informe
+   58: \onehalfspacing
+   59: 
+   60: % Capi­tulos principales
+   61: \input{capitulos/02-introduccion.tex}
+   62: \clearpage
+   63: 
+   64: \input{capitulos/03-estado-arte-marco-teorico.tex}
+   65: \clearpage
+   66: 
+   67: \input{capitulos/04-diseno-desarrollo.tex}
+   68: \clearpage
+   69: 
+   70: \input{capitulos/05-pruebas.tex}
+   71: \clearpage
+   72: 
+   73: \input{capitulos/06-resultados-analisis.tex}
+   74: \clearpage
+   75: 
+   76: \input{capitulos/07-conclusiones.tex}
+   77: \clearpage
+   78: 
+   79: % Referencias
+   80: \printbibliography[
+   81:     heading=bibintoc,
+   82:     title={Referencias}
+   83: ]
+   84: \clearpage
+   85: 
+   86: % Anexos
+   87: \input{capitulos/08-anexos.tex}
+   88: 
+   89: \end{document}
+
+-------------------- referencias.bib --------------------
+    1: @thesis{Yagual2024,
+    2:   author      = {Yagual Castillo, José Manuel},
+    3:   title       = {Desarrollo de una aplicación Web con machine learning para la detección de Deepfakes en casos de suplantación de identidad digital},
+    4:   type        = {Proyecto de Titulación},
+    5:   institution = {Universidad Estatal Península de Santa Elena},
+    6:   year        = {2025},
+    7:   address     = {Santa Elena, Ecuador},
+    8:   language    = {spanish}
+    9: }
+   10: 
+   11: @article{Deng2025,
+   12:   author  = {Deng, Liwei and Wu, Boda and Wang, Jiandong},
+   13:   year    = {2025},
+   14:   month   = {10},
+   15:   pages   = {},
+   16:   title   = {A multi-label classification method combined with texture enhancement for deepfake face detection},
+   17:   volume  = {31},
+   18:   journal = {Multimedia Systems},
+   19:   doi     = {10.1007/s00530-025-01996-y}
+   20: }
+   21: 
+   22: @article{Tiwari2025,
+   23:   author  = {Tiwari, Manish and Patil, Sandip},
+   24:   year    = {2025},
+   25:   month   = {11},
+   26:   pages   = {01043},
+   27:   title   = {Deepfake Image Detection: A Review of Existing Methods and a Hybrid CNN-Based Proposed Framework},
+   28:   volume  = {341},
+   29:   journal = {EPJ Web of Conferences},
+   30:   doi     = {10.1051/epjconf/202534101043}
+   31: }
+   32: 
+   33: @article{Mashhadani2026,
+   34:   author  = {Mashhadani, Shahlaa and Abdulsalam, Wisal Hashim and Abed Shukur, Wisam and Al-Tamimi, Mohammed S. H.},
+   35:   title   = {Digital Forensics Method for Fake Images Detection Using GAN Algorithm Based on Watermarking Technique and Image Content},
+   36:   journal = {Iraqi Journal of Science},
+   37:   volume  = {67},
+   38:   url     = {https://ijs.uobaghdad.edu.iq/index.php/eijs/article/view/14208},
+   39:   doi     = {10.24996/ijs.2026.67.1.40},
+   40:   number  = {1},
+   41:   year    = {2026},
+   42:   month   = {01},
+   43:   pages   = {509–523}
+   44: }
+   45: 
+   46: @misc{Laurier2024,
+   47:   author        = {Laurier, Linda and Giulietta, Ave and Octavia, Arlo and Cleti, Meade},
+   48:   title         = {The Cat and Mouse Game: The Ongoing Arms Race Between Diffusion Models and Detection Methods},
+   49:   year          = {2024},
+   50:   eprint        = {2410.18866},
+   51:   archiveprefix = {arXiv},
+   52:   primaryclass  = {cs.AI},
+   53:   url           = {https://arxiv.org/abs/2410.18866}
+   54: }
+   55: 
+   56: @inproceedings{Rossler_2019_ICCV,
+   57:   author    = {R{\"o}ssler, Andreas and Cozzolino, Davide and Verdoliva, Luisa and Riess, Christian and Thies, Justus and Nie{\ss}ner, Matthias},
+   58:   title     = {FaceForensics++: Learning to Detect Manipulated Facial Images},
+   59:   booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+   60:   date      = {2019-10},
+   61:   year      = {2019},
+   62:   pages     = {1-11}
+   63: }
+   64: 
+   65: @inproceedings{Bappy_2017_ICCV,
+   66:   author    = {Bappy, Jawadul H. and Roy-Chowdhury, Amit K. and Bhowmik, Jason and Natarajan, S. and Pereira, Bart},
+   67:   title     = {Exploiting Spatial Structure for Localizing Manipulated Image Regions},
+   68:   booktitle = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
+   69:   date      = {2017-10},
+   70:   year      = {2017},
+   71:   pages     = {4970-4979}
+   72: }
+   73: 
+   74: @article{jaccard1912distribution,
+   75:   author    = {Jaccard, Paul},
+   76:   title     = {The distribution of the flora in the alpine zone},
+   77:   journal   = {New Phytologist},
+   78:   volume    = {11},
+   79:   number    = {2},
+   80:   pages     = {37--50},
+   81:   year      = {1912},
+   82:   publisher = {Wiley Online Library}
+   83: }
+   84: 
+   85: @book{goodfellow2016deep,
+   86:   title     = {Deep Learning},
+   87:   author    = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+   88:   year      = {2016},
+   89:   publisher = {MIT Press},
+   90:   note      = {\url{http://www.deeplearningbook.org}}
+   91: }
+   92: 
+   93: @inproceedings{Ronneberger2015,
+   94:   author    = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+   95:   title     = {U-Net: Convolutional Networks for Biomedical Image Segmentation},
+   96:   booktitle = {Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+   97:   year      = {2015},
+   98:   volume    = {9351},
+   99:   pages     = {234--241},
+  100:   publisher = {Springer},
+  101:   doi       = {10.1007/978-3-319-24574-4_28}
+  102: }
+  103: 
+  104: @article{Mirsky2021,
+  105:   author     = {Yisroel Mirsky and Wenke Lee},
+  106:   title      = {The Creation and Detection of Deepfakes: {A} Survey},
+  107:   journal    = {CoRR},
+  108:   volume     = {abs/2004.11138},
+  109:   year       = {2020},
+  110:   url        = {https://arxiv.org/abs/2004.11138},
+  111:   eprinttype = {arXiv},
+  112:   eprint     = {2004.11138},
+  113:   timestamp  = {Tue, 28 Apr 2020 16:10:02 +0200},
+  114:   biburl     = {https://dblp.org/rec/journals/corr/abs-2004-11138.bib},
+  115:   bibsource  = {dblp computer science bibliography, https://dblp.org}
+  116: }
+  117: 
+  118: @article{MurguiaSerrano2025,
+  119:   author  = {Murgu{\'i}a Serrano, A. and Mena Guerrero, J. O. and Renter{\'i}a L{\'o}pez, A. and Salcido Ramos, H.},
+  120:   title   = {Deepfakes: Revisi{\'o}n sistem{\'a}tica de tecnolog{\'i}as, impacto y abordajes para su detecci{\'o}n},
+  121:   journal = {Revista de Investigaci{\'o}n en Tecnolog{\'i}as de la Informaci{\'o}n (RITI)},
+  122:   year    = {2025},
+  123:   volume  = {13},
+  124:   number  = {28},
+  125:   pages   = {41--51}
+  126: }
+  127: 
+  128: @article{RamosZaga2024,
+  129:   author  = {Ramos-Zaga, F.},
+  130:   title   = {Deepfake: An{\'a}lisis de sus implicancias tecnol{\'o}gicas y jur{\'i}dicas en la era de la Inteligencia Artificial},
+  131:   journal = {Derecho Global. Estudios sobre Derecho y Justicia},
+  132:   year    = {2024},
+  133:   volume  = {9},
+  134:   number  = {27},
+  135:   pages   = {359--387},
+  136:   doi     = {10.32870/dgedj.v9i27.754}
+  137: }
+  138: 
+  139: @misc{Hu2024,
+  140:   author        = {Hu, J. and Liao, X. and Gao, D. and Tsutsui, S. and Wang, Q. and Qin, Z. and Shou, M. Z.},
+  141:   title         = {Detection and Localization for Deepfake Videos with Randomly-Located Tampered Traces (Delocate)},
+  142:   year          = {2024},
+  143:   eprint        = {2401.13516},
+  144:   archiveprefix = {arXiv},
+  145:   note          = {v5}
+  146: }
+  147: 
+  148: @article{Nelson2025,
+  149:   author  = {Nelson, L. and others},
+  150:   title   = {Detection in Manipulated Images, Audio, Videos: A Three-Stage Multi-Modal Deep Learning Framework},
+  151:   journal = {Inteligencia Artificial},
+  152:   year    = {2025},
+  153:   volume  = {28},
+  154:   number  = {76},
+  155:   pages   = {99--114}
+  156: }
+  157: 
+  158: @inproceedings{Banerjee2025,
+  159:   author    = {Banerjee, S. and Yadav, S. K. and Dhara, A. and Ajij, M.},
+  160:   title     = {A Survey: Deepfake and Current Technologies for Solutions},
+  161:   booktitle = {CEUR Workshop Proceedings (DoSIER 2024)},
+  162:   year      = {2025}
+  163: }
+  164: 
+  165: @article{Alrashoud2025,
+  166:   author  = {Alrashoud, M.},
+  167:   title   = {Deepfake video detection methods, approaches, and challenges},
+  168:   journal = {Alexandria Engineering Journal},
+  169:   year    = {2025},
+  170:   volume  = {125},
+  171:   pages   = {265--277},
+  172:   doi     = {10.1016/j.aej.2025.04.007}
+  173: }
+  174: 
+  175: @misc{Tan2024,
+  176:   author        = {Tan, C. and Zhao, Y. and Wei, S. and Gu, G. and Liu, P. and Wei, Y.},
+  177:   title         = {Frequency-Aware Deepfake Detection: Improving Generalizability through Frequency Space Learning},
+  178:   year          = {2024},
+  179:   eprint        = {2403.07240},
+  180:   archiveprefix = {arXiv},
+  181:   note          = {v1}
+  182: }
+  183: 
+  184: @article{Li2025,
+  185:   author  = {Li, J. and Hu, Y. and Liu, B. and She, H. and Li, C.-T.},
+  186:   title   = {Deepfake detection with domain generalization and mask-guided supervision},
+  187:   journal = {Pattern Recognition},
+  188:   year    = {2025},
+  189:   volume  = {165},
+  190:   pages   = {111622},
+  191:   doi     = {10.1016/j.patcog.2025.111622}
+  192: }
+  193: 
+  194: @article{Yang2025,
+  195:   author  = {Yang, S. and Guo, H. and Hu, S. and Zhu, B. and Fu, Y. and Lyu, S. and Wu, X. and Wang, X.},
+  196:   title   = {CrossDF: improving cross-domain deepfake detection with deep information decomposition},
+  197:   journal = {Frontiers in Big Data},
+  198:   year    = {2025},
+  199:   volume  = {8},
+  200:   doi     = {10.3389/fdata.2025.1669488}
+  201: }
+  202: 
+  203: @misc{Chandra2025,
+  204:   author        = {Chandra, N. A. and Murtfeldt, R. and Qiu, L. and Karmakar, A. and Lee, H. and Tanumihardja, E. and Farhat, K. and Caffee, B. and Paik, S. and Lee, C. and Choi, J. and Kim, A. and Etzioni, O.},
+  205:   title         = {Deepfake-Eval-2024: A Multi-Modal In-the-Wild Benchmark of Deepfakes Circulated in 2024},
+  206:   year          = {2025},
+  207:   eprint        = {2503.02857},
+  208:   archiveprefix = {arXiv},
+  209:   note          = {v2}
+  210: }
+  211: 
+  212: @misc{Qiao2025,
+  213:   author        = {Qiao, M. and Tian, R. and Wang, Y.},
+  214:   title         = {Towards Generalizable Deepfake Detection with Spatial-Frequency Collaborative Learning and Hierarchical Cross-Modal Fusion},
+  215:   year          = {2025},
+  216:   eprint        = {2504.17223},
+  217:   archiveprefix = {arXiv},
+  218:   note          = {v1}
+  219: }
+  220: 
+  221: @article{Amerini2025,
+  222:   author  = {Amerini, I. and Barni, M. and Battiato, S. and Bestagini, P. and Boato, G. and others},
+  223:   title   = {Deepfake Media Forensics: Status and Future Challenges},
+  224:   journal = {Journal of Imaging},
+  225:   year    = {2025},
+  226:   volume  = {11},
+  227:   number  = {3},
+  228:   pages   = {73},
+  229:   doi     = {10.3390/jimaging11030073}
+  230: }
+  231: 
+  232: @article{Gao2024,
+  233:   author  = {Gao, J. and Xia, Z. and Marcialis, G. L. and Dang, C. and Dai, J. and Feng, X.},
+  234:   title   = {DeepFake Detection Based on High-Frequency Enhancement Network for Highly Compressed Content},
+  235:   journal = {Expert Systems with Applications},
+  236:   year    = {2024},
+  237:   volume  = {249},
+  238:   pages   = {123732},
+  239:   doi     = {10.1016/j.eswa.2024.123732}
+  240: }
+  241: 
+  242: @article{Jiang2025,
+  243:   author  = {Jiang, Q. and Liu, S. and Miao, S. and Yi, H. and Jin, X. and Kou, Y. and others},
+  244:   title   = {Robust manipulated media localization and detection based on high frequency and texture features},
+  245:   journal = {Discover Computing},
+  246:   year    = {2025},
+  247:   volume  = {28},
+  248:   note    = {Article 10},
+  249:   doi     = {10.1007/s10791-025-09500-w}
+  250: }
+  251: 
+  252: @article{Jin2025,
+  253:   author  = {Jin, X. and Kou, Y. and Xie, Y. and Zhao, Y. and Mat Kiah, M. L. and Jiang, Q. and Zhou, W.},
+  254:   title   = {Learning Local Texture and Global Frequency Clues for Face Forgery Detection},
+  255:   journal = {Biomimetics},
+  256:   year    = {2025},
+  257:   volume  = {10},
+  258:   number  = {8},
+  259:   pages   = {480},
+  260:   doi     = {10.3390/biomimetics10080480}
+  261: }
+  262: 
+  263: @misc{LiM2025,
+  264:   author        = {Li, M. and Liu, Y. and Tan, C. and Qin, H. and Li, B. and Wei, Y. and Zhao, Y.},
+  265:   title         = {Pay Less Attention to Deceptive Artifacts: Robust Detection of Compressed Deepfakes on Online Social Networks},
+  266:   year          = {2025},
+  267:   eprint        = {2506.20548},
+  268:   archiveprefix = {arXiv},
+  269:   note          = {v1}
+  270: }
+  271: 
+  272: @article{MurguiaSerranoJY2025,
+  273:   author  = {Murguía Serrano, Jania Yamileth and De la Toba Noriega, Carlos Eduardo and Campos Zatarain, Sebastián and Aramburo Contreras, Luis Yael and Diaz Lucas, Gustavo Ángel},
+  274:   title   = {Deepfakes: Revisión sistemática de tecnologías, impacto y estrategias de detección},
+  275:   journal = {Revista de Investigación en Tecnologías de la Información},
+  276:   year    = {2025},
+  277:   volume  = {13},
+  278:   url     = {https://riti.es/index.php/riti/article/view/335},
+  279:   doi     = {10.36825/RITI.13.29.003},
+  280:   number  = {29},
+  281:   month   = {02},
+  282:   pages   = {19–37}
+  283: }
+  284: 
+  285: @misc{Azad2023,
+  286:   author        = {Azad, R. and Heidary, M. and Yilmaz, K. and H{\"u}ttemann, M. and Karimijafarbigloo, S. and Wu, Y. and Schmeink, A. and Merhof, D.},
+  287:   title         = {Loss Functions in the Era of Semantic Segmentation: A Survey and Outlook},
+  288:   year          = {2023},
+  289:   eprint        = {2312.05391},
+  290:   archiveprefix = {arXiv}
+  291: }
+  292: 
+  293: @article{Seghier2024,
+  294:   author  = {Seghier, M. L.},
+  295:   title   = {Image Segmentation Evaluation With the Dice Index: Methodological Issues},
+  296:   journal = {International Journal of Imaging Systems and Technology},
+  297:   year    = {2024},
+  298:   volume  = {34},
+  299:   number  = {6},
+  300:   pages   = {e23203},
+  301:   doi     = {10.1002/ima.23203}
+  302: }
+  303: 
+  304: @misc{Xu2024,
+  305:   author        = {Xu, J. and Liu, J. and Li, J. and Wang, C. and Wu, F. and Luo, J.},
+  306:   title         = {FakeShield: Explainable Image Forgery Detection and Localization via Multi-modal Large Language Models},
+  307:   year          = {2024},
+  308:   eprint        = {2410.02761},
+  309:   archiveprefix = {arXiv}
+  310: }
+  311: 
+  312: @misc{Miao2025,
+  313:   author        = {Miao, C. and Zhang, Y. and Gao, W. and Luo, M. and Feng, W. and Tan, Z. and Li, J. and Liu, A. and Diao, Y. and Chu, Q. and Gong, T. and Li, Z. and Yao, W. and Zhou, J. T.},
+  314:   title         = {DDL: A Dataset for Interpretable Deepfake Detection and Localization in Real-World Scenarios},
+  315:   year          = {2025},
+  316:   eprint        = {2506.23292},
+  317:   archiveprefix = {arXiv}
+  318: }
+  319: 
+  320: @article{Bharati2026,
+  321:   author  = {Bharati, N. and Hamie, A. and Saberi, A. and Garcia-Garcia, B.},
+  322:   title   = {Explainable deepfake detection: A multi-model framework with human-interpretable rationales for legal investigation purposes},
+  323:   journal = {Machine Learning with Applications},
+  324:   year    = {2026},
+  325:   volume  = {23},
+  326:   pages   = {100819},
+  327:   doi     = {10.1016/j.mlwa.2025.100819}
+  328: }
+  329: 
+  330: @article{Almotiri2024,
+  331:   author  = {Almotiri, S. H. and Ahmad, F. and Al Ghamdi, M. A. and Basheri, M.},
+  332:   title   = {Deepfake forensics: A survey of digital forensic methods for multimodal deepfake identification on social media},
+  333:   journal = {PeerJ Computer Science},
+  334:   year    = {2024},
+  335:   volume  = {10},
+  336:   pages   = {e2037},
+  337:   doi     = {10.7717/peerj-cs.2037}
+  338: }
+  339: 
+  340: @article{Karras2019,
+  341:   author     = {Tero Karras and
+  342:                 Samuli Laine and
+  343:                 Timo Aila},
+  344:   title      = {A Style-Based Generator Architecture for Generative Adversarial Networks},
+  345:   journal    = {CoRR},
+  346:   volume     = {abs/1812.04948},
+  347:   year       = {2018},
+  348:   url        = {http://arxiv.org/abs/1812.04948},
+  349:   eprinttype = {arXiv},
+  350:   eprint     = {1812.04948},
+  351:   timestamp  = {Tue, 01 Jan 2019 15:01:25 +0100},
+  352:   biburl     = {https://dblp.org/rec/journals/corr/abs-1812-04948.bib},
+  353:   bibsource  = {dblp computer science bibliography, https://dblp.org}
+  354: }
+  355: 
+  356: @article{Rombach2022,
+  357:   author     = {Robin Rombach and
+  358:                 Andreas Blattmann and
+  359:                 Dominik Lorenz and
+  360:                 Patrick Esser and
+  361:                 Bj{\"{o}}rn Ommer},
+  362:   title      = {High-Resolution Image Synthesis with Latent Diffusion Models},
+  363:   journal    = {CoRR},
+  364:   volume     = {abs/2112.10752},
+  365:   year       = {2021},
+  366:   url        = {https://arxiv.org/abs/2112.10752},
+  367:   eprinttype = {arXiv},
+  368:   eprint     = {2112.10752},
+  369:   timestamp  = {Tue, 04 Jan 2022 15:59:27 +0100},
+  370:   biburl     = {https://dblp.org/rec/journals/corr/abs-2112-10752.bib},
+  371:   bibsource  = {dblp computer science bibliography, https://dblp.org}
+  372: }
+  373: 
+  374: @article{Yu2019bisenet,
+  375:   author     = {Changqian Yu and
+  376:                 Jingbo Wang and
+  377:                 Chao Peng and
+  378:                 Changxin Gao and
+  379:                 Gang Yu and
+  380:                 Nong Sang},
+  381:   title      = {BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation},
+  382:   journal    = {CoRR},
+  383:   volume     = {abs/1808.00897},
+  384:   year       = {2018},
+  385:   url        = {http://arxiv.org/abs/1808.00897},
+  386:   eprinttype = {arXiv},
+  387:   eprint     = {1808.00897},
+  388:   timestamp  = {Tue, 29 Oct 2024 12:14:06 +0100},
+  389:   biburl     = {https://dblp.org/rec/journals/corr/abs-1808-00897.bib},
+  390:   bibsource  = {dblp computer science bibliography, https://dblp.org}
+  391: }
+  392: 
+  393: @article{Deng2019ArcFace,
+  394:   author     = {Jiankang Deng and
+  395:                 Jia Guo and
+  396:                 Stefanos Zafeiriou},
+  397:   title      = {ArcFace: Additive Angular Margin Loss for Deep Face Recognition},
+  398:   journal    = {CoRR},
+  399:   volume     = {abs/1801.07698},
+  400:   year       = {2018},
+  401:   url        = {http://arxiv.org/abs/1801.07698},
+  402:   eprinttype = {arXiv},
+  403:   eprint     = {1801.07698},
+  404:   timestamp  = {Thu, 19 Dec 2024 16:41:11 +0100},
+  405:   biburl     = {https://dblp.org/rec/journals/corr/abs-1801-07698.bib},
+  406:   bibsource  = {dblp computer science bibliography, https://dblp.org}
+  407: }
+
+-------------------- capitulos/00-caratula.tex --------------------
+    1: \begin{titlepage}
+    2:     \fancyhead{}
+    3:     \renewcommand{\headrulewidth}{0pt} 
+    4:     \thispagestyle{fancy}
+    5:     \fancyhf{}  
+    6: \hypersetup{pdfborder=0 0 0}
+    7: 
+    8: \fancyfoot[C]{}
+    9: 
+   10:     
+   11:     \begin{center}
+   12:         \begin{minipage}{0.4\textwidth}
+   13:             \raggedright
+   14:             \includegraphics[width=3.5cm]{ESIME.png}
+   15:         \end{minipage}
+   16:         \hfill
+   17:         \begin{minipage}{0.4\textwidth}
+   18:             \raggedleft
+   19:             \includegraphics[width=3.5cm]{IPN.png} 
+   20:         \end{minipage}
+   21:     \end{center}
+   22:     
+   23:       \begin{center}
+   24:         \LARGE {
+   25:             \textbf{Instituto Politécnico Nacional}\\
+   26:             Escuela Superior de Ingeniería Mecánica y Eléctrica \\
+   27:             Unidad Culhuacán
+   28:             \\[2\baselineskip] \textbf{Detección y localización de manipulaciones faciales deepfakes mediante segmentación semántica basada en redes neuronales convolucionales}
+   29:             }
+   30:     \end{center}
+   31:     
+   32:     \begin{center}
+   33:        \Large{
+   34:              \textbf{Presentan}
+   35:              \\
+   36:              Castillo Delgado Angel Ivan
+   37:              \\
+   38:              Rojas Lozada Cuauhtli Emiliano
+   39:              \\[2\baselineskip]
+   40:              \textbf{Asesores}
+   41:              \\
+   42:              Dr. Manuel Cedillo Hernández
+   43:              \\
+   44:              Dr. Rodrigo Eduardo Arévalo Ancona
+   45:              }
+   46:              \\[2\baselineskip]
+   47:             Ciudad de Mexico, 9  de julio de 2026
+   48:     \end{center}
+   49: \end{titlepage}
+   50: 
+
+-------------------- capitulos/01-resumen.tex --------------------
+    1: \section*{Resumen}
+    2: \addcontentsline{toc}{section}{Resumen}
+    3: 
+    4: % Extensión máxima: 200 palabras.
+    5: % Debe incluir: problema abordado, solución propuesta, principales resultados y palabras clave.
+
+-------------------- capitulos/02-introduccion.tex --------------------
+    1: \section{Introducción}
+    2: 
+    3: % Máximo dos páginas.
+    4: % Debe incluir: contexto general, ámbito, planteamiento del problema,
+    5: % objetivo general, objetivos específicos y justificación.
+    6: 
+    7: La manipulación de imágenes con técnicas y herramientas de inteligencia artificial cada día es mayor, sofisticada y al alcance del público en general, si bien esto representa un avance en el campo de visión de computadora, genera una brecha técnica que dificulta distinguir lo alterado de lo original. Un caso particular: las manipulaciones faciales, o mejor conocidas como "deepfakes", pueden llegar a tener un nivel de gran realismo debido a que conservan coherencia al hacer modificaciones en regiones específicas del rostro. Esta situación genera una necesidad de abordar métodos que aporten una nueva perspectiva a las herramientas usadas en la detección, no solo para determinar una clasificación general sino también para localizar espacialmente lo alterado.
+    8: \subsection{Contexto del problema}
+    9: % Explicar qué son los deepfakes, por qué son un problema técnico y social,
+   10: % y por qué la detección binaria no siempre es suficiente.
+   11: 
+   12: En el ámbito social debido al aumento de los “deepfakes”, la capacidad de poder sustituir, ya sea por video o imagen, representa desde una difamación personal, creación de evidencia visual falsa, suplantación de identidad o hasta desinformación en escala masiva.
+   13: 
+   14: En areas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
+   15: 
+   16: \subsection{Planteamiento del problema}
+   17: 
+   18: % Explicar el problema concreto:
+   19: % muchos métodos detectan si una imagen es falsa, pero no indican con precisión
+   20: % qué regiones fueron manipuladas.
+   21: % Aquí se debe conectar con segmentación semántica.
+   22: Desde la perspectiva técnica, el problema se centra en la disminución de características o patrones visuales que delaten la evidencia falsa al ser inversamente proporcional al realismo generado, los sistemas de detección presentan limitantes pues se concentran en una clasificación binaria global, en la que se le asigna una clase, real o falso a la imagen completa, este tipo de enfoque sirve siempre y cuando la manipulación afecte de forma general a la imagen, sin embargo, una alteración puede y mayormente esta delimitada a regiones especificas que representan un menor porcentaje generando insensibilidad produciendo falsos negativos.
+   23: 
+   24: 
+   25: \subsection{Justificación}
+   26: 
+   27: % Explicar por qué tiene sentido usar segmentación semántica y redes convolucionales.
+   28: % Justificar U-Net por su uso en localización píxel a píxel.
+   29: Ante esa situación, se establece cambiar de enfoque  de clasificación general, a uno de detección, segmentando las zonas, exigiendo que un sistema delimite e identifica las regiones dentro del contexto de un rostro que ha sido intervenido. Para lograr esto las redes neuronales convolucionales enfocadas en segmentación como U-Net resultan de gran ayuda ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que el ojo humano no podría percibir y que los modelos globales omiten por la proporción manipulada con respecto a la imagen completa. Sumándole a eso la segmentación binaria permite generar evidencia visual de gran valor de interpretación, no se limita a decidir, si no que resalta la región intervenida, permitiendo una guía para su inspección.
+   30: 
+   31: \subsection{Objetivo general}
+   32: 
+   33: Desarrollar una red neuronal para la detección y localización de manipulaciones faciales (deepfakes) mediante un modelo de segmentación semántica basado en redes neuronales convolucionales (arquitectura U-Net), orientado al análisis forense de imágenes.
+   34: 
+   35: \subsection{Objetivos específicos}
+   36: 
+   37: \begin{itemize}
+   38:     \item Generar un conjunto de datos (dataset) conformado por 50,000 muestras, estandarizando las imágenes para incluir variaciones de contexto y etiquetado mediante máscaras binarias enfocadas en deepfakes, que delimiten exclusivamente la región facial manipulada.
+   39:     \item Implementar una arquitectura basada en U-Net para la detección de inconsistencias en texturas, iluminación y bordes, capaz de generar una salida de segmentación.
+   40:     \item Entrenar el modelo utilizando el dataset generado, enfocándose en la generalización frente a técnicas de reemplazo y alteraciónes localizadas en el rostro.
+   41:     \item Evaluar el desempeño del sistema con metricas de segmentacion semantica y generando visualizaciones (overlays) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
+   42: \end{itemize}
+   43: 
+   44: \subsection{Alcance del proyecto}
+   45: En el presente proyecto se diseñó para el análisis offline de una imagen exclusivamente dentro del contexto semántico de un rostro (Se omite cuello, orejas y cabello) sin requerir una referencia del sujeto en un estado no manipulado. Partiendo de las características de textura, discontinuidades y bordes que el modelo pueda extraer generando una representación próxima de la alteración facial. Todo esto a partir del entrenamiento de la red, usando un conjunto de datos especializado para la tarea.
+   46: % Delimitar qué sí hace y qué no hace el proyecto.
+   47: % Ejemplo:
+   48: % El proyecto se enfoca en imágenes faciales y localización por máscara.
+   49: % No aborda detección en video en tiempo real ni identificación del autor de la manipulación.
+
+-------------------- capitulos/03-estado-arte-marco-teorico.tex --------------------
+    1: \section{Estado del arte / Marco teórico}
+    2: \subsection{Estado del arte}
+    3: Existen enfoques de detección de “deepfakes” lo cuales tienen como objetivo principal la clasificación global binaria, creando una etiqueta según sus clases. El trabajo de \textcite{Yagual2024} evaluó 3 tipos diferentes de arquitecturas de redes convolucionales dedicadas a la visión de computadora, las cuales fueron MobileNetV2, EfficientNetB0 y ResNet50, el desempeño de estas redes fue evaluado bajo un umbral de probabilidad dedicado a la clasificación binaria (Area Under Curve). Siguiendo con los trabajos de clasificación se encuentra \textcite{Tiwari2025}, utilizando una metodología hibrida combinando la arquitectura de ResNet-50 para la extracción de características robustas y posteriormente la clasificación ajustada de VGG-16 para la detección de deepfakes. Si bien ambos trabajos cumplen con sus objetivos comparten la deficiencia de no localizar espacialmente la alteración de la imagen, lo cual imposibilitan su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
+    4: 
+    5: Para atender las limitaciones de los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido \textcite{Deng2025} menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
+    6: 
+    7: A diferencia de enfoques centrados principalmente en clasificación o localización indirecta. Este proyecto formula el problema como segmentación semántica supervisada, por medio de una red neuronal, con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Además, atiende el desbalance entre píxeles auténticos y manipulados mediante una función de pérdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación (IoU y Dice) que se suman a la función de pérdida total.
+    8: 
+    9: \subsection{Marco teórico}
+   10: 
+   11: \subsubsection{Manipulación facial y deepfakes}
+   12: 
+   13: \medskip\textbf{Definición operativa y tipología de manipulación facial}
+   14: 
+   15: \textcite{Mirsky2021} menciona que los deepfakes son contenido multimedia sintético o manipulado mediante técnicas de inteligencia artificial, donde la similitud visual se logra por modelos generativos capaces de reproducir rasgos faciales, texturas y patrones de iluminación con alta fidelidad y que pueden integrarse a flujos de edición que ocultan rastros evidentes mediante posprocesamiento, por ejemplo, compresión y el cambio de escala.
+   16: 
+   17: En particular, la manipulación facial puede organizarse como un conjunto de transformaciones sobre el rostro que abarcan:
+   18: \begin{itemize}
+   19:     \item Reemplazo de identidad.
+   20:     \item Recreación o transferencia de expresiones.
+   21:     \item Ediciones localizadas del rostro sin sustituir por completo la identidad.
+   22:     \item Síntesis de un rostro completo sin una referencia. 
+   23: \end{itemize}
+   24: 
+   25: Técnicas como el reemplazo y la recreación tienden a introducir discontinuidades en contornos y coherencias internas del rostro, mientras que la síntesis puede producir coherencias globales altas, pero inconsistencias de textura en regiones específicas. \parencite{MurguiaSerrano2025}
+   26: 
+   27: 
+   28: La manipulación de rostros suele incluir una localización y emparejamiento facial, obtención de características, generación mediante modelos como redes generativas antagónicas (GAN) o modelos de difusión, y finalmente una fase de entremezclado y posprocesamiento para integrar el rostro manipulado con el contexto de la imagen real (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
+   29: 
+   30: Para este proyecto, las manipulaciones cubiertas para cumplir el objetivo de generación de conjunto de datos propios se centran en dos tipologías: reemplazo facial tipo FaceSwap e inpainting facial localizado\parencite{Rossler_2019_ICCV, Rombach2022}.
+   31: 
+   32: \subsubsection{Detección de deepfakes: enfoques y taxonomía}
+   33: 
+   34: \medskip\textbf{Enfoques espacial, de frecuencia y aprendizaje profundo end-to-end}
+   35: 
+   36: 
+   37: La detección de deepfakes se ha consolidado como un problema central del análisis forense digital debido a la rápida evolución de los generadores y a la creciente dificultad para distinguir contenido real de contenido sintético bajo condiciones de despliegue reales, con especial énfasis en la generalización y en la degradación introducida por compresión y reescalado.
+   38: 
+   39: Debido al acelerado desarrollo de generadores, la deteccion se puede estructurar en funcion del tipo de evidencia que estas pueden modelar, por ello se adopta una taxonomia de cuatro enfoques de alto nivel:
+   40: \begin{itemize}
+   41:     \item Enfoque espacial.
+   42:     \item Enfoque en frecuencia.
+   43:     \item Enfoque basado en aprendizaje profundo (end-to-end).
+   44:     \item Enfoques híbridos. 
+   45: \end{itemize}
+   46: Esta organización no pretende ser excluyente, ya que diversos modelos contemporáneos combinan señales y representaciones; sin embargo, permite sintetizar la intuición forense detrás de cada familia y, en consecuencia, discutir sus fallas típicas ante el cambio de dominio (conjunto de datos, generador y postprocesado) \parencite{MurguiaSerrano2025, Banerjee2025}.
+   47: 
+   48: En el enfoque de frecuencia, la hipótesis es que los procesos de generación introducen artefactos espectrales que no son necesariamente evidentes en el espacio de píxel, pero sí se manifiestan como anomalías en bandas de alta frecuencia o como distribuciones espectrales atípicas. Parte de la evidencia reportada en la bibliografía vincula estas huellas con operaciones internas de los generadores, por ejemplo, etapas de sobremuestreo en arquitecturas GAN, que dejan patrones característicos en el espectro. En consecuencia, se utilizan transformadas ( Fourier, DCT o wavelets) y descriptores espectrales para separar contenido real de contenido sintético. Sin embargo, delimitante importante es que las huellas pueden variar entre generadores y, por lo tanto, indcuir cierta sensibilidad a patrones específicos del modelo de síntesis o del dominio de entrenamiento, reduciendo la capacidad frente a escenarios mas realista que suelen ser mas variados. \parencite{Tan2024}
+   49: 
+   50: 
+   51: En los enfoques de basados de aprendizaje profundo y en el dominio espacial, la detección se centra en inconsistencias observables en el dominio de píxel, es decir, irregularidades locales o globales que emergen de la unión, la edición y la síntesis facial. Habitualmente se buscan discontinuidades en contornos, incoherencias en iluminación, texturas atípicas, patrones de ruido residuales o discrepancias entre la región facial y su contexto. En implementaciones modernas, estas señales se capturan mediante extractores aprendidos, que identifican patrones discriminativos asociados a manipulaciones y, en variantes orientadas a localización, habilitan mapas de activación o máscaras que aproximan la región alterada, las arquitecturas CNN y variantes con mecanismos de atención o módulos complementarios, entrenadas en clasificación (real/falso) o en formulaciones que incorporan supervisión espacial cuando se dispone de anotaciones. Su ventaja práctica es la capacidad de modelar patrones complejos y no lineales. No obstante, al depender de huellas que pueden ser atenuadas por posprocesamiento, el desempeño suele degradarse en escenarios con compresión, baja resolución u oclusiones, además de mostrar sensibilidad a sesgos de captura y a variaciones de escena. \parencite{Banerjee2025, Alrashoud2025}
+   52: 
+   53: 
+   54: Finalmente, los enfoques híbridos surgen como respuesta directa a la fragilidad de un único tipo de evidencia. De manera general, un enfoque híbrido integra representaciones espaciales y espectrales, o combina señales forenses (inconsistencias de compresión o señales residuales) con características aprendidas por redes profundas, mediante arquitecturas multirrama y mecanismos de fusión. La evidencia apunta a que la manipulación deja rastros en múltiples niveles: algunos son locales en el píxel, otros se expresan como firmas en frecuencia y otros se manifiestan como discrepancias de coherencia global; por lo tanto, la combinación explícita puede aumentar sensibilidad y robustez ante variaciones. En la bibliografía reciente se observa un énfasis en diseñar estrategias orientadas a mejorar como se hace frente a la generalización de datos, precisamente porque los artefactos aislados tienden a perder estabilidad frente a generadores nuevos y frente a interferencia por postprocesado. \parencite{Li2025, Qiao2025}
+   55:  
+   56: En este marco, la generalización se entiende como la capacidad del detector para mantener un desempeño ante cambios, como lo son: nuevos generadores, nuevas distribuciones de datos y nuevas condiciones de captura y publicación. La evidencia reciente menciona que, incluso cuando los modelos obtienen resultados altos en conjuntos académicos, su desempeño puede caer de forma pronunciada en datos en escenarios no controlados. Adicionalmente, la compresión, el reescalado y otros posprocesos actúan como perturbaciones que suprimen o distorsionan huellas forenses, afectando tanto señales espaciales (pérdida de microtextura) como señales espectrales (alteración de distribuciones de frecuencia). \parencite{Hu2024, Li2025, Chandra2025}
+   57: 
+   58: \subsubsection{Clasificación global vs localización}
+   59: 
+   60: \medskip\textbf{Limitaciones de la clasificación global ante manipulaciones locales}
+   61: 
+   62: La detección de deepfakes se podría conceptualizar como un problema de clasificación global, en donde un modelo asigna una etiqueta binaria (real/falso) a la imagen completa. En escenarios reales, las alteraciones llegan a modificar únicamente regiones específicas del rostro (ojos, boca o contornos faciales). Cuando la alteración está delimitada a una región, los modelos de clasificación global pueden no detectar señales discriminativas, especialmente después de procesos de compresión, reescalado o suavizado que reducen las huellas forenses visibles. Esto aumenta la probabilidad de falsos negativos, ya que la imagen conserva gran parte de sus píxeles sin manipular.\parencite{Rossler_2019_ICCV}
+   63: 
+   64: \begin{figure}[H]
+   65:     \centering
+   66:     \includegraphics[width=\textwidth]{imagenes/Analisis_clasificación_binaria.jpeg} 
+   67:     \caption{FaceForensics++ trabaja con Face2Face, FaceSwap, DeepFakes y NeuralTextures como métodos de manipulación facial.}
+   68:     \label{fig:tipos_manipulaciones}
+   69: \end{figure}
+   70: 
+   71: \medskip\textbf{Reformulación como tarea de localización}
+   72: 
+   73: 
+   74: El problema abordado en este trabajo se reformula como una tarea de localización de manipulación, donde el objetivo no es únicamente determinar si una imagen es falsa, sino identificar qué regiones específicas han sido alteradas. En lugar de producir una etiqueta global, el modelo genera un mapa espacial o máscara que asigna a cada píxel una probabilidad de pertenecer a una zona manipulada. Esta metodología integra a la segmentación semántica para poder generar un mapa espacial ayudando a identificar dónde se realizó una alteración.
+   75: 
+   76: La generación de una máscara proporciona evidencia visual interpretable, permite observar la extensión de la manipulación, para posteriormente facilitar los análisis centrados exclusivamente en las regiones sospechosas. \parencite{Bappy_2017_ICCV}
+   77: 
+   78: \subsubsection{Fundamentos de CNN para visión por computadora}
+   79: 
+   80: 
+   81: \medskip\textbf{Redes neuronales convolucionales}
+   82: 
+   83: 
+   84: \textcite{goodfellow2016deep} describen las redes neuronales convolucionales como un tipo de red neuronal especializada en el procesamiento de datos que tiene una topología conocida similar a una cuadrícula. Mencionan particularmente a las imágenes, las cuales pueden considerarse como una cuadrícula bidimensional de píxeles. El nombre "red neuronal convolucional" indica que la red emplea una operación matemática llamada convolución. Por su parte las redes neuronales convolucionales son simplemente redes neuronales que utilizan la convolución en lugar de la multiplicación matricial general en al menos una de sus capas. 
+   85: 
+   86: 
+   87: \medskip\textbf{La operación de convolución}
+   88: 
+   89: 
+   90: La operación de convolución se define como una operación matemática entre dos funciones que produce una tercera función que representa la cantidad de superposición entre ellas.
+   91: 
+   92: En el contexto de redes neuronales convolucionales, esta operación se utiliza para aplicar filtros sobre imágenes con el objetivo de detectar patrones locales como bordes, texturas o formas. Cada filtro se desplaza sobre la imagen generando mapas de activación que resaltan dichas características.
+   93: 
+   94: Sin embargo, en aplicaciones de aprendizaje automático y visión por computadora, los datos utilizados no son continuos sino discretos. Las imágenes digitales, por ejemplo, se representan como matrices de valores numéricos correspondientes a píxeles. Debido a esto, la operación de convolución se expresa mediante una forma discreta. Como las imágenes digitales se pueden representar como matrices bidimensionales de píxeles:
+   95: 
+   96: \[
+   97: s(i,j)=\sum_m\sum_n x(i-m,j-n)w(m,n)
+   98: \]
+   99: Donde: 
+  100: \begin{itemize}
+  101:     \item x(i,j) es el valor del píxel en la imagen de entrada.
+  102:     \item w(m,n) es el valor del filtro o kernel.
+  103:     \item s(i,j) es el resultado de la convolución en la posición (i,j).
+  104:     \item m,n son los índices del kernel.
+  105: \end{itemize}
+  106: 
+  107: \begin{figure}[H]
+  108:     \centering
+  109:     \includegraphics[width=0.5\linewidth]{Ejemplo_convolucion_2_dimensiones.png}
+  110:     \caption{Ejemplo de un proceso de convolución en una matriz de dos dimensiones y el proceso para generar cada uno de los elementos que componen el mapa de activación resultante después de aplicar el filtro en la matriz de entrada}
+  111:     \label{fig:convolucion_2d}
+  112: \end{figure}
+  113: 
+  114: En la mayoría implementaciones de capas convolucionales, la operación denominada convolución corresponde técnicamente a una correlación cruzada (cross-correlation). La principal diferencia entre ambas operaciones radica en que la convolución implica una inversión del filtro antes de realizar el desplazamiento sobre la señal de entrada, mientras que en la correlación el filtro se aplica directamente sin dicha inversión. A pesar de eso ambos términos suelen utilizarse de manera intercambiable, ya que los filtros son aprendidos automáticamente durante el entrenamiento de la red\parencite{goodfellow2016deep}.
+  115: 
+  116: \medskip\textbf{Filtros, mapas de activación y jerarquía de características.}
+  117: 
+  118: Los filtros son matrices que se desplazan sobre la entrada. Durante el proceso de entrenamiento, los valores de los filtros se ajustan automáticamente mediante algoritmos de optimización, permitiendo que la red aprenda a identificar patrones relevantes en los datos.
+  119: 
+  120: El resultado de aplicar un filtro sobre una imagen de entrada se denomina mapa de activación o mapa de características. Este mapa representa la respuesta del filtro en cada posición de la imagen, resaltando aquellas regiones donde el patrón detectado por el filtro está presente. Al ser diferente cada filtro produce una respuesta distinta, permitiendo a la red neuronal capturar múltiples características visuales dentro de la imagen.
+  121: 
+  122: Las redes neuronales convolucionales aprenden una jerarquía de características visuales a través de sus diferentes capas. En las primeras capas, los filtros suelen detectar características simples como bordes y orientaciones. En capas intermedias, la red comienza a identificar patrones más complejos como texturas o formas. Finalmente, en las capas más profundas se reconocen estructuras más complejas, como partes de objetos o configuraciones faciales completas. Esta capacidad de aprender representaciones jerárquicas permite a las CNN analizar imágenes de forma eficiente en tareas de reconocimiento y clasificación.
+  123: Esta capacidad resulta especialmente útil en la detección de deepfakes, ya que permite identificar inconsistencias visuales sutiles en imágenes manipuladas, tales como anomalías en texturas faciales, iluminación o patrones de compresión.\parencite{Rossler_2019_ICCV}
+  124: 
+  125: 
+  126: \medskip\textbf{Pooling y stride.}
+  127: 
+  128: En las redes neuronales convolucionales, el pooling es una operación mediante la cual se busca reducir la dimensionalidad o tamaño de los mapas de activación generados por las capas convolucionales. Esta reducción permite disminuir la dimensión espacial de los mapas de activación y el costo computacional, al mismo tiempo que se conserva la información más relevante para las características que anteriormente se detectaron. Este proceso consiste en dividir el mapa de activación en pequeñas regiones y aplicar una función de agregación sobre cada una de ellas, dando como resultado un mapa de activación más pequeño que conserva las características más importantes detectadas por los filtros de la red.
+  129: 
+  130: 
+  131: El max pooling es uno de los métodos de pooling más utilizados en redes neuronales convolucionales. En este método, para cada región del mapa de activación se selecciona únicamente el valor máximo. De esta manera, se conserva la característica más significativa detectada por el filtro en esa región específica.
+  132: 
+  133: En la operación de convolución, el stride (comúnmente traducido como paso o zancada) es un hiperparámetro estructural que determina la cantidad de unidades espaciales o píxeles que el filtro (kernel) avanza sobre la matriz de entrada en cada iteración.
+  134: En las operaciones de convolución estándar, se asume un desplazamiento unitario (stride = 1), lo que significa que el filtro se mueve un píxel a la vez de izquierda a derecha y de arriba hacia abajo, procesando la imagen de manera altamente superpuesta. Sin embargo, al incrementar este valor, el filtro "salta" posiciones, desplazándose de dos en dos píxeles.
+  135: El impacto principal del stride se ve reflejado en las dimensiones espaciales del mapa de activación resultante una vez terminado el proceso de convolución. Si el stride es grande, las dimensiones serán menores, actuando como un mecanismo de submuestreo\parencite{goodfellow2016deep}.
+  136: 
+  137: \medskip\textbf{Funciones de activación en extracción y salida binaria}
+  138: 
+  139: En las redes neuronales convolucionales, después de realizar la operación de convolución, se aplica una función de activación. Estas funciones introducen no linealidad en el modelo, lo cual permite que la red neuronal pueda aprender representaciones más complejas de los datos. Sin la incorporación de funciones no lineales, una red compuesta únicamente por operaciones lineales sería equivalente a una sola transformación lineal, limitando significativamente su capacidad de aprendizaje.
+  140: Las funciones de activación se aplican a los valores generados por las capas convolucionales, produciendo mapas de activación que posteriormente son procesados por las siguientes capas de la red. De acuerdo con \textcite{goodfellow2016deep}, las funciones de activación permiten que las redes neuronales profundas modelen relaciones complejas presentes en los datos y facilitan el aprendizaje de representaciones jerárquicas en tareas de visión por computadora.
+  141: 
+  142: Una de las funciones de activación más utilizadas en redes neuronales convolucionales es la Rectified Linear Unit (ReLU). Esta función se caracteriza por su simplicidad y eficiencia computacional, ya que transforma los valores negativos en cero y mantiene los valores positivos sin modificación.
+  143: 
+  144: La función ReLU puede definirse como:
+  145: 
+  146: \[
+  147: f(x)=\max(0,x)
+  148: \]
+  149: Donde: 
+  150: \begin{itemize}
+  151:     \item x representa el valor de entrada proveniente de la capa convolucional
+  152:     \item f(x) corresponde al valor resultante después de aplicar la función de activación.
+  153: \end{itemize}
+  154: Según \textcite{goodfellow2016deep}, el uso de la función ReLU facilita el entrenamiento de redes neuronales profundas, ya que ayuda a reducir el problema del gradiente desvanecido y permite una convergencia más rápida durante el proceso de aprendizaje.
+  155: 
+  156: Aun con la eficiencia de ReLU en las capas ocultas para la extracción de características, la salida de la red requiere una acotación, por ello es necesario que la salida sea una probabilidad, la función de activación sigmoide comprime el valor real de la entrada en un intervalo continuo entre el 0 y 1 lo cual según \textcite{goodfellow2016deep} resulta determinante para calcular la probabilidad de pertenecer a una clase por cada píxel de la imagen.
+  157: 
+  158: \begin{equation}
+  159: f(x) = \frac{1}{1 + e^{-x}}
+  160: \end{equation}
+  161: 
+  162: Donde $e$ representa la base del logaritmo natural.
+  163: 
+  164: \subsubsection{Segmentación semántica y formulación del problema.}
+  165: 
+  166: \medskip\textbf{Segmentación semántica.}
+  167: 
+  168: Las técnicas de segmentación semántica permiten asignar una etiqueta a cada píxel de una imagen según su contexto. A diferencia de un método tradicional de clasificación que genera una etiqueta global, la segmentación permite determinar ubicación dentro de la imagen. Dicho enfoque resulta útil en un análisis forense permitiendo la localización espacial.\parencite{Ronneberger2015, Bappy_2017_ICCV}
+  169: 
+  170: \begin{figure}[H]
+  171: \centering
+  172: \includegraphics[width=0.9\textwidth]{Segmentacion_semantica.jpg}
+  173: \caption{Ejemplo de segmentación semántica. A la izquierda se muestra la imagen original y a la derecha el mapa de segmentación donde cada píxel es clasificado en una categoría semántica distinta.}
+  174: \label{fig:segmentacion_semantica}
+  175: \end{figure}
+  176: 
+  177: Como se observa en la Figura \ref{fig:segmentacion_semantica}, la segmentación semántica permite identificar diferentes regiones dentro de una imagen mediante etiquetas asignadas a cada píxel. En este proyecto, en lugar de múltiples categorías semánticas, el objetivo consiste en distinguir únicamente entre regiones manipuladas y regiones auténticas dentro del rostro.
+  178: 
+  179: \medskip\textbf{Formulación del problema como segmentación binaria.}
+  180: 
+  181: El objetivo del modelo es aprender una función que, a partir de una imagen facial manipulada, genere una predicción espacial de la región alterada. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración. Aunque la formulación se mantiene como una distinción binaria entre región auténtica y región manipulada, el conjunto de datos conserva máscaras separadas para ambas regiones, lo que permite entrenar salidas diferenciadas.
+  182: 
+  183: 
+  184: \subsubsection{Arquitectura U-Net}
+  185: 
+  186: \medskip\textbf{Qué es U-Net}
+  187: 
+  188: La red neuronal U-Net es una red convolucional diseñada para tareas de segmentación, propuesta por \textcite{Ronneberger2015}, pensada para usarse en contextos de medicina donde se requirió precisión en imágenes biomédicas, ya que se necesitaba localizar estructuras específicas píxel a píxel. Este modelo se diferencia de los modelos de clasificación global por tener una predicción más específica, permitiendo localizar regiones donde la tarea exige una ubicación del objeto a detectar, llámese alteración u objeto. Su nombre se deriva de la característica de su arquitectura ya que en la etapa de contracción o codificación seguida por la etapa de expansión o decodificación genera un peculiar y reconocible “U”, su arquitectura permite combinar características generales del contexto hasta los detalles espaciales más finos.
+  189: 
+  190: \medskip\textbf{Componentes principales de la arquitectura}
+  191: 
+  192: La U-Net se compone de tres elementos: codificador, decodificador y conexiones de salto. 
+  193: El primero se encarga de extraer las características de la imagen de entrada, está diseñado con una serie de capas convolucionales acompañadas con operaciones de max pooling que reducen de manera progresiva la resolución mientras aumentan la profundidad de los mapas de características extraídos. Su objetivo principal es extraer el contexto e información semántica de manera progresiva, logrando que el modelo identifique patrones complejos. Cada bloque que constituye el codificador está compuesto generalmente por:
+  194: \begin{itemize}
+  195:     \item Dos convoluciones de 3x3
+  196:     \item Una función de activación ReLU
+  197:     \item Una operación de max pooling
+  198: \end{itemize}
+  199: 
+  200: El Decodificador tiene la función de volver a construir la resolución original de la imagen para generar el mapa de segmentación, en dicha etapa se utilizan operaciones de up-sampling o convolución transpuesta, aumentando progresivamente la resolución. El bloque de un decodificador se constituye por:
+  201: 
+  202: \begin{itemize}    
+  203:     \item Up-sampling
+  204:     \item Concatenación de mapas de características
+  205:     \item Dos convoluciones de 3x3
+  206: \end{itemize}
+  207: 
+  208: El decodificador recupera los detalles espaciales que se pueden llegar a perder del proceso anterior.
+  209: 
+  210: Las conexiones de salto son elementos importantes de la arquitectura U-Net, se conectan con las capas del codificador y el decodificador correspondientes, concatenando los mapas de características con el propósito de preservar información espacial de alta resolución. Gracias a esto el modelo puede combinar información global/semántica con detalles espaciales finos.
+  211: 
+  212: \begin{figure}[H]
+  213: \centering
+  214: \includegraphics[width=0.95\textwidth]{U-Net.png}
+  215: \caption{Arquitectura de U-Net propuesta por \cite{Ronneberger2015}. }
+  216: \label{fig:unet_architecture}
+  217: \end{figure}
+  218: 
+  219: La Figura \ref{fig:unet_architecture} muestra la arquitectura original de U-Net. En la parte izquierda se encuentra la ruta de contracción (encoder), donde la resolución espacial de la imagen se reduce progresivamente mediante operaciones de max pooling mientras aumenta el número de mapas de características. En la parte derecha se encuentra la ruta de expansión (decoder), donde la resolución se recupera mediante operaciones de up-convolution. Las conexiones laterales entre ambas rutas permiten combinar información semántica profunda con detalles espaciales de alta resolución, lo que mejora la precisión en tareas de segmentación.
+  220: 
+  221: \medskip\textbf{Diferencia entre clasificación y segmentación}
+  222: 
+  223: El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen completa. En cambio, en una tarea de segmentación no basta con etiquetar sino que también se requiere ubicar la manipulación. Por ello el modelo debe generar un mapa de predicción denso en el cual cada píxel recibe una etiqueta. En U-Net, la resolución espacial se reduce durante la etapa de codificación y posteriormente se recupera en el decodificador para construir dicho mapa de segmentación.
+  224: 
+  225: \medskip\textbf{Elección de U-Net para el escenario del proyecto}
+  226: En el proyecto, la arquitectura se adapta como una variante tipo U-Net con doble decodificador, de modo que una salida aprende regiones auténticas y otra salida aprende regiones manipuladas\parencite{Ronneberger2015}.
+  227: 
+  228: \subsubsection{Artefactos típicos en deepfakes faciales}
+  229: 
+  230: \medskip\textbf{Inconsistencias espaciales: textura, bordes e iluminación}
+  231: 
+  232: El concepto de "artefacto" se define como un rastro o huella observable que surge a partir de la síntesis, recreación o mezcla con el contexto total de la imagen\parencite{Amerini2025, MurguiaSerranoJY2025}. En este proyecto estas huellas pueden interpretarse como señales locales que un segmentador puede capturar a partir del aprendizaje por supervisión con máscaras binarias, considerando que la inferencia se realiza sin imagen de referencia y con una salida visual interpretable. 
+  233: 
+  234: De forma operativa se pueden ubicar tres conjuntos de inconsistencias visuales: textura, bordes/contornos e iluminación/sombras. Estas agrupaciones pueden existir de manera conjunta, y se pueden presentar en cualquier zona dentro de la región facial, lo cual es un factor importante para tratar el problema como una tarea de localización.
+  235: Las inconsistencias de textura se asocian a características normales de la piel, las cuales pueden ser suavizadas, reconstruidas o simuladas por el generador. Sin embargo, la alteración puede quedar con un aspecto liso, repetitivo o con un ruido residual que no corresponde con el resto de la imagen. Por lo tanto, los trabajos recientes hacen énfasis en explotar las texturas finas como un recurso de valor cuando una señal semántica induce un sobreajuste al modelo\parencite{Jiang2025, Jin2025}.
+  236: 
+  237: Las inconsistencias en bordes aparecen cuando existe incompatibilidad entre la región manipulada y la real. Aparecen líneas de mezcla o transiciones abruptas entre regiones, también pueden existir errores de alineación y deformación facial, en imágenes, estas señales pueden observarse en los contornos faciales. En la segmentación esto resulta relevante ya que estas señales se ubican en fronteras de la manipulación lo que favorece la obtención de máscaras\parencite{Amerini2025, Jiang2025}.
+  238: 
+  239: En el caso de la iluminación la evidencia se relaciona con la falta de coherencia con respecto a la imagen completa, direcciones de luz que no coinciden, sombras ajenas, reflejos atípicos, así como diferencias entre el sombreado producido y el real. Aunque los generadores pueden producir una coherencia global alta, aún existen casos donde la generación introduce errores locales. Para un segmentador esto resulta un patrón que sobresale por romper la continuidad, principalmente en zonas de alta variación visual como lo son los ojos, labios, zonas de cambio entre piel y elementos del rostro\parencite{Amerini2025, MurguiaSerranoJY2025}.
+  240: 
+  241: \medskip\textbf{Alta frecuencia y residuos de textura}
+  242: 
+  243: Una parte de estos artefactos puede concentrarse en altas frecuencias y en residuos de textura, detectables al analizar los detalles finos. Partiendo del supuesto de que aquellos rastros de utilidad suelen estar en texturas y detalles, los enfoques que realzan la textura pueden mejorar la sensibilidad ante regiones manipuladas\parencite{Jiang2025, Jin2025, Qiao2025}.
+  244: 
+  245: \medskip\textbf{Compresión y reescalado}
+  246: 
+  247: La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación\parencite{Gao2024, LiM2025}. 
+  248: 
+  249: \subsubsection{Datos, etiquetado y sesgos}
+  250: 
+  251: \medskip\textbf{Conjunto de datos sintético y fuente base}
+  252: 
+  253: La validez de un modelo de detección y localización depende de cómo se representan los datos usados durante el entrenamiento y la evaluación. La bibliografía indica que no basta con obtener métricas altas dentro del mismo conjunto de datos para que el modelo pueda superar escenarios diferentes al entrenamiento. En el entorno de banco de pruebas existen variedades en cuyo momento fueron buena opción, sin embargo, la evolución de los generadores puede volver insuficientes algunas distribuciones usadas como banco de prueba. Por lo cual, en este proyecto se propone construir uno propio con un control alto, para hacer coherente la supervisión con la tarea de segmentación planteada, se utilizaron como base imágenes faciales de alta resolución provenientes del conjunto FFHQ\parencite{Rossler_2019_ICCV, Karras2019}.
+  254: 
+  255: La línea de trabajo del proyecto se enfoca en generar un aproximado de 50,000 imágenes manipuladas, divididas en dos tipologías, cerca de 25,000 imágenes aproximadamente intervenidas con la técnica de FaceSwap avanzado y otras 25,000 imágenes aproximadamente generadas por inpainting facial localizado \parencite{Rombach2022}.
+  256: 
+  257: El reemplazo facial requiere etapas de detección, alineación y análisis de identidad facial, por lo que se apoya en modelos de reconocimiento facial.\parencite{Deng2019ArcFace}
+  258: 
+  259: Para garantizar el control y trazabilidad para el posterior entrenamiento y validación, por cada muestra intervenida, se guarda un conjunto de datos, que incluye: la imagen de entrada manipulada, una máscara auténtica, una máscara fake y los metadatos correspondientes a la generación. Se utilizo  modelos de face parsing para delimitar regiones faciales usadas en la generación de máscaras. \parencite{Yu2019bisenet}.
+  260: 
+  261: \medskip\textbf{Máscaras binarias y protocolo de etiquetado}
+  262: 
+  263: El proceso de etiquetado no se limita a una única máscara binaria general. En su lugar, el sistema define y almacena dos máscaras complementarias para cada muestra: una máscara fake, que delimita la región que ha sido manipulada, y la máscara auténtica, que representa la zona facial original. La definición de las máscaras depende del tipo de manipulación generada. Por ejemplo, en el caso de FaceSwap, la máscara fake cubre en su totalidad el rostro, por ende, la máscara auténtica, resulta en una máscara completamente negra. En cambio, el local inpainting al estar delimitado por zonas específicas, las máscaras se alternan de manera que se restan mutuamente.
+  264: 
+  265: Para estandarizar estas manipulaciones, el proyecto define el rostro como la región que abarca exclusivamente la piel, cejas, ojos, lentes, nariz, boca y labios; excluyendo de manera explícita elementos como el cabello, el cuello, las orejas y el fondo de la imagen, utilizando face parsing para su correcta identificación \parencite{Yu2019bisenet}.
+  266: 
+  267: 
+  268: \medskip\textbf{Sesgos, partición y generalización acotada}
+  269: 
+  270: Es fundamental reconocer los sesgos inherentes al linea de trabajo de generación propuesto, ya que estos determinan los límites de generalización del modelo ante datos no vistos \parencite{Yang2025, Chandra2025}. 
+  271: 
+  272: Al utilizar FFHQ como única base para las imágenes, el modelo hereda la composición visual, las condiciones de captura y la distribución facial propias de dicho conjunto.
+  273: 
+  274: El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e inpainting localizado). Por consiguiente, no garantiza la detección de deepfakes generados por técnicas distintas no representadas en el entrenamiento \parencite{Alrashoud2025}. Los artefactos visuales que el modelo aprende a localizar están ligados a las particularidades de los generadores utilizados para su síntesis. Además, el análisis se restringe a la región facial definida por el linea de trabajo, por lo que no cubre cabello, cuello, orejas ni fondo.
+  275: 
+  276: La separación debe realizarse con base en el identificador original de la imagen FFHQ, evitando que variaciones manipuladas de una misma imagen base aparezcan a la vez en el entrenamiento y pruebas. 
+  277: 
+  278: \subsubsection{Funciones de pérdida y desbalance de clases}
+  279: 
+  280: \medskip\textbf{Desbalance de clases en segmentación binaria}
+  281: 
+  282: En el contexto de la segmentación semántica binaria aplicada a la detección de manipulaciones faciales, la clase correspondiente a la región alterada suele representar una fracción minoritaria respecto al total de píxeles de la imagen. Si la función de pérdida no contempla este desbalance, el modelo puede aprender a favorecer la clase mayoritaria; como resultado, podría obtener una pérdida aparentemente estable o una exactitud elevada sin lograr localizar correctamente las regiones manipuladas. Este problema no es uniforme en todo el conjunto de datos de este proyecto: en manipulaciones por FaceSwap, la región alterada abarca la mayor parte de la región facial interna, mientras que, en técnicas de \textit{inpainting} localizado, la modificación puede limitarse a zonas muy pequeñas, como los ojos, la nariz o los labios. Por lo tanto, el desbalance se vuelve un factor crítico en alteraciones locales, exigiendo una función de pérdida capaz de no ignorar estas regiones de tamaño reducido \parencite{Li2025, Hu2024, Azad2023}.
+  283: 
+  284: \medskip\textbf{Pérdida compuesta para máscaras auténticas y manipuladas}
+  285: 
+  286: Para abordar esta diferencia de proporciones, la bibliografía especializada clasifica las funciones de pérdida según el tipo de señal que optimizan. Por un lado, se encuentran aquellas basadas en la distribución por píxel, como la entropía cruzada binaria (BCE); por otro, aquellas enfocadas en el solapamiento de la región, como Dice e IoU, que evalúan directamente la coincidencia espacial entre la máscara predicha y la real. Aunque existen alternativas como Focal o Tversky diseñadas para escenarios de fuerte desbalance, el criterio de selección de este proyecto se centra en la implementación de una pérdida compuesta. Dicha elección combina un componente distribuido por píxel, mediante entropía cruzada binaria ponderada, con términos de solapamiento como Dice e IoU, lo que permite considerar tanto la clasificación individual de píxeles como la coincidencia espacial entre la predicción y la máscara de referencia \parencite{Azad2023}. Además, la pérdida debe aplicarse de forma independiente a cada salida del modelo, comparando cada predicción con su máscara correspondiente.
+  287: 
+  288: \medskip\textbf{Relación con métricas y condiciones difíciles}
+  289: 
+  290: La declaración explícita de este enfoque de pérdida permite una interpretación coherente del rendimiento en la fase experimental. Cuando la región manipulada ocupa una fracción extremadamente pequeña de la imagen, incluso una pérdida compuesta bien calibrada puede generar máscaras con valores numéricamente bajos en métricas de solapamiento, como la Intersección sobre Unión (IoU), debido a la dificultad de coincidir exactamente en regiones pequeñas \parencite{Azad2023}. Además, condiciones como la compresión y el reescalado pueden degradar detalles finos de la imagen, reduciendo la señal disponible para localizar alteraciones \parencite{Gao2024, LiM2025}.
+  291: 
+  292: \subsubsection{Métricas de evaluación para segmentación y salida forense}
+  293: 
+  294: \medskip\textbf{Métricas de solapamiento: IoU y Dice}
+  295: 
+  296: Las métricas deben evaluar la localización de la región manipulada y no limitarse a la exactitud global por píxel. La exactitud por píxel resulta insuficiente como métrica principal para la segmentación binaria con desbalance de clases, dado que un modelo que prediga de forma uniforme la clase mayoritaria (no alterada) puede alcanzar valores elevados sin detectar ninguna alteración. En consecuencia, el protocolo de evaluación adopta métricas de solapamiento de región como criterio cuantitativo principal \parencite{Azad2023, Seghier2024}.
+  297: 
+  298: Las métricas primarias son la Intersección sobre la Unión (IoU, también denominada índice de Jaccard) \parencite{jaccard1912distribution} y el coeficiente Dice, equivalente a la puntuación F1 a nivel de píxel \parencite{Seghier2024}. El IoU se define como:
+  299: \[
+  300: \mathrm{IoU}=\frac{\mathrm{VP}}{\mathrm{VP}+\mathrm{FP}+\mathrm{FN}}
+  301: \]
+  302: donde VP denota verdaderos positivos, FP falsos positivos y FN falsos negativos. Por su parte, el Dice se define como:
+  303: \[
+  304: \mathrm{Dice}=\frac{2\cdot\mathrm{VP}}{2\cdot\mathrm{VP}+\mathrm{FP}+\mathrm{FN}}
+  305: \]
+  306: Ambas métricas ignoran los verdaderos negativos, lo que las hace menos sensibles al predominio de píxeles no alterados. Existe una relación monotónica entre ambas, expresable como:
+  307: \[
+  308: \mathrm{Dice}=\frac{2\cdot\mathrm{IoU}}{1+\mathrm{IoU}}
+  309: \]
+  310: por lo que deben interpretarse de manera conjunta y no como indicadores independientes \parencite{Azad2023, Seghier2024}.
+  311: 
+  312: \medskip\textbf{Precisión, exhaustividad y errores de localización}
+  313: 
+  314: Como métricas cuantitativas complementarias, la precisión por píxel:
+  315: \[
+  316: \text{Precisión} = \frac{\mathrm{VP}}{\mathrm{VP} + \mathrm{FP}}
+  317: \]
+  318: y la exhaustividad por píxel (\textit{Recall}):
+  319: \[
+  320: \text{Recall} = \frac{\mathrm{VP}}{\mathrm{VP} + \mathrm{FN}}
+  321: \]
+  322: proveen una descomposición del error útil para caracterizar el tipo de fallo del segmentador. La exhaustividad es especialmente relevante en este contexto porque permite identificar omisiones de regiones manipuladas (falsos negativos); sin embargo, debe analizarse junto con la precisión para distinguir entre la correcta localización y la sobredetección (falsos positivos). Esta asimetría se relaciona con el criterio de pérdida descrito en el apartado anterior, requiriendo que las métricas se reporten de forma desagregada para diagnosticar el comportamiento del modelo ante manipulaciones de área reducida \parencite{Li2025, Hu2024}.
+  323: 
+  324: \medskip\textbf{Evaluación visual mediante máscaras y overlays}
+  325: 
+  326: La definición de éxito del sistema no exige una coincidencia perfecta de cada píxel, sino la localización funcional de la región manipulada. Las propias anotaciones de referencia presentan incertidumbre en los bordes de transición, por lo que requerir precisión extrema introduciría penalizaciones artificiales \parencite{Li2025, Xu2024}. 
+  327: 
+  328: Para complementar los resultados numéricos, la evaluación visual mediante \textit{overlays} (representaciones que superponen la máscara predicha sobre la imagen de entrada con codificación cromática) constituye un componente complementario de evaluación visual. A diferencia de las métricas cuantitativas, los \textit{overlays} permiten identificar patrones de error espaciales, como el desplazamiento sistemático de la máscara predicha respecto a la alteración real. Este tipo de salida explicativa resulta útil en contextos de revisión humana, donde una decisión requiere soporte espacial \parencite{Amerini2025, Xu2024, Miao2025}. En este proyecto, los \textit{overlays} se reportan como parte de la evaluación visual del sistema para documentar cualitativamente su desempeño.
+  329: 
+  330: Finalmente, la interpretación de estos indicadores debe contemplar el efecto de las degradaciones de la imagen. La compresión y el reescalado pueden disminuir los valores de IoU y Dice porque reducen las microtexturas y detalles de alta frecuencia necesarios para localizar la alteración, afectando la correspondencia con la máscara de referencia \parencite{Gao2024, LiM2025}. Por ello, el protocolo debe considerar la diferencia entre el desempeño sobre imágenes de calidad estándar y aquellas con degradación aplicada.
+  331: 
+  332: \subsubsection{Consideraciones forenses y operativas}
+  333: 
+  334: \medskip\textbf{Inferencia sin imagen de referencia}
+  335: 
+  336: El presente proyecto delimita su alcance al análisis de imagen fija en el dominio facial, bajo una restricción operativa fundamental: el sistema analiza una sola imagen, sin disponer de una imagen de referencia limpia correspondiente al sujeto. Esta condición, coherente con el escenario real en el que el material disponible para análisis suele ser único, hace que el segmentador base su predicción en inconsistencias internas del contenido, tales como patrones residuales de textura, discontinuidades en bordes y gradientes, o incoherencias fotométricas. Al no comparar contra una imagen inalterada, la capacidad del modelo está acotada a las huellas internas aprendidas durante su entrenamiento \parencite{Amerini2025, Li2025}. Por otra parte, aunque el sistema se ejecuta en un entorno con procesamiento acelerado por GPU, sus requerimientos computacionales pueden limitar su uso en dispositivos con baja capacidad de cómputo o en escenarios con restricciones estrictas de latencia.
+  337: 
+  338: \medskip\textbf{Salida visual e interpretación humana}
+  339: 
+  340: La salida del sistema no se limita a una clasificación binaria global. El modelo entrega una máscara binaria y un \textit{overlay}, entendido como la superposición cromática de dicha máscara sobre la imagen de entrada. Esta salida visual orientada al analista humano tiene como función orientar la inspección hacia la región manipulada, sin sustituir ni automatizar el juicio del analista. En contextos de revisión humana o análisis forense, las decisiones requieren un soporte espacial verificable; en este marco, la máscara habilita la cuantificación técnica mientras que el \textit{overlay} se documenta como apoyo visual para la interpretación del resultado \parencite{Xu2024, Miao2025, Amerini2025}. 
+  341: 
+  342: \medskip\textbf{Alcances y limitaciones operativas}
+  343: 
+  344: El sistema no identifica el tipo específico de manipulación aplicada (reemplazo, \textit{inpainting}, etc.), limitándose a producir una segmentación binaria que distingue entre áreas alteradas y no alteradas. Asimismo, la localización se restringe estrictamente a la región facial interna, excluyendo explícitamente el cabello, el cuello, las orejas, el cuerpo y el fondo de la imagen, en congruencia con la delimitación del conjunto de datos. Existen, además, casos difíciles que pueden degradar el desempeño del modelo: oclusiones fuertes (manos, lentes de gran cobertura, cubrebocas), condiciones de iluminación extrema, compresión severa o resoluciones insuficientes para preservar detalle facial útil. Estas condiciones pueden producir máscaras fragmentadas o con valores bajos de solapamiento, sin que ello permita concluir por sí solo que la arquitectura sea inadecuada para imágenes de calidad estándar \parencite{Gao2024, LiM2025, Almotiri2024}. En su conjunto, estas consideraciones operativas conectan y justifican metodológicamente la elección de la segmentación semántica, la arquitectura propuesta, el uso de pérdidas compuestas y la selección de métricas espaciales para delimitar el alcance funcional del proyecto.
+
+============================================================
+3) CITAS USADAS EN 00-03
+============================================================
+Almotiri2024
+Alrashoud2025
+Amerini2025
+Azad2023
+Banerjee2025
+Bappy_2017_ICCV
+Chandra2025
+Deng2019ArcFace
+Deng2025
+Gao2024
+goodfellow2016deep
+Hu2024
+jaccard1912distribution
+Jiang2025
+Jin2025
+Karras2019
+Li2025
+LiM2025
+Mashhadani2026
+Miao2025
+Mirsky2021
+MurguiaSerrano2025
+MurguiaSerranoJY2025
+Qiao2025
+Rombach2022
+Ronneberger2015
+Rossler_2019_ICCV
+Seghier2024
+Tan2024
+Tiwari2025
+Xu2024
+Yagual2024
+Yang2025
+Yu2019bisenet
+
+============================================================
+4) CLAVES DISPONIBLES EN referencias.bib
+============================================================
+Almotiri2024
+Alrashoud2025
+Amerini2025
+Azad2023
+Banerjee2025
+Bappy_2017_ICCV
+Bharati2026
+Chandra2025
+Deng2019ArcFace
+Deng2025
+Gao2024
+goodfellow2016deep
+Hu2024
+jaccard1912distribution
+Jiang2025
+Jin2025
+Karras2019
+Laurier2024
+Li2025
+LiM2025
+Mashhadani2026
+Miao2025
+Mirsky2021
+MurguiaSerrano2025
+MurguiaSerranoJY2025
+Nelson2025
+Qiao2025
+RamosZaga2024
+Rombach2022
+Ronneberger2015
+Rossler_2019_ICCV
+Seghier2024
+Tan2024
+Tiwari2025
+Xu2024
+Yagual2024
+Yang2025
+Yu2019bisenet
+
+============================================================
+5) CITAS USADAS PERO NO ENCONTRADAS EN BIB
+============================================================
+SIN CITAS FALTANTES
+
+============================================================
+6) FIGURAS REFERENCIADAS Y ARCHIVOS EXISTENTES
+============================================================
+OK  Ejemplo_convolucion_2_dimensiones.png
+OK  ESIME.png
+OK  imagenes/Analisis_clasificación_binaria.jpeg
+OK  IPN.png
+OK  Segmentacion_semantica.jpg
+OK  U-Net.png
+
+============================================================
+7) ALERTAS DE REDACCIÓN / FORMATO
+============================================================
+
+PATRÓN: IA
+main.tex:20: \addbibresource{referencias.bib}
+main.tex:79: % Referencias
+main.tex:82: title={Referencias}
+referencias.bib:12: author  = {Deng, Liwei and Wu, Boda and Wang, Jiandong},
+referencias.bib:18: journal = {Multimedia Systems},
+referencias.bib:47: author        = {Laurier, Linda and Giulietta, Ave and Octavia, Arlo and Cleti, Meade},
+referencias.bib:57: author    = {R{\"o}ssler, Andreas and Cozzolino, Davide and Verdoliva, Luisa and Riess, Christian and Thies, Justus and Nie{\ss}ner, Matthias},
+referencias.bib:58: title     = {FaceForensics++: Learning to Detect Manipulated Facial Images},
+referencias.bib:67: title     = {Exploiting Spatial Structure for Localizing Manipulated Image Regions},
+referencias.bib:87: author    = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+referencias.bib:118: @article{MurguiaSerrano2025,
+referencias.bib:130: title   = {Deepfake: An{\'a}lisis de sus implicancias tecnol{\'o}gicas y jur{\'i}dicas en la era de la Inteligencia Artificial},
+referencias.bib:131: journal = {Derecho Global. Estudios sobre Derecho y Justicia},
+referencias.bib:140: author        = {Hu, J. and Liao, X. and Gao, D. and Tsutsui, S. and Wang, Q. and Qin, Z. and Shou, M. Z.},
+referencias.bib:151: journal = {Inteligencia Artificial},
+referencias.bib:168: journal = {Alexandria Engineering Journal},
+referencias.bib:212: @misc{Qiao2025,
+referencias.bib:213: author        = {Qiao, M. and Tian, R. and Wang, Y.},
+referencias.bib:214: title         = {Towards Generalizable Deepfake Detection with Spatial-Frequency Collaborative Learning and Hierarchical Cross-Modal Fusion},
+referencias.bib:222: author  = {Amerini, I. and Barni, M. and Battiato, S. and Bestagini, P. and Boato, G. and others},
+referencias.bib:223: title   = {Deepfake Media Forensics: Status and Future Challenges},
+referencias.bib:233: author  = {Gao, J. and Xia, Z. and Marcialis, G. L. and Dang, C. and Dai, J. and Feng, X.},
+referencias.bib:242: @article{Jiang2025,
+referencias.bib:243: author  = {Jiang, Q. and Liu, S. and Miao, S. and Yi, H. and Jin, X. and Kou, Y. and others},
+referencias.bib:244: title   = {Robust manipulated media localization and detection based on high frequency and texture features},
+referencias.bib:253: author  = {Jin, X. and Kou, Y. and Xie, Y. and Zhao, Y. and Mat Kiah, M. L. and Jiang, Q. and Zhou, W.},
+referencias.bib:265: title         = {Pay Less Attention to Deceptive Artifacts: Robust Detection of Compressed Deepfakes on Online Social Networks},
+referencias.bib:272: @article{MurguiaSerranoJY2025,
+referencias.bib:273: author  = {Murguía Serrano, Jania Yamileth and De la Toba Noriega, Carlos Eduardo and Campos Zatarain, Sebastián and Aramburo Contreras, Luis Yael and Diaz Lucas, Gustavo Ángel},
+referencias.bib:274: title   = {Deepfakes: Revisión sistemática de tecnologías, impacto y estrategias de detección},
+referencias.bib:306: title         = {FakeShield: Explainable Image Forgery Detection and Localization via Multi-modal Large Language Models},
+referencias.bib:312: @misc{Miao2025,
+referencias.bib:313: author        = {Miao, C. and Zhang, Y. and Gao, W. and Luo, M. and Feng, W. and Tan, Z. and Li, J. and Liu, A. and Diao, Y. and Chu, Q. and Gong, T. and Li, Z. and Yao, W. and Zhou, J. T.},
+referencias.bib:321: author  = {Bharati, N. and Hamie, A. and Saberi, A. and Garcia-Garcia, B.},
+referencias.bib:332: title   = {Deepfake forensics: A survey of digital forensic methods for multimodal deepfake identification on social media},
+referencias.bib:344: title      = {A Style-Based Generator Architecture for Generative Adversarial Networks},
+referencias.bib:375: author     = {Changqian Yu and
+referencias.bib:394: author     = {Jiankang Deng and
+referencias.bib:395: Jia Guo and
+capitulos\00-caratula.tex:28: \\[2\baselineskip] \textbf{Detección y localización de manipulaciones faciales deepfakes mediante segmentación semántica basada en redes neuronales convolucionales}
+capitulos\00-caratula.tex:38: Rojas Lozada Cuauhtli Emiliano
+capitulos\02-introduccion.tex:7: La manipulación de imágenes con técnicas y herramientas de inteligencia artificial cada día es mayor, sofisticada y al alcance del público en general, si bien esto representa un avance en el campo de visión de computadora, genera una brecha técnica que dificulta distinguir lo alterado de lo original. Un caso particular: las manipulaciones faciales, o mejor conocidas como "deepfakes", pueden llegar a tener un nivel de gran realismo debido a que conservan coherencia al hacer modificaciones en regiones específicas del rostro. Esta situación genera una necesidad de abordar métodos que aporten una nueva perspectiva a las herramientas usadas en la detección, no solo para determinar una clasificación general sino también para localizar espacialmente lo alterado.
+capitulos\02-introduccion.tex:9: % Explicar qué son los deepfakes, por qué son un problema técnico y social,
+capitulos\02-introduccion.tex:10: % y por qué la detección binaria no siempre es suficiente.
+capitulos\02-introduccion.tex:12: En el ámbito social debido al aumento de los “deepfakes”, la capacidad de poder sustituir, ya sea por video o imagen, representa desde una difamación personal, creación de evidencia visual falsa, suplantación de identidad o hasta desinformación en escala masiva.
+capitulos\02-introduccion.tex:14: En areas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
+capitulos\02-introduccion.tex:22: Desde la perspectiva técnica, el problema se centra en la disminución de características o patrones visuales que delaten la evidencia falsa al ser inversamente proporcional al realismo generado, los sistemas de detección presentan limitantes pues se concentran en una clasificación binaria global, en la que se le asigna una clase, real o falso a la imagen completa, este tipo de enfoque sirve siempre y cuando la manipulación afecte de forma general a la imagen, sin embargo, una alteración puede y mayormente esta delimitada a regiones especificas que representan un menor porcentaje generando insensibilidad produciendo falsos negativos.
+capitulos\02-introduccion.tex:29: Ante esa situación, se establece cambiar de enfoque  de clasificación general, a uno de detección, segmentando las zonas, exigiendo que un sistema delimite e identifica las regiones dentro del contexto de un rostro que ha sido intervenido. Para lograr esto las redes neuronales convolucionales enfocadas en segmentación como U-Net resultan de gran ayuda ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que el ojo humano no podría percibir y que los modelos globales omiten por la proporción manipulada con respecto a la imagen completa. Sumándole a eso la segmentación binaria permite generar evidencia visual de gran valor de interpretación, no se limita a decidir, si no que resalta la región intervenida, permitiendo una guía para su inspección.
+capitulos\02-introduccion.tex:33: Desarrollar una red neuronal para la detección y localización de manipulaciones faciales (deepfakes) mediante un modelo de segmentación semántica basado en redes neuronales convolucionales (arquitectura U-Net), orientado al análisis forense de imágenes.
+capitulos\02-introduccion.tex:38: \item Generar un conjunto de datos (dataset) conformado por 50,000 muestras, estandarizando las imágenes para incluir variaciones de contexto y etiquetado mediante máscaras binarias enfocadas en deepfakes, que delimiten exclusivamente la región facial manipulada.
+capitulos\02-introduccion.tex:39: \item Implementar una arquitectura basada en U-Net para la detección de inconsistencias en texturas, iluminación y bordes, capaz de generar una salida de segmentación.
+capitulos\02-introduccion.tex:45: En el presente proyecto se diseñó para el análisis offline de una imagen exclusivamente dentro del contexto semántico de un rostro (Se omite cuello, orejas y cabello) sin requerir una referencia del sujeto en un estado no manipulado. Partiendo de las características de textura, discontinuidades y bordes que el modelo pueda extraer generando una representación próxima de la alteración facial. Todo esto a partir del entrenamiento de la red, usando un conjunto de datos especializado para la tarea.
+capitulos\02-introduccion.tex:48: % El proyecto se enfoca en imágenes faciales y localización por máscara.
+capitulos\03-estado-arte-marco-teorico.tex:3: Existen enfoques de detección de “deepfakes” lo cuales tienen como objetivo principal la clasificación global binaria, creando una etiqueta según sus clases. El trabajo de \textcite{Yagual2024} evaluó 3 tipos diferentes de arquitecturas de redes convolucionales dedicadas a la visión de computadora, las cuales fueron MobileNetV2, EfficientNetB0 y ResNet50, el desempeño de estas redes fue evaluado bajo un umbral de probabilidad dedicado a la clasificación binaria (Area Under Curve). Siguiendo con los trabajos de clasificación se encuentra \textcite{Tiwari2025}, utilizando una metodología hibrida combinando la arquitectura de ResNet-50 para la extracción de características robustas y posteriormente la clasificación ajustada de VGG-16 para la detección de deepfakes. Si bien ambos trabajos cumplen con sus objetivos comparten la deficiencia de no localizar espacialmente la alteración de la imagen, lo cual imposibilitan su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
+capitulos\03-estado-arte-marco-teorico.tex:5: Para atender las limitaciones de los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido \textcite{Deng2025} menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, \textcite{Mashhadani2026} demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
+capitulos\03-estado-arte-marco-teorico.tex:7: A diferencia de enfoques centrados principalmente en clasificación o localización indirecta. Este proyecto formula el problema como segmentación semántica supervisada, por medio de una red neuronal, con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Además, atiende el desbalance entre píxeles auténticos y manipulados mediante una función de pérdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación (IoU y Dice) que se suman a la función de pérdida total.
+capitulos\03-estado-arte-marco-teorico.tex:11: \subsubsection{Manipulación facial y deepfakes}
+capitulos\03-estado-arte-marco-teorico.tex:13: \medskip\textbf{Definición operativa y tipología de manipulación facial}
+capitulos\03-estado-arte-marco-teorico.tex:15: \textcite{Mirsky2021} menciona que los deepfakes son contenido multimedia sintético o manipulado mediante técnicas de inteligencia artificial, donde la similitud visual se logra por modelos generativos capaces de reproducir rasgos faciales, texturas y patrones de iluminación con alta fidelidad y que pueden integrarse a flujos de edición que ocultan rastros evidentes mediante posprocesamiento, por ejemplo, compresión y el cambio de escala.
+capitulos\03-estado-arte-marco-teorico.tex:17: En particular, la manipulación facial puede organizarse como un conjunto de transformaciones sobre el rostro que abarcan:
+capitulos\03-estado-arte-marco-teorico.tex:20: \item Recreación o transferencia de expresiones.
+capitulos\03-estado-arte-marco-teorico.tex:22: \item Síntesis de un rostro completo sin una referencia.
+capitulos\03-estado-arte-marco-teorico.tex:25: Técnicas como el reemplazo y la recreación tienden a introducir discontinuidades en contornos y coherencias internas del rostro, mientras que la síntesis puede producir coherencias globales altas, pero inconsistencias de textura en regiones específicas. \parencite{MurguiaSerrano2025}
+capitulos\03-estado-arte-marco-teorico.tex:28: La manipulación de rostros suele incluir una localización y emparejamiento facial, obtención de características, generación mediante modelos como redes generativas antagónicas (GAN) o modelos de difusión, y finalmente una fase de entremezclado y posprocesamiento para integrar el rostro manipulado con el contexto de la imagen real (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
+capitulos\03-estado-arte-marco-teorico.tex:30: Para este proyecto, las manipulaciones cubiertas para cumplir el objetivo de generación de conjunto de datos propios se centran en dos tipologías: reemplazo facial tipo FaceSwap e inpainting facial localizado\parencite{Rossler_2019_ICCV, Rombach2022}.
+capitulos\03-estado-arte-marco-teorico.tex:34: \medskip\textbf{Enfoques espacial, de frecuencia y aprendizaje profundo end-to-end}
+capitulos\03-estado-arte-marco-teorico.tex:37: La detección de deepfakes se ha consolidado como un problema central del análisis forense digital debido a la rápida evolución de los generadores y a la creciente dificultad para distinguir contenido real de contenido sintético bajo condiciones de despliegue reales, con especial énfasis en la generalización y en la degradación introducida por compresión y reescalado.
+capitulos\03-estado-arte-marco-teorico.tex:39: Debido al acelerado desarrollo de generadores, la deteccion se puede estructurar en funcion del tipo de evidencia que estas pueden modelar, por ello se adopta una taxonomia de cuatro enfoques de alto nivel:
+capitulos\03-estado-arte-marco-teorico.tex:41: \item Enfoque espacial.
+capitulos\03-estado-arte-marco-teorico.tex:42: \item Enfoque en frecuencia.
+capitulos\03-estado-arte-marco-teorico.tex:46: Esta organización no pretende ser excluyente, ya que diversos modelos contemporáneos combinan señales y representaciones; sin embargo, permite sintetizar la intuición forense detrás de cada familia y, en consecuencia, discutir sus fallas típicas ante el cambio de dominio (conjunto de datos, generador y postprocesado) \parencite{MurguiaSerrano2025, Banerjee2025}.
+capitulos\03-estado-arte-marco-teorico.tex:48: En el enfoque de frecuencia, la hipótesis es que los procesos de generación introducen artefactos espectrales que no son necesariamente evidentes en el espacio de píxel, pero sí se manifiestan como anomalías en bandas de alta frecuencia o como distribuciones espectrales atípicas. Parte de la evidencia reportada en la bibliografía vincula estas huellas con operaciones internas de los generadores, por ejemplo, etapas de sobremuestreo en arquitecturas GAN, que dejan patrones característicos en el espectro. En consecuencia, se utilizan transformadas ( Fourier, DCT o wavelets) y descriptores espectrales para separar contenido real de contenido sintético. Sin embargo, delimitante importante es que las huellas pueden variar entre generadores y, por lo tanto, indcuir cierta sensibilidad a patrones específicos del modelo de síntesis o del dominio de entrenamiento, reduciendo la capacidad frente a escenarios mas realista que suelen ser mas variados. \parencite{Tan2024}
+capitulos\03-estado-arte-marco-teorico.tex:51: En los enfoques de basados de aprendizaje profundo y en el dominio espacial, la detección se centra en inconsistencias observables en el dominio de píxel, es decir, irregularidades locales o globales que emergen de la unión, la edición y la síntesis facial. Habitualmente se buscan discontinuidades en contornos, incoherencias en iluminación, texturas atípicas, patrones de ruido residuales o discrepancias entre la región facial y su contexto. En implementaciones modernas, estas señales se capturan mediante extractores aprendidos, que identifican patrones discriminativos asociados a manipulaciones y, en variantes orientadas a localización, habilitan mapas de activación o máscaras que aproximan la región alterada, las arquitecturas CNN y variantes con mecanismos de atención o módulos complementarios, entrenadas en clasificación (real/falso) o en formulaciones que incorporan supervisión espacial cuando se dispone de anotaciones. Su ventaja práctica es la capacidad de modelar patrones complejos y no lineales. No obstante, al depender de huellas que pueden ser atenuadas por posprocesamiento, el desempeño suele degradarse en escenarios con compresión, baja resolución u oclusiones, además de mostrar sensibilidad a sesgos de captura y a variaciones de escena. \parencite{Banerjee2025, Alrashoud2025}
+capitulos\03-estado-arte-marco-teorico.tex:54: Finalmente, los enfoques híbridos surgen como respuesta directa a la fragilidad de un único tipo de evidencia. De manera general, un enfoque híbrido integra representaciones espaciales y espectrales, o combina señales forenses (inconsistencias de compresión o señales residuales) con características aprendidas por redes profundas, mediante arquitecturas multirrama y mecanismos de fusión. La evidencia apunta a que la manipulación deja rastros en múltiples niveles: algunos son locales en el píxel, otros se expresan como firmas en frecuencia y otros se manifiestan como discrepancias de coherencia global; por lo tanto, la combinación explícita puede aumentar sensibilidad y robustez ante variaciones. En la bibliografía reciente se observa un énfasis en diseñar estrategias orientadas a mejorar como se hace frente a la generalización de datos, precisamente porque los artefactos aislados tienden a perder estabilidad frente a generadores nuevos y frente a interferencia por postprocesado. \parencite{Li2025, Qiao2025}
+capitulos\03-estado-arte-marco-teorico.tex:56: En este marco, la generalización se entiende como la capacidad del detector para mantener un desempeño ante cambios, como lo son: nuevos generadores, nuevas distribuciones de datos y nuevas condiciones de captura y publicación. La evidencia reciente menciona que, incluso cuando los modelos obtienen resultados altos en conjuntos académicos, su desempeño puede caer de forma pronunciada en datos en escenarios no controlados. Adicionalmente, la compresión, el reescalado y otros posprocesos actúan como perturbaciones que suprimen o distorsionan huellas forenses, afectando tanto señales espaciales (pérdida de microtextura) como señales espectrales (alteración de distribuciones de frecuencia). \parencite{Hu2024, Li2025, Chandra2025}
+capitulos\03-estado-arte-marco-teorico.tex:62: La detección de deepfakes se podría conceptualizar como un problema de clasificación global, en donde un modelo asigna una etiqueta binaria (real/falso) a la imagen completa. En escenarios reales, las alteraciones llegan a modificar únicamente regiones específicas del rostro (ojos, boca o contornos faciales). Cuando la alteración está delimitada a una región, los modelos de clasificación global pueden no detectar señales discriminativas, especialmente después de procesos de compresión, reescalado o suavizado que reducen las huellas forenses visibles. Esto aumenta la probabilidad de falsos negativos, ya que la imagen conserva gran parte de sus píxeles sin manipular.\parencite{Rossler_2019_ICCV}
+capitulos\03-estado-arte-marco-teorico.tex:66: \includegraphics[width=\textwidth]{imagenes/Analisis_clasificación_binaria.jpeg}
+capitulos\03-estado-arte-marco-teorico.tex:67: \caption{FaceForensics++ trabaja con Face2Face, FaceSwap, DeepFakes y NeuralTextures como métodos de manipulación facial.}
+capitulos\03-estado-arte-marco-teorico.tex:74: El problema abordado en este trabajo se reformula como una tarea de localización de manipulación, donde el objetivo no es únicamente determinar si una imagen es falsa, sino identificar qué regiones específicas han sido alteradas. En lugar de producir una etiqueta global, el modelo genera un mapa espacial o máscara que asigna a cada píxel una probabilidad de pertenecer a una zona manipulada. Esta metodología integra a la segmentación semántica para poder generar un mapa espacial ayudando a identificar dónde se realizó una alteración.
+capitulos\03-estado-arte-marco-teorico.tex:76: La generación de una máscara proporciona evidencia visual interpretable, permite observar la extensión de la manipulación, para posteriormente facilitar los análisis centrados exclusivamente en las regiones sospechosas. \parencite{Bappy_2017_ICCV}
+capitulos\03-estado-arte-marco-teorico.tex:84: \textcite{goodfellow2016deep} describen las redes neuronales convolucionales como un tipo de red neuronal especializada en el procesamiento de datos que tiene una topología conocida similar a una cuadrícula. Mencionan particularmente a las imágenes, las cuales pueden considerarse como una cuadrícula bidimensional de píxeles. El nombre "red neuronal convolucional" indica que la red emplea una operación matemática llamada convolución. Por su parte las redes neuronales convolucionales son simplemente redes neuronales que utilizan la convolución en lugar de la multiplicación matricial general en al menos una de sus capas.
+capitulos\03-estado-arte-marco-teorico.tex:94: Sin embargo, en aplicaciones de aprendizaje automático y visión por computadora, los datos utilizados no son continuos sino discretos. Las imágenes digitales, por ejemplo, se representan como matrices de valores numéricos correspondientes a píxeles. Debido a esto, la operación de convolución se expresa mediante una forma discreta. Como las imágenes digitales se pueden representar como matrices bidimensionales de píxeles:
+capitulos\03-estado-arte-marco-teorico.tex:114: En la mayoría implementaciones de capas convolucionales, la operación denominada convolución corresponde técnicamente a una correlación cruzada (cross-correlation). La principal diferencia entre ambas operaciones radica en que la convolución implica una inversión del filtro antes de realizar el desplazamiento sobre la señal de entrada, mientras que en la correlación el filtro se aplica directamente sin dicha inversión. A pesar de eso ambos términos suelen utilizarse de manera intercambiable, ya que los filtros son aprendidos automáticamente durante el entrenamiento de la red\parencite{goodfellow2016deep}.
+capitulos\03-estado-arte-marco-teorico.tex:118: Los filtros son matrices que se desplazan sobre la entrada. Durante el proceso de entrenamiento, los valores de los filtros se ajustan automáticamente mediante algoritmos de optimización, permitiendo que la red aprenda a identificar patrones relevantes en los datos.
+capitulos\03-estado-arte-marco-teorico.tex:122: Las redes neuronales convolucionales aprenden una jerarquía de características visuales a través de sus diferentes capas. En las primeras capas, los filtros suelen detectar características simples como bordes y orientaciones. En capas intermedias, la red comienza a identificar patrones más complejos como texturas o formas. Finalmente, en las capas más profundas se reconocen estructuras más complejas, como partes de objetos o configuraciones faciales completas. Esta capacidad de aprender representaciones jerárquicas permite a las CNN analizar imágenes de forma eficiente en tareas de reconocimiento y clasificación.
+capitulos\03-estado-arte-marco-teorico.tex:123: Esta capacidad resulta especialmente útil en la detección de deepfakes, ya que permite identificar inconsistencias visuales sutiles en imágenes manipuladas, tales como anomalías en texturas faciales, iluminación o patrones de compresión.\parencite{Rossler_2019_ICCV}
+capitulos\03-estado-arte-marco-teorico.tex:128: En las redes neuronales convolucionales, el pooling es una operación mediante la cual se busca reducir la dimensionalidad o tamaño de los mapas de activación generados por las capas convolucionales. Esta reducción permite disminuir la dimensión espacial de los mapas de activación y el costo computacional, al mismo tiempo que se conserva la información más relevante para las características que anteriormente se detectaron. Este proceso consiste en dividir el mapa de activación en pequeñas regiones y aplicar una función de agregación sobre cada una de ellas, dando como resultado un mapa de activación más pequeño que conserva las características más importantes detectadas por los filtros de la red.
+capitulos\03-estado-arte-marco-teorico.tex:133: En la operación de convolución, el stride (comúnmente traducido como paso o zancada) es un hiperparámetro estructural que determina la cantidad de unidades espaciales o píxeles que el filtro (kernel) avanza sobre la matriz de entrada en cada iteración.
+capitulos\03-estado-arte-marco-teorico.tex:134: En las operaciones de convolución estándar, se asume un desplazamiento unitario (stride = 1), lo que significa que el filtro se mueve un píxel a la vez de izquierda a derecha y de arriba hacia abajo, procesando la imagen de manera altamente superpuesta. Sin embargo, al incrementar este valor, el filtro "salta" posiciones, desplazándose de dos en dos píxeles.
+capitulos\03-estado-arte-marco-teorico.tex:135: El impacto principal del stride se ve reflejado en las dimensiones espaciales del mapa de activación resultante una vez terminado el proceso de convolución. Si el stride es grande, las dimensiones serán menores, actuando como un mecanismo de submuestreo\parencite{goodfellow2016deep}.
+capitulos\03-estado-arte-marco-teorico.tex:137: \medskip\textbf{Funciones de activación en extracción y salida binaria}
+capitulos\03-estado-arte-marco-teorico.tex:142: Una de las funciones de activación más utilizadas en redes neuronales convolucionales es la Rectified Linear Unit (ReLU). Esta función se caracteriza por su simplicidad y eficiencia computacional, ya que transforma los valores negativos en cero y mantiene los valores positivos sin modificación.
+capitulos\03-estado-arte-marco-teorico.tex:154: Según \textcite{goodfellow2016deep}, el uso de la función ReLU facilita el entrenamiento de redes neuronales profundas, ya que ayuda a reducir el problema del gradiente desvanecido y permite una convergencia más rápida durante el proceso de aprendizaje.
+capitulos\03-estado-arte-marco-teorico.tex:156: Aun con la eficiencia de ReLU en las capas ocultas para la extracción de características, la salida de la red requiere una acotación, por ello es necesario que la salida sea una probabilidad, la función de activación sigmoide comprime el valor real de la entrada en un intervalo continuo entre el 0 y 1 lo cual según \textcite{goodfellow2016deep} resulta determinante para calcular la probabilidad de pertenecer a una clase por cada píxel de la imagen.
+capitulos\03-estado-arte-marco-teorico.tex:168: Las técnicas de segmentación semántica permiten asignar una etiqueta a cada píxel de una imagen según su contexto. A diferencia de un método tradicional de clasificación que genera una etiqueta global, la segmentación permite determinar ubicación dentro de la imagen. Dicho enfoque resulta útil en un análisis forense permitiendo la localización espacial.\parencite{Ronneberger2015, Bappy_2017_ICCV}
+capitulos\03-estado-arte-marco-teorico.tex:177: Como se observa en la Figura \ref{fig:segmentacion_semantica}, la segmentación semántica permite identificar diferentes regiones dentro de una imagen mediante etiquetas asignadas a cada píxel. En este proyecto, en lugar de múltiples categorías semánticas, el objetivo consiste en distinguir únicamente entre regiones manipuladas y regiones auténticas dentro del rostro.
+capitulos\03-estado-arte-marco-teorico.tex:179: \medskip\textbf{Formulación del problema como segmentación binaria.}
+capitulos\03-estado-arte-marco-teorico.tex:181: El objetivo del modelo es aprender una función que, a partir de una imagen facial manipulada, genere una predicción espacial de la región alterada. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración. Aunque la formulación se mantiene como una distinción binaria entre región auténtica y región manipulada, el conjunto de datos conserva máscaras separadas para ambas regiones, lo que permite entrenar salidas diferenciadas.
+capitulos\03-estado-arte-marco-teorico.tex:188: La red neuronal U-Net es una red convolucional diseñada para tareas de segmentación, propuesta por \textcite{Ronneberger2015}, pensada para usarse en contextos de medicina donde se requirió precisión en imágenes biomédicas, ya que se necesitaba localizar estructuras específicas píxel a píxel. Este modelo se diferencia de los modelos de clasificación global por tener una predicción más específica, permitiendo localizar regiones donde la tarea exige una ubicación del objeto a detectar, llámese alteración u objeto. Su nombre se deriva de la característica de su arquitectura ya que en la etapa de contracción o codificación seguida por la etapa de expansión o decodificación genera un peculiar y reconocible “U”, su arquitectura permite combinar características generales del contexto hasta los detalles espaciales más finos.
+capitulos\03-estado-arte-marco-teorico.tex:208: El decodificador recupera los detalles espaciales que se pueden llegar a perder del proceso anterior.
+capitulos\03-estado-arte-marco-teorico.tex:210: Las conexiones de salto son elementos importantes de la arquitectura U-Net, se conectan con las capas del codificador y el decodificador correspondientes, concatenando los mapas de características con el propósito de preservar información espacial de alta resolución. Gracias a esto el modelo puede combinar información global/semántica con detalles espaciales finos.
+capitulos\03-estado-arte-marco-teorico.tex:219: La Figura \ref{fig:unet_architecture} muestra la arquitectura original de U-Net. En la parte izquierda se encuentra la ruta de contracción (encoder), donde la resolución espacial de la imagen se reduce progresivamente mediante operaciones de max pooling mientras aumenta el número de mapas de características. En la parte derecha se encuentra la ruta de expansión (decoder), donde la resolución se recupera mediante operaciones de up-convolution. Las conexiones laterales entre ambas rutas permiten combinar información semántica profunda con detalles espaciales de alta resolución, lo que mejora la precisión en tareas de segmentación.
+capitulos\03-estado-arte-marco-teorico.tex:221: \medskip\textbf{Diferencia entre clasificación y segmentación}
+capitulos\03-estado-arte-marco-teorico.tex:223: El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen completa. En cambio, en una tarea de segmentación no basta con etiquetar sino que también se requiere ubicar la manipulación. Por ello el modelo debe generar un mapa de predicción denso en el cual cada píxel recibe una etiqueta. En U-Net, la resolución espacial se reduce durante la etapa de codificación y posteriormente se recupera en el decodificador para construir dicho mapa de segmentación.
+capitulos\03-estado-arte-marco-teorico.tex:226: En el proyecto, la arquitectura se adapta como una variante tipo U-Net con doble decodificador, de modo que una salida aprende regiones auténticas y otra salida aprende regiones manipuladas\parencite{Ronneberger2015}.
+capitulos\03-estado-arte-marco-teorico.tex:228: \subsubsection{Artefactos típicos en deepfakes faciales}
+capitulos\03-estado-arte-marco-teorico.tex:230: \medskip\textbf{Inconsistencias espaciales: textura, bordes e iluminación}
+capitulos\03-estado-arte-marco-teorico.tex:232: El concepto de "artefacto" se define como un rastro o huella observable que surge a partir de la síntesis, recreación o mezcla con el contexto total de la imagen\parencite{Amerini2025, MurguiaSerranoJY2025}. En este proyecto estas huellas pueden interpretarse como señales locales que un segmentador puede capturar a partir del aprendizaje por supervisión con máscaras binarias, considerando que la inferencia se realiza sin imagen de referencia y con una salida visual interpretable.
+capitulos\03-estado-arte-marco-teorico.tex:234: De forma operativa se pueden ubicar tres conjuntos de inconsistencias visuales: textura, bordes/contornos e iluminación/sombras. Estas agrupaciones pueden existir de manera conjunta, y se pueden presentar en cualquier zona dentro de la región facial, lo cual es un factor importante para tratar el problema como una tarea de localización.
+capitulos\03-estado-arte-marco-teorico.tex:235: Las inconsistencias de textura se asocian a características normales de la piel, las cuales pueden ser suavizadas, reconstruidas o simuladas por el generador. Sin embargo, la alteración puede quedar con un aspecto liso, repetitivo o con un ruido residual que no corresponde con el resto de la imagen. Por lo tanto, los trabajos recientes hacen énfasis en explotar las texturas finas como un recurso de valor cuando una señal semántica induce un sobreajuste al modelo\parencite{Jiang2025, Jin2025}.
+capitulos\03-estado-arte-marco-teorico.tex:237: Las inconsistencias en bordes aparecen cuando existe incompatibilidad entre la región manipulada y la real. Aparecen líneas de mezcla o transiciones abruptas entre regiones, también pueden existir errores de alineación y deformación facial, en imágenes, estas señales pueden observarse en los contornos faciales. En la segmentación esto resulta relevante ya que estas señales se ubican en fronteras de la manipulación lo que favorece la obtención de máscaras\parencite{Amerini2025, Jiang2025}.
+capitulos\03-estado-arte-marco-teorico.tex:239: En el caso de la iluminación la evidencia se relaciona con la falta de coherencia con respecto a la imagen completa, direcciones de luz que no coinciden, sombras ajenas, reflejos atípicos, así como diferencias entre el sombreado producido y el real. Aunque los generadores pueden producir una coherencia global alta, aún existen casos donde la generación introduce errores locales. Para un segmentador esto resulta un patrón que sobresale por romper la continuidad, principalmente en zonas de alta variación visual como lo son los ojos, labios, zonas de cambio entre piel y elementos del rostro\parencite{Amerini2025, MurguiaSerranoJY2025}.
+capitulos\03-estado-arte-marco-teorico.tex:241: \medskip\textbf{Alta frecuencia y residuos de textura}
+capitulos\03-estado-arte-marco-teorico.tex:243: Una parte de estos artefactos puede concentrarse en altas frecuencias y en residuos de textura, detectables al analizar los detalles finos. Partiendo del supuesto de que aquellos rastros de utilidad suelen estar en texturas y detalles, los enfoques que realzan la textura pueden mejorar la sensibilidad ante regiones manipuladas\parencite{Jiang2025, Jin2025, Qiao2025}.
+capitulos\03-estado-arte-marco-teorico.tex:247: La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación\parencite{Gao2024, LiM2025}.
+capitulos\03-estado-arte-marco-teorico.tex:253: La validez de un modelo de detección y localización depende de cómo se representan los datos usados durante el entrenamiento y la evaluación. La bibliografía indica que no basta con obtener métricas altas dentro del mismo conjunto de datos para que el modelo pueda superar escenarios diferentes al entrenamiento. En el entorno de banco de pruebas existen variedades en cuyo momento fueron buena opción, sin embargo, la evolución de los generadores puede volver insuficientes algunas distribuciones usadas como banco de prueba. Por lo cual, en este proyecto se propone construir uno propio con un control alto, para hacer coherente la supervisión con la tarea de segmentación planteada, se utilizaron como base imágenes faciales de alta resolución provenientes del conjunto FFHQ\parencite{Rossler_2019_ICCV, Karras2019}.
+capitulos\03-estado-arte-marco-teorico.tex:255: La línea de trabajo del proyecto se enfoca en generar un aproximado de 50,000 imágenes manipuladas, divididas en dos tipologías, cerca de 25,000 imágenes aproximadamente intervenidas con la técnica de FaceSwap avanzado y otras 25,000 imágenes aproximadamente generadas por inpainting facial localizado \parencite{Rombach2022}.
+capitulos\03-estado-arte-marco-teorico.tex:257: El reemplazo facial requiere etapas de detección, alineación y análisis de identidad facial, por lo que se apoya en modelos de reconocimiento facial.\parencite{Deng2019ArcFace}
+capitulos\03-estado-arte-marco-teorico.tex:259: Para garantizar el control y trazabilidad para el posterior entrenamiento y validación, por cada muestra intervenida, se guarda un conjunto de datos, que incluye: la imagen de entrada manipulada, una máscara auténtica, una máscara fake y los metadatos correspondientes a la generación. Se utilizo  modelos de face parsing para delimitar regiones faciales usadas en la generación de máscaras. \parencite{Yu2019bisenet}.
+capitulos\03-estado-arte-marco-teorico.tex:261: \medskip\textbf{Máscaras binarias y protocolo de etiquetado}
+capitulos\03-estado-arte-marco-teorico.tex:263: El proceso de etiquetado no se limita a una única máscara binaria general. En su lugar, el sistema define y almacena dos máscaras complementarias para cada muestra: una máscara fake, que delimita la región que ha sido manipulada, y la máscara auténtica, que representa la zona facial original. La definición de las máscaras depende del tipo de manipulación generada. Por ejemplo, en el caso de FaceSwap, la máscara fake cubre en su totalidad el rostro, por ende, la máscara auténtica, resulta en una máscara completamente negra. En cambio, el local inpainting al estar delimitado por zonas específicas, las máscaras se alternan de manera que se restan mutuamente.
+capitulos\03-estado-arte-marco-teorico.tex:272: Al utilizar FFHQ como única base para las imágenes, el modelo hereda la composición visual, las condiciones de captura y la distribución facial propias de dicho conjunto.
+capitulos\03-estado-arte-marco-teorico.tex:274: El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e inpainting localizado). Por consiguiente, no garantiza la detección de deepfakes generados por técnicas distintas no representadas en el entrenamiento \parencite{Alrashoud2025}. Los artefactos visuales que el modelo aprende a localizar están ligados a las particularidades de los generadores utilizados para su síntesis. Además, el análisis se restringe a la región facial definida por el linea de trabajo, por lo que no cubre cabello, cuello, orejas ni fondo.
+capitulos\03-estado-arte-marco-teorico.tex:276: La separación debe realizarse con base en el identificador original de la imagen FFHQ, evitando que variaciones manipuladas de una misma imagen base aparezcan a la vez en el entrenamiento y pruebas.
+capitulos\03-estado-arte-marco-teorico.tex:280: \medskip\textbf{Desbalance de clases en segmentación binaria}
+capitulos\03-estado-arte-marco-teorico.tex:282: En el contexto de la segmentación semántica binaria aplicada a la detección de manipulaciones faciales, la clase correspondiente a la región alterada suele representar una fracción minoritaria respecto al total de píxeles de la imagen. Si la función de pérdida no contempla este desbalance, el modelo puede aprender a favorecer la clase mayoritaria; como resultado, podría obtener una pérdida aparentemente estable o una exactitud elevada sin lograr localizar correctamente las regiones manipuladas. Este problema no es uniforme en todo el conjunto de datos de este proyecto: en manipulaciones por FaceSwap, la región alterada abarca la mayor parte de la región facial interna, mientras que, en técnicas de \textit{inpainting} localizado, la modificación puede limitarse a zonas muy pequeñas, como los ojos, la nariz o los labios. Por lo tanto, el desbalance se vuelve un factor crítico en alteraciones locales, exigiendo una función de pérdida capaz de no ignorar estas regiones de tamaño reducido \parencite{Li2025, Hu2024, Azad2023}.
+capitulos\03-estado-arte-marco-teorico.tex:286: Para abordar esta diferencia de proporciones, la bibliografía especializada clasifica las funciones de pérdida según el tipo de señal que optimizan. Por un lado, se encuentran aquellas basadas en la distribución por píxel, como la entropía cruzada binaria (BCE); por otro, aquellas enfocadas en el solapamiento de la región, como Dice e IoU, que evalúan directamente la coincidencia espacial entre la máscara predicha y la real. Aunque existen alternativas como Focal o Tversky diseñadas para escenarios de fuerte desbalance, el criterio de selección de este proyecto se centra en la implementación de una pérdida compuesta. Dicha elección combina un componente distribuido por píxel, mediante entropía cruzada binaria ponderada, con términos de solapamiento como Dice e IoU, lo que permite considerar tanto la clasificación individual de píxeles como la coincidencia espacial entre la predicción y la máscara de referencia \parencite{Azad2023}. Además, la pérdida debe aplicarse de forma independiente a cada salida del modelo, comparando cada predicción con su máscara correspondiente.
+capitulos\03-estado-arte-marco-teorico.tex:296: Las métricas deben evaluar la localización de la región manipulada y no limitarse a la exactitud global por píxel. La exactitud por píxel resulta insuficiente como métrica principal para la segmentación binaria con desbalance de clases, dado que un modelo que prediga de forma uniforme la clase mayoritaria (no alterada) puede alcanzar valores elevados sin detectar ninguna alteración. En consecuencia, el protocolo de evaluación adopta métricas de solapamiento de región como criterio cuantitativo principal \parencite{Azad2023, Seghier2024}.
+capitulos\03-estado-arte-marco-teorico.tex:298: Las métricas primarias son la Intersección sobre la Unión (IoU, también denominada índice de Jaccard) \parencite{jaccard1912distribution} y el coeficiente Dice, equivalente a la puntuación F1 a nivel de píxel \parencite{Seghier2024}. El IoU se define como:
+capitulos\03-estado-arte-marco-teorico.tex:314: Como métricas cuantitativas complementarias, la precisión por píxel:
+capitulos\03-estado-arte-marco-teorico.tex:322: proveen una descomposición del error útil para caracterizar el tipo de fallo del segmentador. La exhaustividad es especialmente relevante en este contexto porque permite identificar omisiones de regiones manipuladas (falsos negativos); sin embargo, debe analizarse junto con la precisión para distinguir entre la correcta localización y la sobredetección (falsos positivos). Esta asimetría se relaciona con el criterio de pérdida descrito en el apartado anterior, requiriendo que las métricas se reporten de forma desagregada para diagnosticar el comportamiento del modelo ante manipulaciones de área reducida \parencite{Li2025, Hu2024}.
+capitulos\03-estado-arte-marco-teorico.tex:324: \medskip\textbf{Evaluación visual mediante máscaras y overlays}
+capitulos\03-estado-arte-marco-teorico.tex:326: La definición de éxito del sistema no exige una coincidencia perfecta de cada píxel, sino la localización funcional de la región manipulada. Las propias anotaciones de referencia presentan incertidumbre en los bordes de transición, por lo que requerir precisión extrema introduciría penalizaciones artificiales \parencite{Li2025, Xu2024}.
+capitulos\03-estado-arte-marco-teorico.tex:328: Para complementar los resultados numéricos, la evaluación visual mediante \textit{overlays} (representaciones que superponen la máscara predicha sobre la imagen de entrada con codificación cromática) constituye un componente complementario de evaluación visual. A diferencia de las métricas cuantitativas, los \textit{overlays} permiten identificar patrones de error espaciales, como el desplazamiento sistemático de la máscara predicha respecto a la alteración real. Este tipo de salida explicativa resulta útil en contextos de revisión humana, donde una decisión requiere soporte espacial \parencite{Amerini2025, Xu2024, Miao2025}. En este proyecto, los \textit{overlays} se reportan como parte de la evaluación visual del sistema para documentar cualitativamente su desempeño.
+capitulos\03-estado-arte-marco-teorico.tex:330: Finalmente, la interpretación de estos indicadores debe contemplar el efecto de las degradaciones de la imagen. La compresión y el reescalado pueden disminuir los valores de IoU y Dice porque reducen las microtexturas y detalles de alta frecuencia necesarios para localizar la alteración, afectando la correspondencia con la máscara de referencia \parencite{Gao2024, LiM2025}. Por ello, el protocolo debe considerar la diferencia entre el desempeño sobre imágenes de calidad estándar y aquellas con degradación aplicada.
+capitulos\03-estado-arte-marco-teorico.tex:334: \medskip\textbf{Inferencia sin imagen de referencia}
+capitulos\03-estado-arte-marco-teorico.tex:336: El presente proyecto delimita su alcance al análisis de imagen fija en el dominio facial, bajo una restricción operativa fundamental: el sistema analiza una sola imagen, sin disponer de una imagen de referencia limpia correspondiente al sujeto. Esta condición, coherente con el escenario real en el que el material disponible para análisis suele ser único, hace que el segmentador base su predicción en inconsistencias internas del contenido, tales como patrones residuales de textura, discontinuidades en bordes y gradientes, o incoherencias fotométricas. Al no comparar contra una imagen inalterada, la capacidad del modelo está acotada a las huellas internas aprendidas durante su entrenamiento \parencite{Amerini2025, Li2025}. Por otra parte, aunque el sistema se ejecuta en un entorno con procesamiento acelerado por GPU, sus requerimientos computacionales pueden limitar su uso en dispositivos con baja capacidad de cómputo o en escenarios con restricciones estrictas de latencia.
+capitulos\03-estado-arte-marco-teorico.tex:340: La salida del sistema no se limita a una clasificación binaria global. El modelo entrega una máscara binaria y un \textit{overlay}, entendido como la superposición cromática de dicha máscara sobre la imagen de entrada. Esta salida visual orientada al analista humano tiene como función orientar la inspección hacia la región manipulada, sin sustituir ni automatizar el juicio del analista. En contextos de revisión humana o análisis forense, las decisiones requieren un soporte espacial verificable; en este marco, la máscara habilita la cuantificación técnica mientras que el \textit{overlay} se documenta como apoyo visual para la interpretación del resultado \parencite{Xu2024, Miao2025, Amerini2025}.
+capitulos\03-estado-arte-marco-teorico.tex:344: El sistema no identifica el tipo específico de manipulación aplicada (reemplazo, \textit{inpainting}, etc.), limitándose a producir una segmentación binaria que distingue entre áreas alteradas y no alteradas. Asimismo, la localización se restringe estrictamente a la región facial interna, excluyendo explícitamente el cabello, el cuello, las orejas, el cuerpo y el fondo de la imagen, en congruencia con la delimitación del conjunto de datos. Existen, además, casos difíciles que pueden degradar el desempeño del modelo: oclusiones fuertes (manos, lentes de gran cobertura, cubrebocas), condiciones de iluminación extrema, compresión severa o resoluciones insuficientes para preservar detalle facial útil. Estas condiciones pueden producir máscaras fragmentadas o con valores bajos de solapamiento, sin que ello permita concluir por sí solo que la arquitectura sea inadecuada para imágenes de calidad estándar \parencite{Gao2024, LiM2025, Almotiri2024}. En su conjunto, estas consideraciones operativas conectan y justifican metodológicamente la elección de la segmentación semántica, la arquitectura propuesta, el uso de pérdidas compuestas y la selección de métricas espaciales para delimitar el alcance funcional del proyecto.
+
+PATRÓN: garantiza
+capitulos\03-estado-arte-marco-teorico.tex:259: Para garantizar el control y trazabilidad para el posterior entrenamiento y validación, por cada muestra intervenida, se guarda un conjunto de datos, que incluye: la imagen de entrada manipulada, una máscara auténtica, una máscara fake y los metadatos correspondientes a la generación. Se utilizo  modelos de face parsing para delimitar regiones faciales usadas en la generación de máscaras. \parencite{Yu2019bisenet}.
+capitulos\03-estado-arte-marco-teorico.tex:274: El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e inpainting localizado). Por consiguiente, no garantiza la detección de deepfakes generados por técnicas distintas no representadas en el entrenamiento \parencite{Alrashoud2025}. Los artefactos visuales que el modelo aprende a localizar están ligados a las particularidades de los generadores utilizados para su síntesis. Además, el análisis se restringe a la región facial definida por el linea de trabajo, por lo que no cubre cabello, cuello, orejas ni fondo.
+
+PATRÓN: perfecto
+
+PATRÓN: universal
+
+PATRÓN: obviamente
+
+PATRÓN: claramente
+
+PATRÓN: en esta era digital
+capitulos\02-introduccion.tex:14: En areas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
+
+PATRÓN: sección 8\.
+
+PATRÓN: \\cite\{
+capitulos\03-estado-arte-marco-teorico.tex:215: \caption{Arquitectura de U-Net propuesta por \cite{Ronneberger2015}. }
+
+PATRÓN: \\\\$
+capitulos\00-caratula.tex:25: \textbf{Instituto Politécnico Nacional}\\
+capitulos\00-caratula.tex:26: Escuela Superior de Ingeniería Mecánica y Eléctrica \\
+capitulos\00-caratula.tex:35: \\
+capitulos\00-caratula.tex:37: \\
+capitulos\00-caratula.tex:41: \\
+capitulos\00-caratula.tex:43: \\
+
+PATRÓN: \$\$
+
+PATRÓN: comprensión
+
+PATRÓN: Ademas
+
+PATRÓN: perdida
+
+PATRÓN: metricas
+capitulos\02-introduccion.tex:41: \item Evaluar el desempeño del sistema con metricas de segmentacion semantica y generando visualizaciones (overlays) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
+
+PATRÓN: localizacion
+
+PATRÓN: deteccion
+capitulos\03-estado-arte-marco-teorico.tex:39: Debido al acelerado desarrollo de generadores, la deteccion se puede estructurar en funcion del tipo de evidencia que estas pueden modelar, por ello se adopta una taxonomia de cuatro enfoques de alto nivel:
+
+PATRÓN: autentica
+
+============================================================
+8) ESTRUCTURA DE SECCIONES 00-03
+============================================================
+capitulos\02-introduccion.tex:1: \section{Introducción}
+capitulos\02-introduccion.tex:8: \subsection{Contexto del problema}
+capitulos\02-introduccion.tex:16: \subsection{Planteamiento del problema}
+capitulos\02-introduccion.tex:25: \subsection{Justificación}
+capitulos\02-introduccion.tex:31: \subsection{Objetivo general}
+capitulos\02-introduccion.tex:35: \subsection{Objetivos específicos}
+capitulos\02-introduccion.tex:44: \subsection{Alcance del proyecto}
+capitulos\03-estado-arte-marco-teorico.tex:1: \section{Estado del arte / Marco teórico}
+capitulos\03-estado-arte-marco-teorico.tex:2: \subsection{Estado del arte}
+capitulos\03-estado-arte-marco-teorico.tex:9: \subsection{Marco teórico}
+capitulos\03-estado-arte-marco-teorico.tex:11: \subsubsection{Manipulación facial y deepfakes}
+capitulos\03-estado-arte-marco-teorico.tex:32: \subsubsection{Detección de deepfakes: enfoques y taxonomía}
+capitulos\03-estado-arte-marco-teorico.tex:58: \subsubsection{Clasificación global vs localización}
+capitulos\03-estado-arte-marco-teorico.tex:78: \subsubsection{Fundamentos de CNN para visión por computadora}
+capitulos\03-estado-arte-marco-teorico.tex:164: \subsubsection{Segmentación semántica y formulación del problema.}
+capitulos\03-estado-arte-marco-teorico.tex:184: \subsubsection{Arquitectura U-Net}
+capitulos\03-estado-arte-marco-teorico.tex:228: \subsubsection{Artefactos típicos en deepfakes faciales}
+capitulos\03-estado-arte-marco-teorico.tex:249: \subsubsection{Datos, etiquetado y sesgos}
+capitulos\03-estado-arte-marco-teorico.tex:278: \subsubsection{Funciones de pérdida y desbalance de clases}
+capitulos\03-estado-arte-marco-teorico.tex:292: \subsubsection{Métricas de evaluación para segmentación y salida forense}
+capitulos\03-estado-arte-marco-teorico.tex:332: \subsubsection{Consideraciones forenses y operativas}

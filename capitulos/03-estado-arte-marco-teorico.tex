@@ -225,7 +225,7 @@ El objetivo de un modelo de clasificación es asignar una etiqueta general a la 
 \medskip\textbf{Elección de U-Net para el escenario del proyecto}
 En el proyecto, la arquitectura se adapta como una variante tipo U-Net con doble decodificador, de modo que una salida aprende regiones auténticas y otra salida aprende regiones manipuladas\parencite{Ronneberger2015}.
 
-\subsection{Artefactos típicos en deepfakes faciales}
+\subsubsection{Artefactos típicos en deepfakes faciales}
 
 \medskip\textbf{Inconsistencias espaciales: textura, bordes e iluminación}
 
@@ -246,7 +246,7 @@ Una parte de estos artefactos puede concentrarse en altas frecuencias y en resid
 
 La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación\parencite{Gao2024, LiM2025}. 
 
-\subsection{Datos, etiquetado y sesgos}
+\subsubsection{Datos, etiquetado y sesgos}
 
 \medskip\textbf{Conjunto de datos sintético y fuente base}
 
@@ -275,7 +275,7 @@ El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e i
 
 La separación debe realizarse con base en el identificador original de la imagen FFHQ, evitando que variaciones manipuladas de una misma imagen base aparezcan a la vez en el entrenamiento y pruebas. 
 
-\subsection{Funciones de pérdida y desbalance de clases}
+\subsubsection{Funciones de pérdida y desbalance de clases}
 
 \medskip\textbf{Desbalance de clases en segmentación binaria}
 
@@ -288,3 +288,43 @@ Para abordar esta diferencia de proporciones, la bibliografía especializada cla
 \medskip\textbf{Relación con métricas y condiciones difíciles}
 
 La declaración explícita de este enfoque de pérdida permite una interpretación coherente del rendimiento en la fase experimental. Cuando la región manipulada ocupa una fracción extremadamente pequeña de la imagen, incluso una pérdida compuesta bien calibrada puede generar máscaras con valores numéricamente bajos en métricas de solapamiento, como la Intersección sobre Unión (IoU), debido a la dificultad de coincidir exactamente en regiones pequeñas \parencite{Azad2023}. Además, condiciones como la compresión y el reescalado pueden degradar detalles finos de la imagen, reduciendo la señal disponible para localizar alteraciones \parencite{Gao2024, LiM2025}.
+
+\subsubsection{Métricas de evaluación para segmentación y salida forense}
+
+\medskip\textbf{Métricas de solapamiento: IoU y Dice}
+
+Las métricas deben evaluar la localización de la región manipulada y no limitarse a la exactitud global por píxel. La exactitud por píxel resulta insuficiente como métrica principal para la segmentación binaria con desbalance de clases, dado que un modelo que prediga de forma uniforme la clase mayoritaria (no alterada) puede alcanzar valores elevados sin detectar ninguna alteración. En consecuencia, el protocolo de evaluación adopta métricas de solapamiento de región como criterio cuantitativo principal \parencite{Azad2023, Seghier2024}.
+
+Las métricas primarias son la Intersección sobre la Unión (IoU, también denominada índice de Jaccard) \parencite{jaccard1912distribution} y el coeficiente Dice, equivalente a la puntuación F1 a nivel de píxel \parencite{Seghier2024}. El IoU se define como:
+\[
+\mathrm{IoU}=\frac{\mathrm{VP}}{\mathrm{VP}+\mathrm{FP}+\mathrm{FN}}
+\]
+donde VP denota verdaderos positivos, FP falsos positivos y FN falsos negativos. Por su parte, el Dice se define como:
+\[
+\mathrm{Dice}=\frac{2\cdot\mathrm{VP}}{2\cdot\mathrm{VP}+\mathrm{FP}+\mathrm{FN}}
+\]
+Ambas métricas ignoran los verdaderos negativos, lo que las hace menos sensibles al predominio de píxeles no alterados. Existe una relación monotónica entre ambas, expresable como:
+\[
+\mathrm{Dice}=\frac{2\cdot\mathrm{IoU}}{1+\mathrm{IoU}}
+\]
+por lo que deben interpretarse de manera conjunta y no como indicadores independientes \parencite{Azad2023, Seghier2024}.
+
+\medskip\textbf{Precisión, exhaustividad y errores de localización}
+
+Como métricas cuantitativas complementarias, la precisión por píxel:
+\[
+\text{Precisión} = \frac{\mathrm{VP}}{\mathrm{VP} + \mathrm{FP}}
+\]
+y la exhaustividad por píxel (\textit{Recall}):
+\[
+\text{Recall} = \frac{\mathrm{VP}}{\mathrm{VP} + \mathrm{FN}}
+\]
+proveen una descomposición del error útil para caracterizar el tipo de fallo del segmentador. La exhaustividad es especialmente relevante en este contexto porque permite identificar omisiones de regiones manipuladas (falsos negativos); sin embargo, debe analizarse junto con la precisión para distinguir entre la correcta localización y la sobredetección (falsos positivos). Esta asimetría se relaciona con el criterio de pérdida descrito en el apartado anterior, requiriendo que las métricas se reporten de forma desagregada para diagnosticar el comportamiento del modelo ante manipulaciones de área reducida \parencite{Li2025, Hu2024}.
+
+\medskip\textbf{Evaluación visual mediante máscaras y overlays}
+
+La definición de éxito del sistema no exige una coincidencia perfecta de cada píxel, sino la localización funcional de la región manipulada. Las propias anotaciones de referencia presentan incertidumbre en los bordes de transición, por lo que requerir precisión extrema introduciría penalizaciones artificiales \parencite{Li2025, Xu2024}. 
+
+Para complementar los resultados numéricos, la evaluación visual mediante \textit{overlays} (representaciones que superponen la máscara predicha sobre la imagen de entrada con codificación cromática) constituye un componente complementario de evaluación visual. A diferencia de las métricas cuantitativas, los \textit{overlays} permiten identificar patrones de error espaciales, como el desplazamiento sistemático de la máscara predicha respecto a la alteración real. Este tipo de salida explicativa resulta útil en contextos de revisión humana, donde una decisión requiere soporte espacial \parencite{Amerini2025, Xu2024, Miao2025}. En este proyecto, los \textit{overlays} se reportan como parte de la evaluación visual del sistema para documentar cualitativamente su desempeño.
+
+Finalmente, la interpretación de estos indicadores debe contemplar el efecto de las degradaciones de la imagen. La compresión y el reescalado pueden disminuir los valores de IoU y Dice porque reducen las microtexturas y detalles de alta frecuencia necesarios para localizar la alteración, afectando la correspondencia con la máscara de referencia \parencite{Gao2024, LiM2025}. Por ello, el protocolo debe considerar la diferencia entre el desempeño sobre imágenes de calidad estándar y aquellas con degradación aplicada.

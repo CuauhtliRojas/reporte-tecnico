@@ -2,9 +2,9 @@ Estado del arte / Marco teórico
 Estado del arte
 Existen enfoques de detección de “deepfakes” lo cuales tienen como objetivo principal la clasificación global binaria, creando una etiqueta según sus clases. El trabajo de Yagual2024 evaluó 3 tipos diferentes de arquitecturas de redes convolucionales dedicadas a la visión de computadora, las cuales fueron MobileNetV2, EfficientNetB0 y ResNet50, el desempeño de estas redes fue evaluado bajo un umbral de probabilidad dedicado a la clasificación binaria (Area Under Curve). Siguiendo con los trabajos de clasificación se encuentra Tiwari2025, utilizando una metodología hibrida combinando la arquitectura de ResNet-50 para la extracción de características robustas y posteriormente la clasificación ajustada de VGG-16 para la detección de deepfakes. Si bien ambos trabajos cumplen con sus objetivos comparten la deficiencia de no localizar espacialmente la alteración de la imagen, lo cual imposibilitan su uso en escenarios donde se requiere evaluar inconsistencias más detalladas.
 
-Para poder resolver la generalidad que conlleva los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido Deng2025 menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, Mashhadani2026 demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
+Para atender las limitaciones de los detectores globales, investigaciones recientes han empezado a migrar hacia la perspectiva de localización sobre las alteraciones. En este sentido Deng2025 menciona como los clasificadores son incapaces de demostrar la relevancia de los componentes faciales manipulados, abordando un esquema de clasificación etiquetas múltiples por región afectada. En paralelo, Mashhadani2026 demuestra que la alteración de imágenes deja residuos visuales que debido al nivel de integración requieren ser ubicadas para tener una validación forense.
 
-A diferencia de los trabajos anteriores, que resuelven la situación en donde la proporción de pixeles falsos contra píxeles reales es desbalanceada, con estrategias matemáticas como la función de perdida asimétrica polinomial (APL). En contraste en este proyecto el sistema busca centrarse en una segmentación semántica por medio de una red neuronal con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera mascaras donde agrupa y delimita una región manipulada contra la real. Ademas, reduce el desbalanceo de clases usando una función de perdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación semánticas (IoU y Dice) que se suman a la función de pérdida total.
+A diferencia de enfoques centrados principalmente en clasificación o localización indirecta. Este proyecto formula el problema como segmentación semántica supervisada, por medio de una red neuronal, con una arquitectura basada en U-Net. Mediante su doble decodificador el modelo genera máscaras donde agrupa y delimita una región manipulada contra la real. Además, atiende el desbalance entre píxeles auténticos y manipulados mediante una función de pérdida compuesta de Entropía Cruzada Binaria (BCE), junto con métricas de segmentación (IoU y Dice) que se suman a la función de pérdida total.
 
 Marco teórico
 
@@ -16,16 +16,18 @@ Mirsky2021 menciona que los deepfakes son contenido multimedia sintético o mani
 
 En particular, la manipulación facial puede organizarse como un conjunto de transformaciones sobre el rostro que abarcan:
 
- Reemplazo de identidad.
- Recreación o transferencia de expresiones.
- Ediciones localizadas del rostro sin sustituir por completo la identidad.
- Síntesis de un rostro completo sin una referencia. 
+Reemplazo de identidad.
+Recreación o transferencia de expresiones.
+Ediciones localizadas del rostro sin sustituir por completo la identidad.
+Síntesis de un rostro completo sin una referencia. 
 
 
 Técnicas como el reemplazo y la recreación tienden a introducir discontinuidades en contornos y coherencias internas del rostro, mientras que la síntesis puede producir coherencias globales altas, pero inconsistencias de textura en regiones específicas. MurguiaSerrano2025
 
 
 La manipulación de rostros suele incluir una localización y emparejamiento facial, obtención de características, generación mediante modelos como redes generativas antagónicas (GAN) o modelos de difusión, y finalmente una fase de entremezclado y posprocesamiento para integrar el rostro manipulado con el contexto de la imagen real (color, grano, compresión y bordes). Estas etapas no solo producen una "imagen falsa", sino que también pueden dejar rastros residuales que se pueden ubicar localmente (texturas, micro bordes, patrones de ruido o inconsistencias de iluminación).
+
+Para este proyecto, las manipulaciones cubiertas para cumplir el objetivo de generación de conjunto de datos propios se centran en dos tipologías: reemplazo facial tipo FaceSwap e inpainting facial localizadoRossler_2019_ICCV, Rombach2022.
 
 Detección de deepfakes: enfoques y taxonomía
 
@@ -36,28 +38,28 @@ La detección de deepfakes se ha consolidado como un problema central del análi
 
 Debido al acelerado desarrollo de generadores, la deteccion se puede estructurar en funcion del tipo de evidencia que estas pueden modelar, por ello se adopta una taxonomia de cuatro enfoques de alto nivel:
 
- Enfoque espacial.
- Enfoque en frecuencia.
- Enfoque basado en aprendizaje profundo (end-to-end).
- Enfoques híbridos. 
+Enfoque espacial.
+Enfoque en frecuencia.
+Enfoque basado en aprendizaje profundo (end-to-end).
+Enfoques híbridos. 
 
 Esta organización no pretende ser excluyente, ya que diversos modelos contemporáneos combinan señales y representaciones; sin embargo, permite sintetizar la intuición forense detrás de cada familia y, en consecuencia, discutir sus fallas típicas ante el cambio de dominio (conjunto de datos, generador y postprocesado) MurguiaSerrano2025, Banerjee2025.
 
-En el enfoque de frecuencia, la hipótesis es que los procesos de generación introducen artefactos espectrales que no son necesariamente evidentes en el espacio de píxel, pero sí se manifiestan como anomalías en bandas de alta frecuencia o como distribuciones espectrales atípicas. Parte de la evidencia reportada en la bibliografía vincula estas huellas con operaciones internas de los generadores, por ejemplo, etapas de sobremuestreo en arquitecturas GAN, que dejan patrones característicos en el espectro. En consecuencia, se utilizan transformadas (p. ej., Fourier, DCT o wavelets) y descriptores espectrales para separar contenido real de contenido sintético. Sin embargo, delimitante importante es que las huellas pueden variar entre generadores y, por lo tanto, indcuir cierta sensibilidad a patrones específicos del modelo de síntesis o del dominio de entrenamiento, reduciendo la capacidad frente a escenarios mas realista que suelen ser mas variados. Tan2024
+En el enfoque de frecuencia, la hipótesis es que los procesos de generación introducen artefactos espectrales que no son necesariamente evidentes en el espacio de píxel, pero sí se manifiestan como anomalías en bandas de alta frecuencia o como distribuciones espectrales atípicas. Parte de la evidencia reportada en la bibliografía vincula estas huellas con operaciones internas de los generadores, por ejemplo, etapas de sobremuestreo en arquitecturas GAN, que dejan patrones característicos en el espectro. En consecuencia, se utilizan transformadas ( Fourier, DCT o wavelets) y descriptores espectrales para separar contenido real de contenido sintético. Sin embargo, delimitante importante es que las huellas pueden variar entre generadores y, por lo tanto, indcuir cierta sensibilidad a patrones específicos del modelo de síntesis o del dominio de entrenamiento, reduciendo la capacidad frente a escenarios mas realista que suelen ser mas variados. Tan2024
 
 
-En los enfoques de basados de aprendizaje profundo y en el dominio espacial, la detección se centra en inconsistencias observables en el dominio de píxel, es decir, irregularidades locales o globales que emergen de la unión, la edición y la síntesis facial. Habitualmente se buscan discontinuidades en contornos, incoherencias en iluminación, texturas atípicas, patrones de ruido residuales o discrepancias entre la región facial y su contexto. En implementaciones modernas, estas señales se capturan mediante extractores aprendidos, que identifican patrones discriminativos asociados a manipulaciones y, en variantes orientadas a localización, habilitan mapas de activación o máscaras que aproximan la región alterada, las arquitecturas CNN y variantes con mecanismos de atención o módulos complementarios, entrenadas en clasificación (real/falso) o en formulaciones que incorporan supervisión espacial cuando se dispone de anotaciones. Su ventaja práctica es la capacidad de modelar patrones complejos y no lineales. No obstante, No obstante, al depender de huellas que pueden ser atenuadas por posprocesamiento, el desempeño suele degradarse en escenarios con compresión, baja resolución u oclusiones, además de mostrar sensibilidad a sesgos de captura y a variaciones de escena. Banerjee2025, Alrashoud2025
+En los enfoques de basados de aprendizaje profundo y en el dominio espacial, la detección se centra en inconsistencias observables en el dominio de píxel, es decir, irregularidades locales o globales que emergen de la unión, la edición y la síntesis facial. Habitualmente se buscan discontinuidades en contornos, incoherencias en iluminación, texturas atípicas, patrones de ruido residuales o discrepancias entre la región facial y su contexto. En implementaciones modernas, estas señales se capturan mediante extractores aprendidos, que identifican patrones discriminativos asociados a manipulaciones y, en variantes orientadas a localización, habilitan mapas de activación o máscaras que aproximan la región alterada, las arquitecturas CNN y variantes con mecanismos de atención o módulos complementarios, entrenadas en clasificación (real/falso) o en formulaciones que incorporan supervisión espacial cuando se dispone de anotaciones. Su ventaja práctica es la capacidad de modelar patrones complejos y no lineales. No obstante, al depender de huellas que pueden ser atenuadas por posprocesamiento, el desempeño suele degradarse en escenarios con compresión, baja resolución u oclusiones, además de mostrar sensibilidad a sesgos de captura y a variaciones de escena. Banerjee2025, Alrashoud2025
 
 
-Finalmente, los enfoques híbridos surgen como respuesta directa a la fragilidad de un único tipo de evidencia. De manera general, un enfoque híbrido integra representaciones espaciales y espectrales, o combina señales forenses (p. ej., inconsistencias de compresión o señales residuales) con características aprendidas por redes profundas, mediante arquitecturas multirrama y mecanismos de fusión. La intuición es que la manipulación deja rastros en múltiples niveles: algunos son locales en el píxel, otros se expresan como firmas en frecuencia y otros se manifiestan como discrepancias de coherencia global; por lo tanto, la combinación explícita puede aumentar sensibilidad y robustez ante variaciones. En la bibliografía reciente se observa un énfasis en modelar interacciones espacio–frecuencia y en diseñar estrategias orientadas a mejorar la generalización, precisamente porque los artefactos aislados tienden a perder estabilidad frente a generadores nuevos y frente a interferencia por postprocesado. Li2025, Qiao2025
+Finalmente, los enfoques híbridos surgen como respuesta directa a la fragilidad de un único tipo de evidencia. De manera general, un enfoque híbrido integra representaciones espaciales y espectrales, o combina señales forenses (inconsistencias de compresión o señales residuales) con características aprendidas por redes profundas, mediante arquitecturas multirrama y mecanismos de fusión. La evidencia apunta a que la manipulación deja rastros en múltiples niveles: algunos son locales en el píxel, otros se expresan como firmas en frecuencia y otros se manifiestan como discrepancias de coherencia global; por lo tanto, la combinación explícita puede aumentar sensibilidad y robustez ante variaciones. En la bibliografía reciente se observa un énfasis en diseñar estrategias orientadas a mejorar como se hace frente a la generalización de datos, precisamente porque los artefactos aislados tienden a perder estabilidad frente a generadores nuevos y frente a interferencia por postprocesado. Li2025, Qiao2025
  
-En este marco, la generalización se entiende como la capacidad del detector para mantener desempeño ante cambios de dominio: nuevos generadores, nuevas distribuciones de datos y nuevas condiciones de captura y publicación. La evidencia reciente subraya que, incluso cuando los modelos obtienen resultados altos en conjuntos académicos, su desempeño puede caer de forma pronunciada en datos "in-the-wild", recolectados de plataformas y escenarios contemporáneos. Adicionalmente, la compresión, el reescalado y otros posprocesos actúan como perturbaciones que suprimen o distorsionan huellas forenses, afectando tanto señales espaciales (pérdida de microtextura) como señales espectrales (alteración de distribuciones de frecuencia). Hu2024, Li2025, Chandra2025
+En este marco, la generalización se entiende como la capacidad del detector para mantener un desempeño ante cambios, como lo son: nuevos generadores, nuevas distribuciones de datos y nuevas condiciones de captura y publicación. La evidencia reciente menciona que, incluso cuando los modelos obtienen resultados altos en conjuntos académicos, su desempeño puede caer de forma pronunciada en datos en escenarios no controlados. Adicionalmente, la compresión, el reescalado y otros posprocesos actúan como perturbaciones que suprimen o distorsionan huellas forenses, afectando tanto señales espaciales (pérdida de microtextura) como señales espectrales (alteración de distribuciones de frecuencia). Hu2024, Li2025, Chandra2025
 
 Clasificación global vs localización
 
 Limitaciones de la clasificación global ante manipulaciones locales
 
-La detección de deepfakes se podría conceptualizar como un problema de clasificación global, en donde un modelo asigna una etiqueta binaria (real/falso) a la imagen completa. En escenarios reales, las alteraciones llegan a modificar únicamente regiones específicas del rostro (por ejemplo, ojos, boca o contornos faciales). Cuando la alteración está delimitada a una región, los modelos de clasificación global pueden no detectar señales discriminativas, especialmente después de procesos de compresión, reescalado o suavizado que reducen las huellas forenses visibles. Esto aumenta la probabilidad de falsos negativos, ya que la imagen conserva gran parte de sus píxeles sin manipular.Rossler_2019_ICCV
+La detección de deepfakes se podría conceptualizar como un problema de clasificación global, en donde un modelo asigna una etiqueta binaria (real/falso) a la imagen completa. En escenarios reales, las alteraciones llegan a modificar únicamente regiones específicas del rostro (ojos, boca o contornos faciales). Cuando la alteración está delimitada a una región, los modelos de clasificación global pueden no detectar señales discriminativas, especialmente después de procesos de compresión, reescalado o suavizado que reducen las huellas forenses visibles. Esto aumenta la probabilidad de falsos negativos, ya que la imagen conserva gran parte de sus píxeles sin manipular.Rossler_2019_ICCV
 
 
 Reformulación como tarea de localización
@@ -120,21 +122,15 @@ Según goodfellow2016deep, el uso de la función ReLU facilita el entrenamiento 
 
 Aun con la eficiencia de ReLU en las capas ocultas para la extracción de características, la salida de la red requiere una acotación, por ello es necesario que la salida sea una probabilidad, la función de activación sigmoide comprime el valor real de la entrada en un intervalo continuo entre el 0 y 1 lo cual según goodfellow2016deep resulta determinante para calcular la probabilidad de pertenecer a una clase por cada píxel de la imagen.
 
-
-Donde e representa la base del logaritmo natural.
-
 Segmentación semántica y formulación del problema.
 
 Segmentación semántica.
 
 Las técnicas de segmentación semántica permiten asignar una etiqueta a cada píxel de una imagen según su contexto. A diferencia de un método tradicional de clasificación que genera una etiqueta global, la segmentación permite determinar ubicación dentro de la imagen. Dicho enfoque resulta útil en un análisis forense permitiendo la localización espacial.Ronneberger2015, Bappy_2017_ICCV
 
-
-Como se observa en la Figura fig:segmentacion_semantica, la segmentación semántica permite identificar diferentes regiones dentro de una imagen mediante etiquetas asignadas a cada píxel. En este proyecto, en lugar de múltiples categorías semánticas, el objetivo consiste en distinguir únicamente entre regiones manipuladas y regiones auténticas dentro del rostro.
-
 Formulación del problema como segmentación binaria.
 
-El objetivo del modelo es aprender una función que a partir de una imagen del rostro pueda generar una máscara binaria que indique regiones manipuladas. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración.
+El objetivo del modelo es aprender una función que, a partir de una imagen facial manipulada, genere una predicción espacial de la región alterada. De esta forma se pueden representar asignando a los píxeles auténticos el valor 0, caso contrario, a los píxeles de la región manipulada se les asigna el valor 1. Dicha formulación permitirá localizar visualmente las áreas de la alteración. Aunque la formulación se mantiene como una distinción binaria entre región auténtica y región manipulada, el conjunto de datos conserva máscaras separadas para ambas regiones, lo que permite entrenar salidas diferenciadas.
 
 
 Arquitectura U-Net
@@ -148,31 +144,29 @@ Componentes principales de la arquitectura
 La U-Net se compone de tres elementos: codificador, decodificador y conexiones de salto. 
 El primero se encarga de extraer las características de la imagen de entrada, está diseñado con una serie de capas convolucionales acompañadas con operaciones de max pooling que reducen de manera progresiva la resolución mientras aumentan la profundidad de los mapas de características extraídos. Su objetivo principal es extraer el contexto e información semántica de manera progresiva, logrando que el modelo identifique patrones complejos. Cada bloque que constituye el codificador está compuesto generalmente por:
 
- Dos convoluciones de 3x3
- Una función de activación ReLU
- Una operación de max pooling
+Dos convoluciones de 3x3
+Una función de activación ReLU
+Una operación de max pooling
 
 
 El Decodificador tiene la función de volver a construir la resolución original de la imagen para generar el mapa de segmentación, en dicha etapa se utilizan operaciones de up-sampling o convolución transpuesta, aumentando progresivamente la resolución. El bloque de un decodificador se constituye por:
 
     
- Up-sampling
- Concatenación de mapas de características
- Dos convoluciones de 3x3
+Up-sampling
+Concatenación de mapas de características
+Dos convoluciones de 3x3
 
 
 El decodificador recupera los detalles espaciales que se pueden llegar a perder del proceso anterior.
 
 Las conexiones de salto son elementos importantes de la arquitectura U-Net, se conectan con las capas del codificador y el decodificador correspondientes, concatenando los mapas de características con el propósito de preservar información espacial de alta resolución. Gracias a esto el modelo puede combinar información global/semántica con detalles espaciales finos.
 
-
 Diferencia entre clasificación y segmentación
 
 El objetivo de un modelo de clasificación es asignar una etiqueta general a la imagen completa. En cambio, en una tarea de segmentación no basta con etiquetar sino que también se requiere ubicar la manipulación. Por ello el modelo debe generar un mapa de predicción denso en el cual cada píxel recibe una etiqueta. En U-Net, la resolución espacial se reduce durante la etapa de codificación y posteriormente se recupera en el decodificador para construir dicho mapa de segmentación.
 
 Elección de U-Net para el escenario del proyecto
-El objetivo es detectar y localizar manipulaciones faciales en imágenes mediante una segmentación binaria.La arquitectura U-Net resulta la que mejor se adecua por esta tarea por gran capcidad para capturar aracterísticas semánticas complejas, preservar información espacial y generar mapas
-de segmentación de alta resolución.
+En el proyecto, la arquitectura se adapta como una variante tipo U-Net con doble decodificador, de modo que una salida aprende regiones auténticas y otra salida aprende regiones manipuladasRonneberger2015.
 
 Artefactos típicos en deepfakes faciales
 
@@ -188,8 +182,52 @@ Las inconsistencias en bordes aparecen cuando existe incompatibilidad entre la r
 En el caso de la iluminación la evidencia se relaciona con la falta de coherencia con respecto a la imagen completa, direcciones de luz que no coinciden, sombras ajenas, reflejos atípicos, así como diferencias entre el sombreado producido y el real. Aunque los generadores pueden producir una coherencia global alta, aún existen casos donde la generación introduce errores locales. Para un segmentador esto resulta un patrón que sobresale por romper la continuidad, principalmente en zonas de alta variación visual como lo son los ojos, labios, zonas de cambio entre piel y elementos del rostroAmerini2025, MurguiaSerranoJY2025.
 
 Alta frecuencia y residuos de textura
+
 Una parte de estos artefactos puede concentrarse en altas frecuencias y en residuos de textura, detectables al analizar los detalles finos. Partiendo del supuesto de que aquellos rastros de utilidad suelen estar en texturas y detalles, los enfoques que realzan la textura pueden mejorar la sensibilidad ante regiones manipuladasJiang2025, Jin2025, Qiao2025.
 
 Compresión y reescalado
 
-La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluación Gao2024, LiM2025.
+La compresión y el reescalado degradan los detalles finos a los que los detectores buscan ser sensibles. Los canales de mensajería y redes sociales introducen dichas degradaciones, logrando encubrir o distorsionar los artefactos de manipulación. En este proyecto, esta interacción es relevante porque los artefactos de compresión pueden confundirse con artefactos de manipulación, elevando falsos positivos o falsos negativos en imágenes con poca resolución o con compresión severa. Ante este escenario, la bibliografía reciente propone metodologías para aumentar la robustez llevando a cabo un entrenamiento con imágenes comprimidas, reescaladas o degradadas, para acercarse a una situación real, por ello debe considerarse explícitamente en el entrenamiento o en la evaluaciónGao2024, LiM2025. 
+
+Datos, etiquetado y sesgos
+
+Conjunto de datos sintético y fuente base
+
+La validez de un modelo de detección y localización depende de cómo se representan los datos usados durante el entrenamiento y la evaluación. La bibliografía indica que no basta con obtener métricas altas dentro del mismo conjunto de datos para que el modelo pueda superar escenarios diferentes al entrenamiento. En el entorno de banco de pruebas existen variedades en cuyo momento fueron buena opción, sin embargo, la evolución de los generadores puede volver insuficientes algunas distribuciones usadas como banco de prueba. Por lo cual, en este proyecto se propone construir uno propio con un control alto, para hacer coherente la supervisión con la tarea de segmentación planteada, se utilizaron como base imágenes faciales de alta resolución provenientes del conjunto FFHQRossler_2019_ICCV, Karras2019.
+
+La línea de trabajo del proyecto se enfoca en generar un aproximado de 50,000 imágenes manipuladas, divididas en dos tipologías, cerca de 25,000 imágenes aproximadamente intervenidas con la técnica de FaceSwap avanzado y otras 25,000 imágenes aproximadamente generadas por inpainting facial localizado Rombach2022.
+
+El reemplazo facial requiere etapas de detección, alineación y análisis de identidad facial, por lo que se apoya en modelos de reconocimiento facial.Deng2019ArcFace
+
+Para garantizar el control y trazabilidad para el posterior entrenamiento y validación, por cada muestra intervenida, se guarda un conjunto de datos, que incluye: la imagen de entrada manipulada, una máscara auténtica, una máscara fake y los metadatos correspondientes a la generación. Se utilizo  modelos de face parsing para delimitar regiones faciales usadas en la generación de máscaras. Yu2019bisenet.
+
+Máscaras binarias y protocolo de etiquetado
+
+El proceso de etiquetado no se limita a una única máscara binaria general. En su lugar, el sistema define y almacena dos máscaras complementarias para cada muestra: una máscara fake, que delimita la región que ha sido manipulada, y la máscara auténtica, que representa la zona facial original. La definición de las máscaras depende del tipo de manipulación generada. Por ejemplo, en el caso de FaceSwap, la máscara fake cubre en su totalidad el rostro, por ende, la máscara auténtica, resulta en una máscara completamente negra. En cambio, el local inpainting al estar delimitado por zonas específicas, las máscaras se alternan de manera que se restan mutuamente.
+
+Para estandarizar estas manipulaciones, el proyecto define el rostro como la región que abarca exclusivamente la piel, cejas, ojos, lentes, nariz, boca y labios; excluyendo de manera explícita elementos como el cabello, el cuello, las orejas y el fondo de la imagen, utilizando face parsing para su correcta identificación Yu2019bisenet.
+
+
+Sesgos, partición y generalización acotada
+
+Es fundamental reconocer los sesgos inherentes al linea de trabajo de generación propuesto, ya que estos determinan los límites de generalización del modelo ante datos no vistos Yang2025, Chandra2025. 
+
+Al utilizar FFHQ como única base para las imágenes, el modelo hereda la composición visual, las condiciones de captura y la distribución facial propias de dicho conjunto.
+
+El conjunto de datos incluye únicamente dos tipos de alteraciones (FaceSwap e inpainting localizado). Por consiguiente, no garantiza la detección de deepfakes generados por técnicas distintas no representadas en el entrenamiento Alrashoud2025. Los artefactos visuales que el modelo aprende a localizar están ligados a las particularidades de los generadores utilizados para su síntesis. Además, el análisis se restringe a la región facial definida por el linea de trabajo, por lo que no cubre cabello, cuello, orejas ni fondo.
+
+La separación debe realizarse con base en el identificador original de la imagen FFHQ, evitando que variaciones manipuladas de una misma imagen base aparezcan a la vez en el entrenamiento y pruebas. 
+
+Funciones de pérdida y desbalance de clases
+
+Desbalance de clases en segmentación binaria
+
+En el contexto de la segmentación semántica binaria aplicada a la detección de manipulaciones faciales, la clase correspondiente a la región alterada suele representar una fracción minoritaria respecto al total de píxeles de la imagen. Si la función de pérdida no contempla este desbalance, el modelo puede aprender a favorecer la clase mayoritaria; como resultado, podría obtener una pérdida aparentemente estable o una exactitud elevada sin lograr localizar correctamente las regiones manipuladas. Este problema no es uniforme en todo el conjunto de datos de este proyecto: en manipulaciones por FaceSwap, la región alterada abarca la mayor parte de la región facial interna, mientras que, en técnicas de inpainting localizado, la modificación puede limitarse a zonas muy pequeñas, como los ojos, la nariz o los labios. Por lo tanto, el desbalance se vuelve un factor crítico en alteraciones locales, exigiendo una función de pérdida capaz de no ignorar estas áreas de área reducida Li2025, Hu2024, Azad2023.
+
+Pérdida compuesta para máscaras auténticas y manipuladas
+
+Para abordar esta diferencia de proporciones, la bibliografía especializada clasifica las funciones de pérdida según el tipo de señal que optimizan. Por un lado, se encuentran aquellas basadas en la distribución por píxel, como la entropía cruzada binaria (BCE); por otro, aquellas enfocadas en el solapamiento de la región, como la pérdida Dice, que evalúa directamente la coincidencia espacial entre la máscara predicha y la real. Aunque existen alternativas como Focal o Tversky diseñadas para escenarios de fuerte desbalance, el criterio de selección de este proyecto se centra en la implementación de una pérdida compuesta. Dicha elección combina la estabilidad de los gradientes evaluados por píxel (BCE) con la sensibilidad estructural a regiones pequeñas (Dice) Azad2023. Además, esta pérdida compuesta se aplica de manera coherente con las salidas diferenciadas del modelo propuesto: la pérdida debe aplicarse de forma independiente a cada salida del modelo, comparando cada predicción con su máscara correspondiente.
+
+Relación con métricas y condiciones difíciles
+
+La declaración explícita de este enfoque de pérdida permite una interpretación coherente del rendimiento en la fase experimental. Cuando la región manipulada ocupa una fracción extremadamente pequeña de la imagen, incluso una pérdida compuesta bien calibrada puede generar máscaras con valores numéricamente bajos en métricas de solapamiento, como la Intersección sobre Unión (IoU). Esto refleja la dificultad geométrica intrínseca de predecir bordes exactos en áreas minúsculas, y no necesariamente un fallo estructural del sistema. Adicionalmente, condiciones difíciles como la compresión de imagen reducen los detalles de alta frecuencia, lo que disminuye la señal discriminativa disponible para la función de pérdida y puede afectar la precisión en la localización de las alteraciones durante el entrenamiento y la evaluación Gao2024, LiM2025, Azad2023.

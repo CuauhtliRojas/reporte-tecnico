@@ -11,7 +11,7 @@ La manipulación de imágenes con técnicas y herramientas de inteligencia artif
 
 En el ámbito social debido al aumento de los “deepfakes”, la capacidad de poder sustituir, ya sea por video o imagen, representa desde una difamación personal, creación de evidencia visual falsa, suplantación de identidad o hasta desinformación en escala masiva.
 
-En areas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
+En áreas como la política y los medios de comunicación, esto genera riesgos en la confiabilidad  e integridad, dado que la veracidad del contenido es difícil de avalar por los medios de detección propuestos. El alcance de estas malas prácticas puede abarcar desde lo individual hasta lo colectivo, pues afectan y comprometen áreas donde la evidencia audiovisual resulta en lo más decisivo en esta era digital.
 
 \subsection{Planteamiento del problema}
 
@@ -19,14 +19,14 @@ En areas como la política y los medios de comunicación, esto genera riesgos en
 % muchos métodos detectan si una imagen es falsa, pero no indican con precisión
 % qué regiones fueron manipuladas.
 % Aquí se debe conectar con segmentación semántica.
-Desde la perspectiva técnica, el problema se centra en la disminución de características o patrones visuales que delaten la evidencia falsa al ser inversamente proporcional al realismo generado, los sistemas de detección presentan limitantes pues se concentran en una clasificación binaria global, en la que se le asigna una clase, real o falso a la imagen completa, este tipo de enfoque sirve siempre y cuando la manipulación afecte de forma general a la imagen, sin embargo, una alteración puede y mayormente esta delimitada a regiones especificas que representan un menor porcentaje generando insensibilidad produciendo falsos negativos.
+Desde la perspectiva técnica, el problema se centra en la disminución de características o patrones visuales que delaten la evidencia falsa al ser inversamente proporcional al realismo generado, los sistemas de detección presentan limitantes pues se concentran en una clasificación binaria global, en la que se le asigna una clase, real o falso a la imagen completa, este tipo de enfoque sirve siempre y cuando la manipulación afecte de forma general a la imagen, sin embargo, una alteración puede y mayormente está delimitada a regiones específicas que representan un menor porcentaje generando insensibilidad produciendo falsos negativos.
 
 
 \subsection{Justificación}
 
 % Explicar por qué tiene sentido usar segmentación semántica y redes convolucionales.
 % Justificar U-Net por su uso en localización píxel a píxel.
-Ante esa situación, se establece cambiar de enfoque  de clasificación general, a uno de detección, segmentando las zonas, exigiendo que un sistema delimite e identifica las regiones dentro del contexto de un rostro que ha sido intervenido. Para lograr esto las redes neuronales convolucionales enfocadas en segmentación como U-Net resultan de gran ayuda ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que el ojo humano no podría percibir y que los modelos globales omiten por la proporción manipulada con respecto a la imagen completa. Sumándole a eso la segmentación binaria permite generar evidencia visual de gran valor de interpretación, no se limita a decidir, si no que resalta la región intervenida, permitiendo una guía para su inspección.
+Ante esa situación, se establece cambiar de enfoque  de clasificación general, a uno de detección, segmentando las zonas, exigiendo que un sistema delimite e identifique las regiones dentro del contexto de un rostro que ha sido intervenido. Para lograr esto las redes neuronales convolucionales enfocadas en segmentación como U-Net resultan de gran ayuda ya que su capacidad de evaluar píxel por píxel permite detectar anomalías que el ojo humano no podría percibir y que los modelos globales omiten por la proporción manipulada con respecto a la imagen completa. Sumándole a eso la segmentación binaria permite generar evidencia visual de gran valor de interpretación, no se limita a decidir, sino que resalta la región intervenida, permitiendo una guía para su inspección.
 
 \subsection{Objetivo general}
 
@@ -37,8 +37,8 @@ Desarrollar una red neuronal para la detección y localización de manipulacione
 \begin{itemize}
     \item Generar un conjunto de datos (dataset) conformado por 50,000 muestras, estandarizando las imágenes para incluir variaciones de contexto y etiquetado mediante máscaras binarias enfocadas en deepfakes, que delimiten exclusivamente la región facial manipulada.
     \item Implementar una arquitectura basada en U-Net para la detección de inconsistencias en texturas, iluminación y bordes, capaz de generar una salida de segmentación.
-    \item Entrenar el modelo utilizando el dataset generado, enfocándose en la generalización frente a técnicas de reemplazo y alteraciónes localizadas en el rostro.
-    \item Evaluar el desempeño del sistema con metricas de segmentacion semantica y generando visualizaciones (overlays) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
+    \item Entrenar el modelo utilizando el dataset generado, enfocándose en la generalización frente a técnicas de reemplazo y alteraciones localizadas en el rostro.
+    \item Evaluar el desempeño del sistema con métricas de segmentación semántica y generando visualizaciones (overlays) que resalten las regiones modificadas para facilitar la interpretación forense de los resultados.
 \end{itemize}
 
 \subsection{Alcance del proyecto}

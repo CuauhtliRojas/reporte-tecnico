@@ -1,13 +1,8 @@
 \section{Introducción}
 
-% Máximo dos páginas.
-% Debe incluir: contexto general, ámbito, planteamiento del problema,
-% objetivo general, objetivos específicos y justificación.
 
 La manipulación de imágenes mediante técnicas y herramientas de inteligencia artificial ha aumentado y se ha vuelto más sofisticada y accesible para el público general. Si bien esto representa un avance en el campo de la visión por computadora, también genera una brecha técnica que dificulta distinguir lo alterado de lo original. Un caso particular son las manipulaciones faciales, conocidas como \textit{deepfakes}, las cuales pueden alcanzar un alto nivel de realismo porque conservan coherencia visual al modificar regiones específicas del rostro. Esta situación exige métodos que no solo determinen una clasificación general, sino que también localicen espacialmente la región alterada.
 \subsection{Contexto del problema}
-% Explicar qué son los deepfakes, por qué son un problema técnico y social,
-% y por qué la detección binaria no siempre es suficiente.
 
 En el ámbito social, el aumento de los \textit{deepfakes} y la capacidad de sustituir rostros en imágenes o videos representan riesgos como difamación personal, creación de evidencia visual falsa, suplantación de identidad y desinformación a escala masiva.
 
@@ -15,10 +10,6 @@ En áreas como la política y los medios de comunicación, esto genera riesgos p
 
 \subsection{Planteamiento del problema}
 
-% Explicar el problema concreto:
-% muchos métodos detectan si una imagen es falsa, pero no indican con precisión
-% qué regiones fueron manipuladas.
-% Aquí se debe conectar con segmentación semántica.
 Desde la perspectiva técnica, el problema se centra en que, mientras mayor realismo alcanza una manipulación, menos evidentes pueden ser las características o patrones visuales que la delatan. Muchos sistemas de detección se concentran en una clasificación binaria global, donde asignan una clase real o falsa a la imagen completa. Este enfoque puede ser útil cuando la manipulación afecta gran parte de la imagen; sin embargo, una alteración facial suele estar delimitada a regiones específicas, lo que puede reducir la sensibilidad del detector y producir falsos negativos.
 
 
@@ -44,6 +35,3 @@ Desarrollar una red neuronal para la detección y localización de manipulacione
 \subsection{Alcance del proyecto}
 El presente proyecto se diseñó para el análisis offline de una imagen exclusivamente dentro del contexto semántico de un rostro; se omiten cuello, orejas y cabello, y no se requiere una referencia del sujeto en un estado no manipulado. El sistema parte de características de textura, discontinuidades y bordes que el modelo pueda extraer para generar una representación aproximada de la alteración facial. Todo esto se realiza a partir del entrenamiento de la red con un conjunto de datos especializado para la tarea.
 % Delimitar qué sí hace y qué no hace el proyecto.
-% Ejemplo:
-% El proyecto se enfoca en imágenes faciales y localización por máscara.
-% No aborda detección en video en tiempo real ni identificación del autor de la manipulación.

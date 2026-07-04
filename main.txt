@@ -1,4 +1,36 @@
-Introducción
+:::::::: titlepage
+::::: center
+::: minipage
+![image](ESIME.png){width="3.5cm"}
+:::
+
+::: minipage
+![image](IPN.png){width="3.5cm"}
+:::
+:::::
+
+::: center
+**Instituto Politécnico Nacional**\
+Escuela Superior de Ingeniería Mecánica y Eléctrica\
+Unidad Culhuacán\
+**Detección y localización de manipulaciones faciales deepfakes mediante
+segmentación semántica basada en redes neuronales convolucionales**
+:::
+
+::: center
+**Presentan**\
+Castillo Delgado Angel Ivan\
+Rojas Lozada Cuauhtli Emiliano\
+**Asesores**\
+Dr. Manuel Cedillo Hernández\
+Dr. Rodrigo Eduardo Arévalo Ancona \
+Ciudad de México, 9 de julio de 2026
+:::
+::::::::
+
+# Resumen {#resumen .unnumbered}
+
+# Introducción
 
 La manipulación de imágenes mediante técnicas y herramientas de
 inteligencia artificial ha aumentado y se ha vuelto más sofisticada y
@@ -39,8 +71,8 @@ producir falsos negativos.
 
 ## Justificación
 
-Ante esa situación, se plantea cambiar de un enfoque de clasificación
-global a uno de segmentación de regiones, exigiendo que el sistema
+Por este motivo, el proyecto propone transitar de una clasificación
+global hacia la segmentación de regiones, exigiendo que el sistema
 delimite e identifique las áreas del rostro que han sido intervenidas.
 Para lograr esto, las redes neuronales convolucionales enfocadas en
 segmentación, como U-Net, resultan adecuadas, ya que su capacidad de
@@ -93,38 +125,41 @@ especializado para la tarea.
 
 ## Estado del arte
 
-Existen enfoques de detección de *deepfakes* los cuales tienen como
-objetivo principal la clasificación global binaria, asignando una
-etiqueta según sus clases. El trabajo de @Yagual2024 evaluó tres
-arquitecturas de redes convolucionales aplicadas a visión por
-computadora: MobileNetV2, EfficientNetB0 y ResNet50. El desempeño de
-estas redes fue evaluado mediante el área bajo la curva (AUC), en un
-esquema de clasificación binaria. En esta misma línea, @Tiwari2025
-propuso una metodología híbrida que combina ResNet-50 para la extracción
-de características robustas y VGG-16 ajustada para la detección de
-*deepfakes*. Si bien ambos trabajos cumplen con sus objetivos, comparten
-la limitación de no localizar espacialmente la alteración en la imagen,
-lo cual imposibilita su uso en escenarios donde se requiere evaluar
+Existen enfoques de detección de "deepfakes" lo cuales tienen como
+objetivo principal la clasificación global binaria, creando una etiqueta
+según sus clases. El trabajo de @Yagual2024 evaluó 3 tipos diferentes de
+arquitecturas de redes convolucionales dedicadas a la visión de
+computadora, las cuales fueron MobileNetV2, EfficientNetB0 y ResNet50,
+el desempeño de estas redes fue evaluado bajo un umbral de probabilidad
+dedicado a la clasificación binaria (Area Under Curve). Siguiendo con
+los trabajos de clasificación se encuentra @Tiwari2025, utilizando una
+metodología hibrida combinando la arquitectura de ResNet-50 para la
+extracción de características robustas y posteriormente la clasificación
+ajustada de VGG-16 para la detección de deepfakes. Si bien ambos
+trabajos cumplen con sus objetivos comparten la deficiencia de no
+localizar espacialmente la alteración de la imagen, lo cual
+imposibilitan su uso en escenarios donde se requiere evaluar
 inconsistencias más detalladas.
 
 Para atender las limitaciones de los detectores globales,
 investigaciones recientes han empezado a migrar hacia la perspectiva de
-localización de las alteraciones. En este sentido, @Deng2025 menciona
-que los clasificadores son incapaces de demostrar la relevancia de los
-componentes faciales manipulados, por lo que aborda un esquema de
-clasificación de etiquetas múltiples por región afectada. En paralelo,
-@Mashhadani2026 demuestra que la alteración de imágenes deja residuos
-visuales que, debido a su nivel de integración, requieren ubicarse para
-tener una validación forense.
+localización sobre las alteraciones. En este sentido @Deng2025 menciona
+como los clasificadores son incapaces de demostrar la relevancia de los
+componentes faciales manipulados, abordando un esquema de clasificación
+etiquetas múltiples por región afectada. En paralelo, @Mashhadani2026
+demuestra que la alteración de imágenes deja residuos visuales que
+debido al nivel de integración requieren ser ubicadas para tener una
+validación forense.
 
 A diferencia de enfoques centrados principalmente en clasificación o
-localización indirecta, este proyecto formula el problema como
-segmentación semántica supervisada por medio de una red neuronal con
-arquitectura basada en U-Net. Mediante su doble decodificador, el modelo
-genera máscaras que delimitan la región manipulada y la región
-auténtica. Además, atiende el desbalance entre píxeles auténticos y
-manipulados mediante una función de pérdida compuesta por entropía
-cruzada binaria (BCE) y términos de solapamiento como IoU y Dice.
+localización indirecta. Este proyecto formula el problema como
+segmentación semántica supervisada, por medio de una red neuronal, con
+una arquitectura basada en U-Net. Mediante su doble decodificador el
+modelo genera máscaras donde agrupa y delimita una región manipulada
+contra la real. Además, atiende el desbalance entre píxeles auténticos y
+manipulados mediante una función de pérdida compuesta de Entropía
+Cruzada Binaria (BCE), junto con métricas de segmentación (IoU y Dice)
+que se suman a la función de pérdida total.
 
 ## Marco teórico
 
@@ -184,10 +219,9 @@ sintético bajo condiciones de despliegue reales, con especial énfasis en
 la generalización y en la degradación introducida por compresión y
 reescalado.
 
-Debido al acelerado desarrollo de generadores, la detección se puede
-estructurar en función del tipo de evidencia que estos enfoques pueden
-modelar; por ello, se adopta una taxonomía de cuatro enfoques de alto
-nivel:
+Debido al acelerado desarrollo de generadores, la deteccion se puede
+estructurar en funcion del tipo de evidencia que estas pueden modelar,
+por ello se adopta una taxonomia de cuatro enfoques de alto nivel:
 
 - Enfoque espacial.
 
@@ -211,26 +245,27 @@ en bandas de alta frecuencia o como distribuciones espectrales atípicas.
 Parte de la evidencia reportada en la bibliografía vincula estas huellas
 con operaciones internas de los generadores, por ejemplo, etapas de
 sobremuestreo en arquitecturas GAN, que dejan patrones característicos
-en el espectro. En consecuencia, se utilizan transformadas (Fourier, DCT
-o wavelets) y descriptores espectrales para separar contenido real de
-contenido sintético. Sin embargo, una limitación importante es que las
-huellas pueden variar entre generadores y, por lo tanto, inducir
+en el espectro. En consecuencia, se utilizan transformadas ( Fourier,
+DCT o wavelets) y descriptores espectrales para separar contenido real
+de contenido sintético. Sin embargo, delimitante importante es que las
+huellas pueden variar entre generadores y, por lo tanto, indcuir cierta
 sensibilidad a patrones específicos del modelo de síntesis o del dominio
-de entrenamiento, reduciendo la capacidad de generalización ante
-escenarios más realistas y variados. [@Tan2024]
+de entrenamiento, reduciendo la capacidad frente a escenarios mas
+realista que suelen ser mas variados. [@Tan2024]
 
-En los enfoques basados en aprendizaje profundo y en el dominio
+En los enfoques de basados de aprendizaje profundo y en el dominio
 espacial, la detección se centra en inconsistencias observables en el
 dominio de píxel, es decir, irregularidades locales o globales que
 emergen de la unión, la edición y la síntesis facial. Habitualmente se
 buscan discontinuidades en contornos, incoherencias en iluminación,
 texturas atípicas, patrones de ruido residuales o discrepancias entre la
 región facial y su contexto. En implementaciones modernas, estas señales
-se capturan mediante extractores aprendidos que identifican patrones
-discriminativos asociados a manipulaciones. En variantes orientadas a
-localización, estos modelos pueden generar mapas de activación o
-máscaras que aproximan la región alterada, ya sea mediante arquitecturas
-CNN, mecanismos de atención o formulaciones con supervisión espacial
+se capturan mediante extractores aprendidos, que identifican patrones
+discriminativos asociados a manipulaciones y, en variantes orientadas a
+localización, habilitan mapas de activación o máscaras que aproximan la
+región alterada, las arquitecturas CNN y variantes con mecanismos de
+atención o módulos complementarios, entrenadas en clasificación
+(real/falso) o en formulaciones que incorporan supervisión espacial
 cuando se dispone de anotaciones. Su ventaja práctica es la capacidad de
 modelar patrones complejos y no lineales. No obstante, al depender de
 huellas que pueden ser atenuadas por posprocesamiento, el desempeño
@@ -249,10 +284,10 @@ locales en el píxel, otros se expresan como firmas en frecuencia y otros
 se manifiestan como discrepancias de coherencia global; por lo tanto, la
 combinación explícita puede aumentar sensibilidad y robustez ante
 variaciones. En la bibliografía reciente se observa un énfasis en
-diseñar estrategias orientadas a mejorar la generalización ante cambios
-de dominio, precisamente porque los artefactos aislados tienden a perder
-estabilidad frente a generadores nuevos y frente a interferencia por
-postprocesado. [@Li2025; @Qiao2025]
+diseñar estrategias orientadas a mejorar como se hace frente a la
+generalización de datos, precisamente porque los artefactos aislados
+tienden a perder estabilidad frente a generadores nuevos y frente a
+interferencia por postprocesado. [@Li2025; @Qiao2025]
 
 En este marco, la generalización se entiende como la capacidad del
 detector para mantener un desempeño ante cambios, como lo son: nuevos
@@ -487,9 +522,9 @@ Donde $e$ representa la base del logaritmo natural.
 Las técnicas de segmentación semántica permiten asignar una etiqueta a
 cada píxel de una imagen según su contexto. A diferencia de un método
 tradicional de clasificación que genera una etiqueta global, la
-segmentación permite determinar la ubicación dentro de la imagen. Dicho
-enfoque resulta útil en el análisis forense, ya que permite la
-localización espacial.[@Ronneberger2015; @Bappy_2017_ICCV]
+segmentación permite determinar ubicación dentro de la imagen. Dicho
+enfoque resulta útil en un análisis forense permitiendo la localización
+espacial.[@Ronneberger2015; @Bappy_2017_ICCV]
 
 <figure id="fig:segmentacion_semantica" data-latex-placement="H">
 <img src="Segmentacion_semantica.jpg" style="width:90.0%" />
@@ -578,8 +613,8 @@ detalles espaciales finos.
 
 <figure id="fig:unet_architecture" data-latex-placement="H">
 <img src="U-Net.png" style="width:95.0%" />
-<figcaption>Arquitectura de U-Net propuesta por Ronneberger et
-al.</figcaption>
+<figcaption>Arquitectura de U-Net propuesta por <span class="citation"
+data-cites="Ronneberger2015"></span>. </figcaption>
 </figure>
 
 La Figura [4](#fig:unet_architecture){reference-type="ref"
@@ -717,13 +752,11 @@ general. En su lugar, el sistema define y almacena dos máscaras
 complementarias para cada muestra: una máscara fake, que delimita la
 región que ha sido manipulada, y la máscara auténtica, que representa la
 zona facial original. La definición de las máscaras depende del tipo de
-manipulación generada. Por ejemplo, en el caso de FaceSwap, la
-`mascara_fake` cubre la región facial interna definida por el pipeline,
-por lo tanto, la máscara auténtica, resulta en una máscara completamente
-negra. En cambio, el local inpainting al estar delimitado por zonas
-específicas, la `mascara_fake` corresponde a las regiones alteradas y la
-`mascara_autentica` corresponde a la región facial interna menos la
-región manipulada.
+manipulación generada. Por ejemplo, en el caso de FaceSwap, la máscara
+fake cubre en su totalidad el rostro, por ende, la máscara auténtica,
+resulta en una máscara completamente negra. En cambio, el local
+inpainting al estar delimitado por zonas específicas, las máscaras se
+alternan de manera que se restan mutuamente.
 
 Para estandarizar estas manipulaciones, el proyecto define el rostro
 como la región que abarca exclusivamente la piel, cejas, ojos, lentes,
@@ -881,7 +914,7 @@ alteración, afectando la correspondencia con la máscara de referencia
 diferencia entre el desempeño sobre imágenes de calidad estándar y
 aquellas con degradación aplicada.
 
-## Consideraciones forenses y operativas
+### Consideraciones forenses y operativas
 
 **Inferencia sin imagen de referencia**
 
@@ -934,3 +967,23 @@ consideraciones operativas conectan y justifican metodológicamente la
 elección de la segmentación semántica, la arquitectura propuesta, el uso
 de pérdidas compuestas y la selección de métricas espaciales para
 delimitar el alcance funcional del proyecto.
+
+# Diseño y desarrollo del proyecto
+
+## Diseño conceptual
+
+## Requerimientos del sistema
+
+## Diseño modular
+
+## Diseño detallado
+
+## Metodología y desarrollo
+
+# Pruebas
+
+# Resultados y análisis
+
+# Conclusiones
+
+# Anexos {#anexos .unnumbered}
